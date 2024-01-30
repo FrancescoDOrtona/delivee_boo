@@ -13,4 +13,9 @@ class Product extends Model
     public function restaurant(){
         $this->belongsTo(Restaurant::class);
     }
+
+    // Relazione many to many con Orders
+    public function orders(){
+        $this->belongsToMany(Order::class);
+    }
 }
