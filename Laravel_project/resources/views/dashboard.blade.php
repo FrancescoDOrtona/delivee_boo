@@ -18,6 +18,11 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+                    <div>
+                        
+                        <a href="{{route('admin.restaurant.create')}}">Aggiungi le informazioni del tuo ristorante</a>
+                        
+                    </div>
                 </div>
             </div>
         </div>

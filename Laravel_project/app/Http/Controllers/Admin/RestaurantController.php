@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
+use App\Models\Type;
 
 class RestaurantController extends Controller
 {
@@ -21,7 +23,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+
+        $types = Type::all();
+        return view('admin.restaurant.create',compact('types'));
     }
 
     /**
