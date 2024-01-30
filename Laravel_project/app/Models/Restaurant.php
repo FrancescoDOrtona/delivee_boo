@@ -13,4 +13,9 @@ class Restaurant extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    // Relazione many to many con Type
+    public function types(){
+        $this->belongsToMany(Type::class);
+    }
 }
