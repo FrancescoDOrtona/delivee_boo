@@ -18,4 +18,9 @@ class Restaurant extends Model
     public function types(){
         $this->belongsToMany(Type::class);
     }
+
+    // Relazione 1 to many con Product
+    public function products(){
+        $this->hasMany(Product::class);
+    }
 }
