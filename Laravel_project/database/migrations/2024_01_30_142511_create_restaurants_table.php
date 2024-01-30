@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('restaurant_description');
             $table->string('restaurant_address', 255);
             $table->string('restaurant_image')->nullable();
-            $table->string('phone_number', 50)->unique();
+            $table->string('phone_number', 12)->unique();
             $table->string('vat_number', 11)->unique();
             $table->timestamps();
         });
