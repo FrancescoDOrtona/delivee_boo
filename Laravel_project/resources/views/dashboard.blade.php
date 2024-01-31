@@ -19,9 +19,15 @@
 
                     {{ __('You are logged in!') }}
                     <div>
-                        
+                        @if (!isset($restaurant['id']))
                         <a href="{{route('admin.restaurant.create')}}">Aggiungi le informazioni del tuo ristorante</a>
+                        @else
+                            <h2>{{ $restaurant['restaurant_name'] }}</h2>
+                        @endif
                         
+
+                        
+                        {{-- <a href="{{route('admin.restaurant.show' , $restaurant['id'])}}">Ristorante</a>   --}}
                     </div>
                 </div>
             </div>

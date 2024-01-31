@@ -16,7 +16,7 @@ class Restaurant extends Model
         'restaurant_image',
         'phone_number',
         'vat_number',
-        'type_id',
+        'types',
         'user_id'
     ];
     // Relazione 1 to 1 con User
