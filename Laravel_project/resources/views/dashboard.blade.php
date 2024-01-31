@@ -23,6 +23,9 @@
                         <a href="{{route('admin.restaurant.create')}}">Aggiungi le informazioni del tuo ristorante</a>
                         @else
                             <h2>{{ $restaurant['restaurant_name'] }}</h2>
+                            <p>{{ $restaurant['restaurant_description'] }}</p>
+                            <p>{{ $restaurant['restaurant_address'] }}</p>
+                            <p>{{ $restaurant['phone_number'] }}</p>
                         @endif
                         
 
