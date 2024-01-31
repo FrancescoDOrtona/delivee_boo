@@ -21,7 +21,7 @@
                             @enderror
                         </div>
                     </div>
-
+                    
                     <div class="mb-4 row">
                         @foreach ($types as $type)
                             <label for="type-{{$type->id}}" class="col-md-4 col-form-label text-md-right">{{ __($type->name) }}</label>

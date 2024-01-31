@@ -16,7 +16,7 @@ class Restaurant extends Model
         'restaurant_image',
         'phone_number',
         'vat_number',
-        'types',
+        'type_id',
         'user_id'
     ];
     // Relazione 1 to 1 con User
@@ -26,11 +26,11 @@ class Restaurant extends Model
 
     // Relazione many to many con Type
     public function types(){
-        $this->belongsToMany(Type::class);
+        return $this->belongsToMany(Type::class);
     }
 
     // Relazione 1 to many con Product
     public function products(){
-        $this->hasMany(Product::class);
+        return $this->hasMany(Product::class);
     }
 }
