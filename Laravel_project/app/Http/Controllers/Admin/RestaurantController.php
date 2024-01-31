@@ -37,10 +37,10 @@ class RestaurantController extends Controller
         $data = $request->validated();
         $data['user_id'] = $request->user()->id;
 
-        if($request->image){
-            $img_path = Storage::disk('public')->put('uploads', $request->image);
+        if($request->restaurant_image){
+            $img_path = Storage::disk('public')->put('uploads', $request->restaurant_image);
 
-            $data['image'] = $img_path;
+            $data['restaurant_image'] = $img_path;
 
         }
 
