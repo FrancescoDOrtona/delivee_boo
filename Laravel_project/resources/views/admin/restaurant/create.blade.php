@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <h1>sono la create restaurant</h1>
+        <div class="row mt-3 mb-3">
+            <h1>Restaurant Information</h1>
 
             <form id="myForm" action="{{ route('admin.restaurant.store') }}" method="POST">
 
@@ -27,10 +27,13 @@
 
 
                 <div class="mb-4 row">
+                    <h5>Restaurant Type</h5>
                     @foreach ($types as $type)
-                        <label for="type-{{ $type->id }}" class="col-md-4 col-form-label text-md-right">{{ __($type->name) }} 
-                        </label>
-                        <input type="checkbox" name="types[]" id="type-{{ $type->id }}" value="{{ $type->id }}" @checked(in_array($type->id, old('types', [])))> 
+                        <div class="col-4">                           
+                            <input type="checkbox" name="types[]" id="type-{{ $type->id }}" value="{{ $type->id }}" @checked(in_array($type->id, old('types', [])))>
+                            <label for="type-{{ $type->id }}" class="col-md-4 col-form-label text-md-right text-capitalize">{{ __($type->name) }} 
+                            </label>
+                        </div>
                         
                     @endforeach
                             
@@ -39,9 +42,6 @@
                     @enderror
                     
                 </div>
-
-                
-        </div>
 
         <div class="mb-4 row">
             <label for="restaurant_address"
@@ -113,7 +113,7 @@
 
             <div class="col-md-6">
                 <textarea id="restaurant_description" type="file"
-                    class="form-control @error('restaurant_description') is-invalid @enderror" name="restaurant_description">{{ old('restaurant_description') }}</textarea>
+                    class="form-control @error('restaurant_description') is-invalid @enderror" name="restaurant_description" rows="10">{{ old('restaurant_description') }}</textarea>
                 @error('restaurant_description')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -131,6 +131,6 @@
 
         </form>
     </div>
-    </div>
+</div>
 
 @endsection
