@@ -5,7 +5,7 @@
         <div class="row mt-3 mb-3">
             <h1>Restaurant Information</h1>
 
-            <form id="myForm" action="{{ route('admin.restaurant.store') }}" method="POST">
+            <form id="myForm" action="{{ route('admin.restaurant.store') }}" method="POST" enctype="multipart/form-data" >
 
                 @csrf
                 <div class="mb-4 row">

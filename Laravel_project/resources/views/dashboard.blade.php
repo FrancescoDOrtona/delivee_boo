@@ -26,6 +26,7 @@
                             <p>{{ $restaurant['restaurant_description'] }}</p>
                             <p>{{ $restaurant['restaurant_address'] }}</p>
                             <p>{{ $restaurant['phone_number'] }}</p>
+                            <img src="{{asset('storage/'.$restaurant->restaurant_image)}}" alt="">
                         @endif
                         
 

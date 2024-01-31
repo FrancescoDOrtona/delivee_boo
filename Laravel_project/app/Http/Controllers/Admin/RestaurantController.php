@@ -7,6 +7,7 @@ use App\Models\Restaurant;
 use App\Http\Requests\StoreRestaurantRequest;
 use App\Http\Requests\UpdateRestaurantRequest;
 use App\Models\Type;
+use Illuminate\Support\Facades\Storage;
 
 class RestaurantController extends Controller
 {
@@ -35,6 +36,13 @@ class RestaurantController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = $request->user()->id;
+
+        if($request->image){
+            $img_path = Storage::disk('public')->put('uploads', $request->image);
+
+            $data['image'] = $img_path;
+
+        }
 
         if (!isset($data['types']) || empty($data['types'])) {
             return redirect()->back()->withErrors(['types' => 'Seleziona almeno una tipologia di ristorante.']);
