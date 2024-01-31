@@ -15,7 +15,9 @@ class Restaurant extends Model
         'restaurant_address',
         'restaurant_image',
         'phone_number',
-        'vat_number'
+        'vat_number',
+        'type_id',
+        'user_id'
     ];
     // Relazione 1 to 1 con User
     public function user(){

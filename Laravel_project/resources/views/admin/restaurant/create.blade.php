@@ -5,8 +5,7 @@
         <div class="row">
             <h1>sono la create restaurant</h1>
             
-                
-                <form action="" method="POST">
+                <form action="{{route('admin.restaurant.store')}}" method="POST">
 
                     @csrf
                     <div class="mb-4 row">

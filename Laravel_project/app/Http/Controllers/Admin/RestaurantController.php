@@ -33,6 +33,12 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
+        $data = $request->validated();
+        
+        $new_restaurant = Restaurant::create($data);
+        $new_restaurant->types()->attach($data['types']);
+
+        return redirect()->route('admin.restaurant.show', $new_restaurant);
         
     }
 
@@ -41,7 +47,8 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        //
+        $restaurant = Restaurant::findOrFail($restaurant->id);
+        return view('admin.restaurant.show',compact('restaurant'));
     }
 
     /**
