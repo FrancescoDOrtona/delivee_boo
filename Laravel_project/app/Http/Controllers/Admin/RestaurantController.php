@@ -35,9 +35,13 @@ class RestaurantController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = $request->user()->id;
+
+        if (!isset($data['types']) || empty($data['types'])) {
+            return redirect()->back()->withErrors(['types' => 'Seleziona almeno una tipologia di ristorante.']);
+        }
+
         $new_restaurant = Restaurant::create($data);
         $new_restaurant->types()->attach($data['types']);
-
         return redirect()->route('dashboard', $new_restaurant->id);       
     }
 
