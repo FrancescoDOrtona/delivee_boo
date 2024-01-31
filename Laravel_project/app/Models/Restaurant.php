@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model
 {
     use HasFactory;
-
+    protected $fillable = 
+    [
+        'restaurant_name',
+        'restaurant_description',
+        'restaurant_address',
+        'restaurant_image',
+        'phone_number',
+        'vat_number'
+    ];
     // Relazione 1 to 1 con User
     public function user(){
         return $this->belongsTo(User::class);
