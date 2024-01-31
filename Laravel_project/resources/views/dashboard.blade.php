@@ -27,7 +27,7 @@
                             <p>{{ $restaurant['restaurant_address'] }}</p>
                             <p>{{ $restaurant['phone_number'] }}</p>
                             @if($restaurant['restaurant_image'])
-                            <img class="img-fluid" src="{{asset('storage/'. $restaurant['restaurant_image'])}}" alt="">
+                            <img class="img-fluid" src="{{ asset('storage/' . $restaurant['restaurant_image']) }}" alt="">
                             @endif
                         @endif
                         
