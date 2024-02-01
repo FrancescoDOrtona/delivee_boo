@@ -31,7 +31,7 @@
                   <form class="margin-left-auto" action="{{route('admin.product.destroy',$product)}}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-sm btn-black">Delete</button>
+                    <button class="btn btn-danger">Delete</button>
                 </form>
                 </div>
               </div>

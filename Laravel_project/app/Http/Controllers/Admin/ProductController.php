@@ -70,7 +70,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.product.edit', compact('product'));
     }
 
     /**
@@ -78,7 +78,19 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $data = $request->validated();
+        if ($request->has('image')) {
+            if ($product->image) {
+                Storage::delete($product->image);
+            }
+            // Salvo l'immagine
+            // e l aggiungo sia all data che poi viene aggiurnato nel databese sia nella cartella public con percorso uploads/image.jpg esempio
+            $imagePath = Storage::put('uploads', $request->image);
+            $data['image'] = $imagePath;
+        }
+        $product->update($data);
+
+        return redirect()->route('admin.product.show', compact('product'));
     }
 
     /**
@@ -86,6 +98,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if ($product->image) {
+            Storage::delete($product->image);
+        }
+        $product->delete();
+
+        return redirect()->route('admin.product.index');
     }
 }
