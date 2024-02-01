@@ -44,8 +44,17 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item d-flex">
+                            @if(!Auth::user()) 
+                            
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
+                            
+                            @else 
+                            
                             <a class="nav-link" href="{{route('admin.products.index') }}">{{ __('Menu') }}</a>
+                            
+                            @endif
+                                
+
                         </li>
                     </ul>
 
