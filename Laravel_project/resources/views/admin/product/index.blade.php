@@ -1,8 +1,7 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
-    <div class="container">
-      
+    <div class="container">     
         <div class="title d-flex justify-content-between">
             <h1>Restaurant Menu</h1>
             <div class="m-3">
@@ -20,9 +19,9 @@
                   <small>{{ $product->price }} €</small>
                   <p>Available: 
                     @if ($product->available == true)
-                      &check;
+                      <span class="fw-bold text-success">&check;</span>
                     @else
-                      &cross;
+                      <span class="fw-bold text-danger">&cross;</span>
                     @endif
                     </p>
                   <a href="{{route('admin.product.show',$product)}}" class="btn btn-primary">Product Details</a>
