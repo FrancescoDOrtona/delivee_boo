@@ -12,7 +12,7 @@
         <div class="products row gap-3">
             @foreach ($products as $product)
             <div class="card col-3 p-2" style="width: 18rem;">
-                <img src="{{ asset('storage/' . $product->image )}}" class="card-img" alt="...">
+                <img src="{{ asset('storage/' . $product->image )}}" class="card-img img-fluid" alt="...">
                 <div class="card-body d-flex flex-column gap-3">
                   <h5 class="card-title">{{ $product->name}}</h5>
                   <p class="card-text">{{ $product->description }}</p>
