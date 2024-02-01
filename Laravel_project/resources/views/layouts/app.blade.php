@@ -50,7 +50,7 @@
                             
                             @else 
                             
-                            <a class="nav-link" href="{{route('admin.products.index') }}">{{ __('Menu') }}</a>
+                            <a class="nav-link" href="{{route('admin.product.index') }}">{{ __('Menu') }}</a>
                             
                             @endif
                                 

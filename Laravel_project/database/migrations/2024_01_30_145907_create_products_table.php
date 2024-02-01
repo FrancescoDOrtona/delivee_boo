@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->text('description');
-            $table->unsignedDecimal('price', 6 ,2);
-            $table->boolean('available')->default(true);
+            $table->unsignedDecimal('price', 6, 2);
+            $table->boolean('available')->default(false);
             $table->string('image', 255);
             $table->timestamps();
         });
