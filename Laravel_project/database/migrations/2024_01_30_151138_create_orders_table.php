@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedDecimal('total_price', 8 , 2);
+            $table->unsignedDecimal('total_price', 12 , 2);
             $table->boolean('payment_status')->default(false);
             $table->string('order_code', 12)->unique();
             $table->string('customer_name', 100);

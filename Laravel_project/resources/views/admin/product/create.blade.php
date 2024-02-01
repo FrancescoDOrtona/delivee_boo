@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('content')
     {{-- <h1>Products Create</h1> --}}
@@ -29,20 +29,22 @@
                 </div>
 
                 <div class="mb-4 row" >
-                    
-                    <div class="col-md-6 input-group">
-                        <label for="price"
-                            class="col-md-4 col-form-label text-md-right">{{ __('Price') }}</label>
-                            <input id="price" type="number" step="0.01" min="0"
-                            class="form-control @error('price') is-invalid @enderror" name="price"
-                            value="{{ old('price') }}" required autocomplete="price" autofocus>
-                            <span class="input-group-text">€</span>
-
-                        @error('price')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price') }}</label>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            
+                                <span class="input-group-text">€</span>
+                                <input id="price" type="number" step="0.01" min="0"
+                                class="form-control @error('price') is-invalid @enderror" name="price"
+                                value="{{ old('price') }}" required autocomplete="price" autofocus>
+                                
+    
+                            @error('price')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 
