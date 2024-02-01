@@ -25,7 +25,7 @@
                       &cross;
                     @endif
                     </p>
-                  <a href="#" class="btn btn-primary">Product Details</a>
+                  <a href="{{route('admin.product.show',$product)}}" class="btn btn-primary">Product Details</a>
                 </div>
               </div>
             @endforeach

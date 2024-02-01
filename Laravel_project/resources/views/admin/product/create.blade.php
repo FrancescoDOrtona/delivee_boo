@@ -1,7 +1,7 @@
 @extends('layouts.app');
 
 @section('content')
-    <h1>Products Create</h1>
+    {{-- <h1>Products Create</h1> --}}
 
     <div class="container">
         <div class="row mt-3 mb-3">
