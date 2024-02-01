@@ -5,14 +5,14 @@
         <div class="title d-flex justify-content-between">
             <h1>Restaurant Menu</h1>
             <div class="m-3">
-                <a class="btn btn-primary" href="{{route('admin.product.create')}}">Crea il piatto</a>
+                <a class="btn btn-primary" href="{{route('admin.product.create')}}">Add Dish</a>
             </div>
         </div>
 
-        <div class="products row gap-3">
+        <div class="products">
             @foreach ($products as $product)
-            <div class="card col-3 p-2" style="width: 18rem;">
-                <img src="{{ asset('storage/' . $product->image )}}" class="card-img img-fluid" alt="...">
+            <div class="card p-2">
+                    <img src="{{ asset('storage/' . $product->image )}}" class="rounded w-100 img-fluid" alt="...">
                 <div class="card-body d-flex flex-column gap-3">
                   <h5 class="card-title">{{ $product->name}}</h5>
                   <p class="card-text">{{ $product->description }}</p>
