@@ -81,13 +81,13 @@
 
                 <div class="form-check form-switch">
                     <input class="form-check-input" name="available" type="checkbox" role="switch" id="available" 
-                    value="1" >
+                    value="1" @checked($product->available) >
                     <label class="form-check-label" for="flexSwitchCheckChecked">Available</label>
                   </div>
         
                 <div>
                     <button class="btn btn-primary" type="submit">
-                        Crea
+                        Edit
                     </button>
                 </div>
 
