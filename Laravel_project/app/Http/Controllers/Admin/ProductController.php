@@ -48,7 +48,7 @@ class ProductController extends Controller
 
 
 
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.product.show', $product->id);
     }
 
     /**
@@ -56,7 +56,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('admin.product.show', compact('product'));
     }
 
     /**
