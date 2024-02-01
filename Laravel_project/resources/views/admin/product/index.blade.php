@@ -25,6 +25,13 @@
                     @endif
                     </p>
                   <a href="{{route('admin.product.show',$product)}}" class="btn btn-primary">Product Details</a>
+                  <a href="{{route('admin.product.edit', $product)}}" class="btn btn-secondary">Edit Product</a>
+
+                  <form class="margin-left-auto" action="{{route('admin.product.destroy',$product)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger">Delete</button>
+                </form>
                 </div>
               </div>
             @endforeach

@@ -24,7 +24,7 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'required|max:255|String',
             'description' => 'required|String',
-            'price' => 'required|regex:/^\d+(.\d{1,2})?$/',
+            'price' => 'required|max:6|regex:/^\d+(.\d{1,2})?$/' ,
             'image' =>   'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7168',
             'available' => 'nullable',
             // 'restaurant_id' => 'required'
