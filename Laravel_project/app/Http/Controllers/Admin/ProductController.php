@@ -15,7 +15,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+    // Recupera l'ID del ristorante corrente associato all'utente loggato
+    $restaurantId = auth()->user()->restaurant->id;
+
+    // Recupera solo i prodotti del ristorante corrente
+    $products = Product::where('restaurant_id', $restaurantId)->get();
+
 
         return view("admin.product.index", compact("products"));
     }
@@ -35,7 +40,8 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $data = $request->validated();
-        $data['restaurant_id'] = auth()->user()->restaurant->id;
+        $restaurantId = auth()->user()->restaurant->id;
+        $data['restaurant_id'] =  $restaurantId;
 
 
         if ($request->hasFile('image')) {
