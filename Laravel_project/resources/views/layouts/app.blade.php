@@ -44,14 +44,18 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item d-flex">
+                            {{-- @dd(Auth::user()->restaurant) --}}
+                            
                             @if(!Auth::user()) 
                             
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                             
-                            @else 
+                            @else  
                             
-                            <a class="nav-link" href="{{route('admin.product.index') }}">{{ __('Menu') }}</a>
-                            
+                                @if(Auth::user()->restaurant)
+                                <a class="nav-link" href="{{route('admin.product.index') }}">{{ __('Menu') }}</a>
+                                @endif
+
                             @endif
                                 
 

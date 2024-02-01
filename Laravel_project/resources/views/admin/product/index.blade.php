@@ -2,8 +2,12 @@
 
 @section('content')
     <div class="container">
-        <div class="title">
+      
+        <div class="title d-flex justify-content-between">
             <h1>Restaurant Menu</h1>
+            <div class="m-3">
+                <a class="btn btn-primary" href="{{route('admin.product.create')}}">Crea il piatto</a>
+            </div>
         </div>
 
         <div class="products row gap-3">
@@ -27,10 +31,10 @@
             @endforeach
             
         </div>
-        <div class="m-3">
-            <a class="btn btn-primary" href="{{route('admin.product.create')}}">Crea il piatto</a>
-        </div>
-
+       
+        {{-- <h1>Register your restaurant</h1>
+        <a class="btn btn-primary" href="{{route('admin.restaurant.create')}}"></a> --}}
+     
     </div>
 
 
