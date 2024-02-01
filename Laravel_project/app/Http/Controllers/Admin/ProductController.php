@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -33,7 +34,21 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request);
+        $data = $request->validated();
+        $data['restaurant_id'] = auth()->user()->restaurant->id;
+
+
+        if ($request->hasFile('image')) {
+            $img_path = Storage::put('uploads', $request->image);
+
+            $data['image'] = $img_path;
+        }
+
+        $product = Product::create($data);
+
+
+
+        return redirect()->route('admin.product.index');
     }
 
     /**
