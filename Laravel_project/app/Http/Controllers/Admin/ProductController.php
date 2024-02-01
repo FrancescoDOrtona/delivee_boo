@@ -79,6 +79,10 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $data = $request->validated();
+
+        if(!$request->has('available')){
+            $data['available'] = false;
+        }
         if ($request->has('image')) {
             if ($product->image) {
                 Storage::delete($product->image);
