@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="header-logo">
-            <img src="../../public/logo-teal.svg" alt="">
+            <img src="../../public/logo-no-bg.png" alt="">
         </div>
         <div class="header-buttons">
             <div class="dropdown">
@@ -31,14 +31,14 @@
 header{
     background-color: black;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding: 20px 60px;
 }
 
 .header-logo{
-    margin-left: 50px;
     img{
-        width: 150px;
+        width: 70px;
     }
 }
 </style>
