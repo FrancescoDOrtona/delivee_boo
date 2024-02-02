@@ -6,7 +6,7 @@ body{
 
 .products{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 15px;
 }
 
@@ -26,13 +26,18 @@ body{
 }
 
 .card-img{
-    max-height: 200px;
+    min-height: 200px;
     max-width: 300px;
+    text-align: center;
 
     img{
-        max-height: 200px;
+        height: 200px;
         max-width: 200px;
         object-fit: cover;
     }
+}
+
+.cover{
+    object-fit: cover;
 }
 
