@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class ProductSeeder extends Seeder
 {
@@ -13,14 +14,20 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-         // Dati dei piatti
-         $products = [
+        $fileName = 'pizza_margherita.jpg'; // il nome del file dell'immagine che desideri inserire
+        $filePath = 'public/images/uploads/' . $fileName; // il percorso relativo al file
+
+        // Copia l'immagine dalla sua posizione originale nella cartella di memorizzazione di Laravel
+        Storage::copy('public/storage/uploads' . $fileName, $filePath);
+
+        // Dati dei piatti
+        $products = [
             [
                 'name' => 'Spaghetti alla Carbonara',
                 'description' => 'Deliziosi spaghetti con uovo, pancetta e pecorino romano.',
                 'price' => 12.50,
                 'available' => true,
-                'image' => 'spaghetti_carbonara.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
             [
@@ -28,7 +35,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Classica pizza con pomodoro, mozzarella e basilico.',
                 'price' => 9.99,
                 'available' => true,
-                'image' => 'pizza_margherita.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
             [
@@ -36,7 +43,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Salmone fresco grigliato servito con contorno di verdure.',
                 'price' => 15.75,
                 'available' => true,
-                'image' => 'filetto_salmone.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
             [
@@ -44,7 +51,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Insalata fresca con pomodoro, mozzarella di bufala, basilico e olio extravergine di oliva.',
                 'price' => 8.50,
                 'available' => false,
-                'image' => 'insalata_caprese.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
             [
@@ -52,7 +59,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Strati di pasta, besciamella, ragù e formaggio, cotti al forno.',
                 'price' => 11.99,
                 'available' => true,
-                'image' => 'lasagne.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
             [
@@ -60,7 +67,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Hamburger di manzo con insalata, pomodoro e formaggio, servito con patatine fritte.',
                 'price' => 13.25,
                 'available' => true,
-                'image' => 'hamburger_patatine.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
             [
@@ -68,7 +75,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Dolce italiano fatto con savoiardi, caffè, mascarpone e cacao.',
                 'price' => 6.99,
                 'available' => false,
-                'image' => 'tiramisu.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
             [
@@ -76,7 +83,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Insalata mista con petto di pollo grigliato, pomodoro, cetrioli e mais.',
                 'price' => 10.50,
                 'available' => true,
-                'image' => 'insalata_pollo.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
             [
@@ -84,7 +91,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Risotto cremoso con funghi porcini freschi e parmigiano.',
                 'price' => 14.50,
                 'available' => false,
-                'image' => 'risotto_funghi.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
             [
@@ -92,7 +99,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Gelato cremoso alla vaniglia, servito con scaglie di cioccolato.',
                 'price' => 5.75,
                 'available' => true,
-                'image' => 'gelato_vaniglia.jpg',
+                'image' => 'uploads/pizza_margherita.jpg',
                 'restaurant_id' => 1
             ],
         ];
