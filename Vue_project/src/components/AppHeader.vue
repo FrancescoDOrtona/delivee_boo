@@ -9,8 +9,8 @@
                     <i class="fa-solid fa-link"></i> Links
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="http://127.0.0.1:8000/login">Login</a></li>
+                  <li><a class="dropdown-item" href="http://127.0.0.1:8000/register">Registrati</a></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </div>
