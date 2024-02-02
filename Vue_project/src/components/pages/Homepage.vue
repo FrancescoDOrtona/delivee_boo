@@ -1,11 +1,4 @@
-<script>
-export default {
-  name: 'Home',
-  mounted() {
-    document.title = 'DeliveBoo - Very Tasty Takeaway Food for Devs';
-  },
-};
-</script>
+<script></script>
 
 <template>
   <h1>Delivebo</h1>
