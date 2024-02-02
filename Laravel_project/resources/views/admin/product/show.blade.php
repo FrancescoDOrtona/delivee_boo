@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col-6 ">
-            <img class="img-fluid h-50 cover w-100 rounded" src="{{asset('storage/'.$product->image)}}" alt="">
+            <img class="img-fluid cover w-100 rounded" src="{{asset('storage/'.$product->image)}}" alt="">
         </div>
         <div class="col-6">
             <h2>{{ $product->name }}</h2>
