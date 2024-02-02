@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center gap-5">
-            <div class="title d-flex align-items-center justify-between">
+            <div class="title d-flex align-items-center justify-content-between">
                 <h1>Restaurant Menu</h1>
                 <div class="m-3">
                     <a class="btn btn-primary" href="{{route('admin.product.create')}}">Add Dish</a>
