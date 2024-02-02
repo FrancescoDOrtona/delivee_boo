@@ -19,3 +19,15 @@ body{
 .app-logo{
     width: 80px;
 }
+
+.card-img{
+    max-height: 200px;
+    max-width: 300px;
+
+    img{
+        max-height: 200px;
+        max-width: 200px;
+        object-fit: cover;
+    }
+}
+
