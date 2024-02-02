@@ -18,8 +18,10 @@ class ProductController extends Controller
     // Recupera l'ID del ristorante corrente associato all'utente loggato
     $restaurantId = auth()->user()->restaurant->id;
 
-    // Recupera solo i prodotti del ristorante corrente
-    $products = Product::where('restaurant_id', $restaurantId)->get();
+    // Recupera solo i prodotti del ristorante corrente ordinati in ordine alfabetico per il nome
+    $products = Product::where('restaurant_id', $restaurantId)
+    ->orderBy('name', 'asc')
+    ->get();
 
 
         return view("admin.product.index", compact("products"));
