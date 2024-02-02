@@ -1,7 +1,5 @@
-import { createRouter, createWebHistory } from "vue-router"
-import Homepage from './components/pages/Homepage.vue'
-
-
+import { createRouter, createWebHistory } from 'vue-router';
+import Homepage from './components/pages/Homepage.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -10,7 +8,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Homepage,
-    }
+    },
   ],
 });
 export { router };
