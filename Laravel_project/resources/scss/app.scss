@@ -14,7 +14,12 @@ body{
     --bs-border-opacity: 0.4;
 }
 
-
+.icon-profile {
+    border: 5px solid black;
+    padding: 14px;
+    border-radius: 100px;
+    background-color: white;
+}
 
 .app-logo{
     width: 80px;
