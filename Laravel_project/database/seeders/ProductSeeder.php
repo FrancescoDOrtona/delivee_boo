@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
         $filePath = 'public/images/uploads/' . $fileName; // il percorso relativo al file
 
         // Copia l'immagine dalla sua posizione originale nella cartella di memorizzazione di Laravel
-        Storage::copy('public/storage/uploads' . $fileName, $filePath);
+        Storage::copy($fileName, $filePath);
 
         // Dati dei piatti
         $products = [
