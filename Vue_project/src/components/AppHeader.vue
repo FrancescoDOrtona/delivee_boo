@@ -2,7 +2,8 @@
     <header>
         <div class="header">
             <div class="header-logo">
-                <img src="../../public/logo-no-bg.png" alt="">
+                <img class="logo-1" src="../../public/logo-no-bg.png" alt="">
+                <img class="logo-2" src="../../public/logo-teal-titolo.svg" alt="">
             </div>
             <div class="header-buttons">
                     <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/login">
@@ -61,8 +62,14 @@ header{
 }
 
 .header-logo{
-    img{
+    display: flex;
+    flex-wrap: nowrap;
+    .logo-1{
         width: 70px;
+    }
+
+    .logo-2{
+        width: 140px;
     }
 }
 
