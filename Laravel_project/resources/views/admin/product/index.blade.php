@@ -17,7 +17,7 @@
                         <img src="{{ asset('storage/' . $product->image )}}" class="rounded w-100 img-fluid" alt="...">
                     </div>
                     {{-- container text --}}
-                    <div class=" d-flex flex-column gap-1 flex-grow-1">
+                    <div class="card-body d-flex flex-column gap-1 flex-grow-1">
                         <h5 class="card-title">{{ $product->name}}</h5>
                         <p class="card-text">{{ $product->description }}</p>
                         <small>{{ $product->price }} €</small>
