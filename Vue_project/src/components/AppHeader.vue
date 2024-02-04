@@ -1,19 +1,23 @@
 <template>
     <header>
-        <div class="header-logo">
-            <img src="../../public/logo-no-bg.png" alt="">
-        </div>
-        <div class="header-buttons">
-            <div class="dropdown">
-                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-link"></i> Links
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="http://127.0.0.1:8000/login">Login</a></li>
-                  <li><a class="dropdown-item" href="http://127.0.0.1:8000/register">Registrati</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </div>
+        <div class="header">
+            <div class="header-logo">
+                <img src="../../public/logo-no-bg.png" alt="">
+            </div>
+            <div class="header-buttons">
+                    <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/login">
+                        <span class="color-brand">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                        </span>
+                        <span>Accedi</span>
+                    </a>
+                    <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/register">
+                        <span class="color-brand">
+                            <i class="fa-regular fa-user"></i>
+                        </span>
+                        <span>Registrati</span>
+                    </a>
+            </div>
         </div>
     </header>
     
@@ -21,24 +25,49 @@
 </template>
 
 <script>
-    export default {
-        
-    }
 
 </script>
 
 <style lang="scss" scoped>
+@import "../../style/partials/variables";
+
+// Utility classes
+.color-brand{
+    color: $main-brand-color;
+}
+
+.buttons_icon{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+
+
 header{
-    background-color: black;
+    display: flex;
+    flex-direction: column;
+    position:absolute;
+    right: 0;
+    left: 0;
+    z-index: 999;
+}
+.header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 60px;
+    padding: 10px 60px;
 }
 
 .header-logo{
     img{
         width: 70px;
     }
+}
+
+.header-buttons{
+    display: flex;
+    gap: 20px;
 }
 </style>

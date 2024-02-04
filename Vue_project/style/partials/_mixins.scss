@@ -1,0 +1,13 @@
+// Custom container for Jumbotron
+
+// Definizione della tua variabile per la max-width personalizzata
+$custom-max-width: 800px;
+
+// Estendi la classe .container di Bootstrap per includere la max-width personalizzata
+.container-custom {
+  max-width: $custom-max-width;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
