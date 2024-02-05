@@ -28,7 +28,7 @@
                     <span class="search_button">
                         <button>Cerca</button>
                     </span>
-                    <!-- {{ dataRT.types[0].name }} -->
+                    {{ store.dataRT.types[0].name }}
                 </div>
             </div>
         </div>
@@ -36,17 +36,17 @@
 </template>
 
 <script>
-import axios from 'axios';
+import {store} from '../store';
 
 export default {
     data() {
         return {
             searchRestaurant: '',
-           
+            store,
         }
     },
     props:{
-        dataRT : Object
+        // dataRT : Object
     },
     methods: {
         // async search() {
