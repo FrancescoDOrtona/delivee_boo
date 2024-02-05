@@ -84,13 +84,13 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: 45%;
+    width: 30%;
     height: 100%;
     background: linear-gradient(90deg, #000c, #0000 33.83%);
     transform: matrix(-1, 0, 0, 1, 0, 0);
     z-index: 1;
     background-size: cover;
-    background-image: url('https://img2.storyblok.com/filters:format(webp)/f/62776/860x642/4e0f98735d/grocery-bag.jpg');
+    background-image: url('https://s1.1zoom.me/big0/901/Apples_Water_Black_background_Two_583577_853x1024.jpg');
 }
 
 .right-bg {
