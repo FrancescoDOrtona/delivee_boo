@@ -249,7 +249,9 @@ export default {
                         </div>
                         
                         <div class="card-body" v-for="restaurant in store.dataRT.restaurants">
-                            <h5>{{ restaurant.restaurant_name }}</h5>
+                            <h5>
+                                <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }">{{ restaurant.restaurant_name }}</router-link>
+                            </h5>
                             <p> 5.1 Valutazione</p>
                             <p>{{ restaurant.phone_number}}</p>
                             <span>{{restaurant.restaurant_address}}</span> -
