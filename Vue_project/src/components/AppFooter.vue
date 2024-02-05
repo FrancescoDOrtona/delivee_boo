@@ -59,7 +59,10 @@ a {
 
     ul{
         background-color: #434848;
-        border-radius: 7px
+        border-radius: 7px;
+        li:nth-child(n+2):hover{
+            color: $main-brand-color;
+        }
     }
 }
 </style>

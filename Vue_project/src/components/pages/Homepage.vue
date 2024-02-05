@@ -5,13 +5,15 @@ import AppJumbo from './homepage/AppJumbo.vue';
 import JumboCarousel from './homepage/CarouselJumbo.vue';
 import HomepageTracking from './homepage/HomepageTracking.vue';
 import HomepageSales from './homepage/HomepageSales.vue';
+import HomepageCards from './homepage/HomepageCards.vue';
 
 export default {
   components: {
     AppJumbo,
     JumboCarousel,
     HomepageTracking,
-    HomepageSales
+    HomepageSales,
+    HomepageCards
   },
   data() {
     return {
@@ -39,10 +41,10 @@ export default {
 </script>
 <template>
   <AppJumbo />
-  <JumboCarousel/>
-  
+  <JumboCarousel/> 
   <HomepageTracking/>
   <HomepageSales/>
+  <HomepageCards/>
 
 </template>
 
