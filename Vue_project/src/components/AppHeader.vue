@@ -5,6 +5,7 @@
                 <img src="../../public/logo-no-bg.png" alt="">
             </div>
             <div class="header-buttons">
+                    <router-link :to="{name:'menu'}">menu</router-link>
                     <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/login">
                         <span class="color-brand">
                             <i class="fa-solid fa-right-to-bracket"></i>
