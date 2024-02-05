@@ -1,7 +1,13 @@
 <template>
     <div class="section-sales">
+        <div class="sales_title container container-custom-2">
+            <div class="title_bg-left"></div>
+            <div class="title">
+                <h1>Menù in offerta: sconti fino al 25%</h1>
+            </div>
+            <div class="title_bg-right"></div>
+        </div>
         <div class="sales_content container container-custom">
-            <h1>Menù in offerta: sconti fino al 25%</h1>
             <p>Perfetti per dare più gusto alla tua settimana, ordinare i piatti più amati da tutta la famiglia e fare una
                 pausa dai fornelli.</p>
             <small>Si applicano spese di consegna e di servizio. Offerta soggetta a disponibilità, solo per ristoranti
@@ -36,6 +42,37 @@ export default {
     
 }
 
+.sales_title{
+    padding: 0;
+    display: flex;
+    justify-content: center;    
+}
+
+.title{
+    h1{
+        font-size: 60px;
+        font-weight: bolder;
+        max-width: 726px;
+        min-width: 159px;
+    }
+}
+
+.title_bg-left{
+    background-image: url(https://cwa.roocdn.com/_next/static/media/merch-sparkleleft@2x.90d6981a.svg);
+    background-size: contain;
+    margin-right: 24px;
+    width: 72px;
+    height: 84px;
+}
+
+.title_bg-right{
+    margin-left: 24px;
+    background-image: url(https://cwa.roocdn.com/_next/static/media/merch-sparkleright@2x.75af3f8c.svg);
+    background-size: contain;
+    width: 72px;
+    height: 84px;
+}
+
 .sales_content{
     display: flex;
     flex-direction: column;
@@ -45,10 +82,6 @@ export default {
     text-align: center;
     color: white;
     text-shadow: 0 2px 6px 0 #0000001a;
-    h1{
-        font-size: 60px;
-        font-weight: bolder;
-    }
     p{
         font-size: 24px;
     }
