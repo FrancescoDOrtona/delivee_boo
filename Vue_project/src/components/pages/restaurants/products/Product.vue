@@ -13,9 +13,12 @@ export default {
 <template>
     <!-- said-bar -->
     <div class="line-header d-flex justify-content-center align-items-center">
-        <input type="search" class="">
+        <input type="text" class="z-3 search-input" placeholder="Ristoranti, spesa, piatti">
     </div>
-    <div class="said-bar">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-2">
+            <div class="said-bar">
         <ul>
             <li class=" bottom-line">Caserta</li>
             <ul class="bottom-line ">
@@ -217,6 +220,73 @@ export default {
             </div>
         </ul>
     </div>
+            </div>
+            <div class="col-10">
+                <h3 class="pt-3">Ristoranti che consegnano a "Milano"</h3>
+                <div class="grid">
+                    <div class="card">
+                        <div>
+                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h5>Nome Ristorante</h5>
+                            <p> 5.1 Valutazione</p>
+                            <span>Distanza</span> - 
+                            <span>Consegna gratuita</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h5>Nome Ristorante</h5>
+                            <p>3.1 Valutazione</p>
+                            <span>Distanza</span> - 
+                            <span>Consegna gratuita</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h5>Nome Ristorante</h5>
+                            <p>3.2 Valutazione</p>
+                            <span>Distanza</span> - 
+                            <span>Consegna gratuita</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h5>Nome Ristorante</h5>
+                            <p>1.0 Valutazione</p>
+                            <span>Distanza</span> - 
+                            <span>Consegna gratuita</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg" alt="">
+                        </div>
+                        <div class="card-body">
+                            <h5>Nome Ristorante</h5>
+                            <p>2.0 Valutazione</p>
+                            <span>Distanza</span> - 
+                            <span>Consegna gratuita</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+
+    
 </template>
 
 <style lang="scss">
@@ -233,7 +303,7 @@ export default {
 .line-header{
     border-bottom: 1px solid lightgray;
     width: 100%;
-    padding-bottom: 85px;
+    padding-bottom: 15px;
     content: '';
 }
 
@@ -258,7 +328,7 @@ li {
     border-color: #F9FAFA!important;
     box-shadow: none !important;
     padding: 5px 0px !important;
-    font-size: 13px !important;
+    font-size: 14px !important;
 
 }
 
@@ -270,5 +340,34 @@ input[type="radio"] {
     width: 18px;
     height: 18px;
     margin-right: 4px;
+}
+
+.search-input{
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 20%;
+    height: 50px;
+    color: lightgrey;
+    background-color: rgb(239, 239, 239);
+    border: 1px solid rgb(223, 223, 223);
+    padding: 5px;
+    z-index: 20;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    gap: 20px;
+}
+
+.card{
+    
+    img{
+        max-width: 100%;
+    }
+
+    .card-body{
+        padding: 20px;
+    }
 }
 </style>

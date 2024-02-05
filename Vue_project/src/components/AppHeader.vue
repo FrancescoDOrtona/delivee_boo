@@ -6,19 +6,19 @@
                 <img class="logo-2" src="../../public/logo-teal-titolo.svg" alt="">
             </div>
             <div class="header-buttons">
-                    <router-link :to="{name:'menu'}">menu</router-link>
-                    <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/login">
-                        <span class="color-brand">
-                            <i class="fa-solid fa-right-to-bracket"></i>
-                        </span>
-                        <span>Accedi</span>
-                    </a>
-                    <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/register">
-                        <span class="color-brand">
-                            <i class="fa-regular fa-user"></i>
-                        </span>
-                        <span>Registrati</span>
-                    </a>
+                <router-link :to="{name:'menu'}">menu</router-link>
+                <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/login">
+                    <span class="color-brand">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                    </span>
+                    <span>Accedi</span>
+                </a>
+                <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/register">
+                    <span class="color-brand">
+                        <i class="fa-regular fa-user"></i>
+                    </span>
+                    <span>Registrati</span>
+                </a>
             </div>
         </div>
     </header>
@@ -53,7 +53,7 @@ header{
     position:absolute;
     right: 0;
     left: 0;
-    z-index: 999;
+    z-index: 10;
 }
 .header{
     display: flex;
