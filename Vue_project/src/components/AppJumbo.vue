@@ -139,7 +139,7 @@ export default {
     flex-direction: column;
     gap: 20px;
     position: relative;
-    width: 664px;
+    width: 100%;
     margin: auto;
     padding: 0 32px;
 }
