@@ -19,7 +19,7 @@ export default {
 
             });
         }
-    },created(){
+    }, created() {
         this.fetchRestaurants();
     }
 }
@@ -242,23 +242,25 @@ export default {
             <div class="main-content">
                 <h3 class="py-3">Ristoranti che consegnano a "Milano"</h3>
                 <div class="grid">
-                    <div class="card">
-                        <div>
-                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg"
-                                alt="">
-                        </div>
-                        
-                        <div class="card-body" v-for="restaurant in store.dataRT.restaurants">
-                            <h5>
-                                <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }">{{ restaurant.restaurant_name }}</router-link>
-                            </h5>
-                            <p> 5.1 Valutazione</p>
-                            <p>{{ restaurant.phone_number}}</p>
-                            <span>{{restaurant.restaurant_address}}</span> -
-                            <span>Consegna gratuita</span>
-                        </div>
-                    </div>
+                    <div class="card" v-for="restaurant in store.dataRT.restaurants">
+                        <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
+                            <div>
+                                <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg"
+                                    alt="">
+                            </div>
 
+                            <div class="card-body" >
+                                <h5>
+                                    {{ restaurant.restaurant_name }}
+                                </h5>
+                                <p> 5.1 Valutazione</p>
+                                <p>{{ restaurant.phone_number }}</p>
+                                <span>{{ restaurant.restaurant_address }}</span> -
+                                <span>Consegna gratuita</span>
+                            </div>
+                        </router-link>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -268,6 +270,11 @@ export default {
   
 <style lang="scss">
 @import "../../../../style/partials/variables.scss";
+
+.reset{
+    text-decoration: none;
+    color: currentColor;
+}
 
 .side-bar {
     display: flex;
@@ -352,4 +359,5 @@ input[type="radio"] {
     .card-body {
         padding: 20px;
     }
-}</style>
+}
+</style>
