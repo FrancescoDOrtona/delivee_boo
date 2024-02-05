@@ -18,7 +18,7 @@ export default {
     fetchRestaurants() {
       axios.get(`${this.BASE_URL}/restaurants`).then((res) => {
         this.dataRT = res.data.results;
-        // console.log(this.restaurants);
+        console.log(this.dataRT);
       });
     },
   },
@@ -28,7 +28,7 @@ export default {
 };
 </script>
 <template>
-  <AppJumbo/>
+  <AppJumbo :dataRT="dataRT"/>
   <JumboCarousel/>
   
   <div class="container">

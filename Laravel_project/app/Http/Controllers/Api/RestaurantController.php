@@ -15,6 +15,7 @@ class RestaurantController extends Controller
     public function index()
     {
 
+
         $restaurants = Restaurant::with('types')->get();
         $types = Type::all();
         return response()->json([
@@ -26,7 +27,15 @@ class RestaurantController extends Controller
             'success' => true,
         ]);
     }
+    // public function search(Request $request){
+    //     $query = $request->input('searchRestaurant');
+    //     $results = Type::where('name','like','%' . $query . '%')->get();
 
+    //     return response()->json([
+    //         'success'=> true,
+    //         'results'=> $results
+    //     ]);
+    // }
     /**
      * Store a newly created resource in storage.
      */
