@@ -28,7 +28,7 @@
                     <span class="search_button">
                         <button>Cerca</button>
                     </span>
-                    {{ store.dataRT.types[0].name }}
+                    <!-- {{ store.dataRT.types[0].name }} -->
                 </div>
             </div>
         </div>
