@@ -33,7 +33,7 @@
 }
 
 .card-1{
-    background-image: url(https://a.storyblok.com/f/62776/1154x756/32f5d94b05/restaurant.png);
+    background-image: url(https://www.adformandum.org/wp-content/uploads/2019/07/img-alberghiera.jpg);
     
 }
 
@@ -53,7 +53,7 @@
 }
 
 .card-2{
-    background-image: url(https://a.storyblok.com/f/62776/1958x1292/d9a732387f/rider.png);
+    background-image: url(https://www.assocarenews.it/wp/wp-content/uploads/2019/04/deliveroo.jpg);
 }
 
 .card_layer{
