@@ -3,12 +3,14 @@ import axios from 'axios';
 import AppJumbo from './homepage/AppJumbo.vue';
 import JumboCarousel from './homepage/CarouselJumbo.vue';
 import HomepageTracking from './homepage/HomepageTracking.vue';
+import HomepageSales from './homepage/HomepageSales.vue';
 
 export default {
   components: {
     AppJumbo,
     JumboCarousel,
-    HomepageTracking
+    HomepageTracking,
+    HomepageSales
   },
   data() {
     return {
@@ -33,6 +35,7 @@ export default {
   <AppJumbo/>
   <JumboCarousel/>
   <HomepageTracking/>
+  <HomepageSales/>
 
 </template>
 
