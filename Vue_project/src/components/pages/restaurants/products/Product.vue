@@ -23,12 +23,13 @@ export default {
                         <li class="bottom-line">Caserta</li>
                         <ul class="bottom-line ">
                             <li class="pb-3 fw-light d-flex">
-                                <input type="radio" name="option1" id="consegna">
-                                <label for="consegna">Consegna</label>
+                                <label for=""></label>
+                                <input type="radio">Consegna
+
                             </li>
                             <li class="fw-light d-flex">
-                                <input type="radio" name="option1" id="Ritiro">
-                                <label for="Ritiro">Ritiro</label>
+                                <label for=""></label>
+                                <input type="radio">Ritiro
                             </li>
                         </ul>
                         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -44,21 +45,21 @@ export default {
                                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                                     <div class="accordion-body">
                                         <ul class="fw-light">
-                                            <li class="pb-3 d-flex">
-                                                <input type="radio" value="consegna" id="consegna" name="option2">
-                                                <label for="consegna">Consegna più rapida</label>
+                                            <li class="pb-3 d-flex ">
+                                                <label for=""></label>
+                                                <input type="radio">Consegna più rapida
                                             </li>
                                             <li class="pb-3 d-flex">
-                                                <input type="radio" id="consigliati" name="option2" value="consigliati">
-                                                <label for="consigliati">Consigliati</label>
+                                                <label for=""></label>
+                                                <input type="radio">Consigni
                                             </li>
                                             <li class="pb-3 d-flex">
-                                                <input type="radio" id="distanza" name="option2" value="distanza">
-                                                <label for="distanza">Distanza</label>
+                                                <label for=""></label>
+                                                <input type="radio">Distanza
                                             </li>
                                             <li class="pb-3 d-flex">
-                                                <input type="radio" name="option2" id="votati" value="votati">
-                                                <label for="votati">I più votati</label>
+                                                <label for=""></label>
+                                                <input type="radio">I più votati
                                             </li>
                                         </ul>
                                     </div>
@@ -77,8 +78,8 @@ export default {
                                     <div class="accordion-body">
                                         <ul class="fw-light">
                                             <li class="d-flex">
-                                                <input type="checkbox" class="me-1" id="accetta-contanti" value="accetta-contanti" name="option3">
-                                                <label for="accetta-contanti">Accetta contanti</label>
+                                                <label for=""></label>
+                                                <input type="checkbox" class="me-1"> Accetta contanti
                                             </li>
                                         </ul>
                                     </div>
@@ -97,12 +98,12 @@ export default {
                                     <div class="accordion-body">
                                         <ul class="fw-light">
                                             <li class="pb-3 d-flex">
-                                                <input type="checkbox" class="me-1" value="senza-glutine" name="option4" id="senza-glutine">
-                                                <label for="">Senza Glutine</label>
+                                                <label for=""></label>
+                                                <input type="checkbox" class="me-1">Senza Glutine
                                             </li>
                                             <li class="pb-3 d-flex">
-                                                <input type="checkbox" class="me-1" name="option4" value="vegetariano" id="vegetariano">
-                                                <label for="vegetariano">Vegetariano</label>
+                                                <label for=""></label>
+                                                <input type="checkbox" class="me-1">Vegetariano
                                             </li>
                                         </ul>
                                     </div>
@@ -121,8 +122,8 @@ export default {
                                     <div class="accordion-body">
                                         <ul class="fw-light">
                                             <li class="d-flex">
-                                                <input type="radio" name="option5" value="ticket-restaurant" id="ticket-restaurant">
-                                                <label for="ticket-restaurant">Ticket Restaurant</label>
+                                                <label for=""></label>
+                                                <input type="radio">Ticket Restaurant
                                             </li>
                                         </ul>
                                     </div>
@@ -362,7 +363,7 @@ input[type="radio"] {
     gap: 20px;
 }
 
-.main-content {
+.main-content{
     flex-grow: 1;
     padding: 0px 40px 40px 40px;
 }
