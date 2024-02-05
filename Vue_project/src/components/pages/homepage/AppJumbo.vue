@@ -33,8 +33,8 @@
 </script>
 
 <style lang="scss" scoped>
-@import "../../style/partials/variables";
-@import "../../style/partials/mixins";
+@import "../../../../style/partials/variables";
+@import "../../../../style/partials/mixins";
 
 .jumbotron{
     position: relative;

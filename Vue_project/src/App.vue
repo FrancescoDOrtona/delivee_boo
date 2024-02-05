@@ -21,11 +21,16 @@ export default {
 
 <style lang="scss">
 @use "./style/general.scss";
+@use "../style/partials/variables" as *;
 
 #app{
   display: flex;
   flex-direction: column;
   height: 100vh;
+}
+
+body{
+  background-color: $page-body-light !important;
 }
 
 

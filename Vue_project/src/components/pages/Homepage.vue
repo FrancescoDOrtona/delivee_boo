@@ -1,12 +1,14 @@
 <script>
 import axios from 'axios';
-import AppJumbo from '../AppJumbo.vue'
-import JumboCarousel from '../CarouselJumbo.vue'
+import AppJumbo from './homepage/AppJumbo.vue';
+import JumboCarousel from './homepage/CarouselJumbo.vue';
+import HomepageTracking from './homepage/HomepageTracking.vue';
 
 export default {
   components: {
     AppJumbo,
-    JumboCarousel
+    JumboCarousel,
+    HomepageTracking
   },
   data() {
     return {
@@ -30,31 +32,8 @@ export default {
 <template>
   <AppJumbo/>
   <JumboCarousel/>
-  
-  <div class="container">
-    <h1>Delivebo</h1>
-  
-    <div class="d-flex">
-      <div>
-        <ul>
-          <h2>Types</h2>
-          <li v-for="type in dataRT.types">
-            {{ type.name }}
-          </li>
-        </ul>
-      </div>
-  
-      <div>
-        <ul>
-          <h2>Restaurants</h2>
-          <li v-for="restaurant in dataRT.restaurants">
-            {{ restaurant.restaurant_name }}
-          </li>
-        </ul>
-      </div>
-    </div>
+  <HomepageTracking/>
 
-  </div>
 </template>
 
 <style lang="scss" scoped></style>
