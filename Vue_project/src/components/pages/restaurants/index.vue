@@ -291,7 +291,7 @@ export default {
   </template>
   
   <style lang="scss">
-  @import "../../../../style/partials/variables";
+  @import "../../../../style/partials/variables.scss";
   
   .side-bar {
     display: flex;
@@ -326,8 +326,8 @@ export default {
   }
   
   .accordion-button {
-    background-color: white !important;
-    border-color: white !important;
+    background-color: $page-body-light !important;
+    border-color: $page-body-light !important;
     box-shadow: none !important;
     padding: 5px 0px !important;
     font-size: 14px !important;
