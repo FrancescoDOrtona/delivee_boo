@@ -1,12 +1,27 @@
 <script>
 import axios from 'axios';
-
+import { store } from '../../../store';
 export default {
+
     data() {
         return {
-
+            store: store,
+            BASE_URL: 'http://127.0.0.1:8000/api',
         }
-    },
+    }, methods: {
+        fetchRestaurants() {
+            axios.get(`${this.BASE_URL}/restaurants`).then((res) => {
+                // this.dataRT = res.data.results;
+                // console.log(this.dataRT);
+
+                this.store.dataRT = res.data.results;
+                console.log(this.store.dataRT);
+
+            });
+        }
+    },created(){
+        this.fetchRestaurants();
+    }
 }
 </script>
 
@@ -32,7 +47,7 @@ export default {
                             </li>
                         </ul>
                         <div class="accordion" id="accordionPanelsStayOpenExample">
-  
+
                             <div class="bottom-line ">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -64,7 +79,7 @@ export default {
                                     </div>
                                 </div>
                             </div>
-  
+
                             <div class="bottom-line">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -77,14 +92,15 @@ export default {
                                     <div class="accordion-body">
                                         <ul class="fw-light">
                                             <li class="d-flex">
-                                                <input type="checkbox" class="me-1" id="accetta-contanti" value="accetta-contanti" name="option3">
+                                                <input type="checkbox" class="me-1" id="accetta-contanti"
+                                                    value="accetta-contanti" name="option3">
                                                 <label for="accetta-contanti">Accetta contanti</label>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-  
+
                             <div class="bottom-line">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -97,18 +113,20 @@ export default {
                                     <div class="accordion-body">
                                         <ul class="fw-light">
                                             <li class="pb-3 d-flex">
-                                                <input type="checkbox" class="me-1" value="senza-glutine" name="option4" id="senza-glutine">
+                                                <input type="checkbox" class="me-1" value="senza-glutine" name="option4"
+                                                    id="senza-glutine">
                                                 <label for="">Senza Glutine</label>
                                             </li>
                                             <li class="pb-3 d-flex">
-                                                <input type="checkbox" class="me-1" name="option4" value="vegetariano" id="vegetariano">
+                                                <input type="checkbox" class="me-1" name="option4" value="vegetariano"
+                                                    id="vegetariano">
                                                 <label for="vegetariano">Vegetariano</label>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-  
+
                             <div class="bottom-line">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -121,14 +139,15 @@ export default {
                                     <div class="accordion-body">
                                         <ul class="fw-light">
                                             <li class="d-flex">
-                                                <input type="radio" name="option5" value="ticket-restaurant" id="ticket-restaurant">
+                                                <input type="radio" name="option5" value="ticket-restaurant"
+                                                    id="ticket-restaurant">
                                                 <label for="ticket-restaurant">Ticket Restaurant</label>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-  
+
                             <div class="bottom-line">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -172,7 +191,7 @@ export default {
                                     </div>
                                 </div>
                             </div>
-  
+
                             <div class="bottom-line">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -228,123 +247,78 @@ export default {
                             <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg"
                                 alt="">
                         </div>
-                        <div class="card-body">
-                            <h5>Nome Ristorante</h5>
+                        
+                        <div class="card-body" v-for="restaurant in store.dataRT.restaurants">
+                            <h5>{{ restaurant.restaurant_name }}</h5>
                             <p> 5.1 Valutazione</p>
-                            <span>Distanza</span> -
+                            <p>{{ restaurant.phone_number}}</p>
+                            <span>{{restaurant.restaurant_address}}</span> -
                             <span>Consegna gratuita</span>
                         </div>
                     </div>
-                    <div class="card">
-                        <div>
-                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg"
-                                alt="">
-                        </div>
-                        <div class="card-body">
-                            <h5>Nome Ristorante</h5>
-                            <p>3.1 Valutazione</p>
-                            <span>Distanza</span> -
-                            <span>Consegna gratuita</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div>
-                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg"
-                                alt="">
-                        </div>
-                        <div class="card-body">
-                            <h5>Nome Ristorante</h5>
-                            <p>3.2 Valutazione</p>
-                            <span>Distanza</span> -
-                            <span>Consegna gratuita</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div>
-                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg"
-                                alt="">
-                        </div>
-                        <div class="card-body">
-                            <h5>Nome Ristorante</h5>
-                            <p>1.0 Valutazione</p>
-                            <span>Distanza</span> -
-                            <span>Consegna gratuita</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div>
-                            <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg"
-                                alt="">
-                        </div>
-                        <div class="card-body">
-                            <h5>Nome Ristorante</h5>
-                            <p>2.0 Valutazione</p>
-                            <span>Distanza</span> -
-                            <span>Consegna gratuita</span>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
-  
+
     </div>
-  </template>
+</template>
   
-  <style lang="scss">
-  @import "../../../../style/partials/variables.scss";
-  
-  .side-bar {
+<style lang="scss">
+@import "../../../../style/partials/variables.scss";
+
+.side-bar {
     display: flex;
     flex-direction: column;
     padding-top: 5px;
     width: 250px;
     margin-left: 0px;
     position: sticky;
-  }
-  
-  .line-header {
+}
+
+.line-header {
     border-bottom: 1px solid lightgray;
     width: 100%;
     padding-bottom: 15px;
     content: '';
-  }
-  
-  ul,
-  li {
+}
+
+ul,
+li {
     list-style: none;
-  }
-  
-  .bottom-line {
+}
+
+.bottom-line {
     font-weight: 500;
     font-size: 13px;
     padding: 20px 0px 20px 0px;
     border-bottom: 1px solid lightgray;
-  }
-  
-  .green {
+}
+
+.green {
     color: #01CCBC;
-  }
-  
-  .accordion-button {
+}
+
+.accordion-button {
     background-color: $page-body-light !important;
     border-color: $page-body-light !important;
     box-shadow: none !important;
     padding: 5px 0px !important;
     font-size: 14px !important;
-  
-  }
-  
-  .accordion-collapse {
+
+}
+
+.accordion-collapse {
     margin-left: -50px !important;
-  }
-  
-  input[type="radio"] {
+}
+
+input[type="radio"] {
     width: 18px;
     height: 18px;
     margin-right: 4px;
-  }
-  
-  .search-input {
+}
+
+.search-input {
     margin-top: 15px;
     border-radius: 5px;
     width: 20%;
@@ -354,27 +328,26 @@ export default {
     border: 1px solid rgb(223, 223, 223);
     padding: 5px;
     z-index: 20;
-  }
-  
-  .grid {
+}
+
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
     gap: 20px;
-  }
-  
-  .main-content {
+}
+
+.main-content {
     flex-grow: 1;
     padding: 0px 40px 40px 40px;
-  }
-  
-  .card {
-  
+}
+
+.card {
+
     img {
         max-width: 100%;
     }
-  
+
     .card-body {
         padding: 20px;
     }
-  }
-  </style>
+}</style>
