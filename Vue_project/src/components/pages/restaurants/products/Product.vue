@@ -254,8 +254,8 @@ li {
 }
 
 .accordion-button {
-    background-color: white !important;
-    border-color: white !important;
+    background-color: #F9FAFA !important;
+    border-color: #F9FAFA!important;
     box-shadow: none !important;
     padding: 5px 0px !important;
     font-size: 13px !important;
