@@ -2,7 +2,8 @@
     <header>
         <div class="header">
             <div class="header-logo">
-                <img src="../../public/logo-no-bg.png" alt="">
+                <img class="logo-1" src="../../public/logo-no-bg.png" alt="">
+                <img class="logo-2" src="../../public/logo-teal-titolo.svg" alt="">
             </div>
             <div class="header-buttons">
                     <router-link :to="{name:'menu'}">menu</router-link>
@@ -62,8 +63,14 @@ header{
 }
 
 .header-logo{
-    img{
+    display: flex;
+    flex-wrap: nowrap;
+    .logo-1{
         width: 70px;
+    }
+
+    .logo-2{
+        width: 140px;
     }
 }
 
