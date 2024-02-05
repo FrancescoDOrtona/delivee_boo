@@ -15,7 +15,7 @@
                     <label for="search">Cerca un ristorante nella tua zona</label>
                 </div>
                 <div class="search_container">
-                    <input class="search_input" type="text" v-model="searchRestaurant" name="search"
+                    <input class="search_input" type="text" v-model="searchRestaurant"  @keyup.enter="search()"  name="search"
                         placeholder="Inserisci il nome del ristorante">
                     <span class="input_icon">
                         <svg height="24" width="24" viewBox="0 0 24 24" role="presentation" focusable="false">
@@ -28,39 +28,37 @@
                     <span class="search_button">
                         <button>Cerca</button>
                     </span>
-                    <!-- {{ dataRT.types[0].name }} -->
+                
+                    
                 </div>
             </div>
+
+
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+import { store } from '../store';
 
 export default {
     data() {
         return {
             searchRestaurant: '',
-           
+            store,
         }
     },
-    props:{
-        dataRT : Object
+    props: {
+        // dataRT : Object
     },
     methods: {
-        // async search() {
-        //     console.log(this.searchRestaurant);
-           
-        //     try {
-        //         const response = await axios.get(`${this.BASE_URL}/search`, { params: { query: this.searchRestaurant }});
-        //         this.searchResults = response.data;
-        //     } catch (error) {
-        //         console.error('Errore durante la ricerca:', error);
-        //     }
-        // }
+        search(){
+            console.log(this.searchRestaurant);
+            
+        }
     },
-    computed(){
+    computed: {
+       
     }
 }
 
@@ -197,4 +195,5 @@ export default {
         color: #fff;
         background: #00ccbc;
     }
-}</style>
+}
+</style>
