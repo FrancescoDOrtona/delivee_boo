@@ -6,7 +6,8 @@ body{
 
 .products{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px , 300px));
+    // grid-template-columns: repeat(auto-fill, minmax(250px , 300px));
+    grid-template-columns: repeat(4,1fr);
     gap: 15px;
 }
 
@@ -37,4 +38,22 @@ body{
 .cover{
     object-fit: cover;
 }
+@media (max-width: 575.98px) { 
+    .products{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
 
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .products{
+        grid-template-columns: repeat(2,1fr);
+    }
+ }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .products{
+        grid-template-columns: repeat(3,1fr);
+    }
+ }
