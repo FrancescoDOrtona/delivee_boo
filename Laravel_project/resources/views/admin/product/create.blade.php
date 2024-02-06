@@ -13,7 +13,7 @@
 
                 <div class="mb-4 row">
                     <label for="name"
-                        class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                        class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Name *') }}</label>
 
                     <div class="col-md-6">
                         <input id="name" type="text"
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="mb-4 row" >
-                    <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price') }}</label>
+                    <label for="price" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Price *') }}</label>
                     <div class="col-md-6">
                         <div class="input-group">
                             
@@ -50,7 +50,7 @@
 
                 <div class="mb-4 row">
                     <label for="image"
-                        class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
+                        class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Image') }}</label>
         
                     <div class="col-md-6">
                         <input id="image" type="file"
@@ -67,7 +67,7 @@
         
                 <div class="mb-4 row">
                     <label for="description"
-                        class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                        class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Description *') }}</label>
         
                     <div class="col-md-6">
                         <textarea id="description" type="file"
@@ -83,9 +83,13 @@
                 <div class="form-check form-switch">
                     <input class="form-check-input" name="available" type="checkbox" role="switch" id="available" 
                     value="1" >
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Available</label>
+                    <label class="form-check-label fw-bold" for="flexSwitchCheckChecked">Available</label>
                   </div>
-        
+                <div class="my-4 ">
+                    <p class="fw-bold fs-6">
+                       ( * )  Required fields
+                    </p>
+                </div>
                 <div>
                     <button class="btn btn-primary" type="submit">
                         Save
