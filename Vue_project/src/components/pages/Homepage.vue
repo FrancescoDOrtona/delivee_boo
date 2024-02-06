@@ -6,11 +6,13 @@ import JumboCarousel from './homepage/CarouselJumbo.vue';
 import HomepageTracking from './homepage/HomepageTracking.vue';
 import HomepageSales from './homepage/HomepageSales.vue';
 import HomepageCards from './homepage/HomepageCards.vue';
+import HomepageTypes from './homepage/HomepageTypes.vue';
 
 export default {
   components: {
     AppJumbo,
     JumboCarousel,
+    HomepageTypes,
     HomepageTracking,
     HomepageSales,
     HomepageCards
@@ -41,7 +43,8 @@ export default {
 </script>
 <template>
   <AppJumbo />
-  <JumboCarousel/> 
+  <JumboCarousel/>
+  <HomepageTypes/> 
   <HomepageTracking/>
   <HomepageSales/>
   <HomepageCards/>
