@@ -5,9 +5,9 @@ import { store } from '../../../store';
 
 <template>
     <div class="container-fluid justify-content-between">
-        <div class="row">
-            <div class="pt-4">
-                <p class="green"><i class="fa-solid fa-arrow-left"></i> Indietro</p>
+        <div class="row p-4">
+            <div class="my-4">
+                <router-link :to="{ name: 'restaurants.index' }" class="router-link"><i class="fa-solid fa-arrow-left green"></i> Indietro</router-link>
             </div>
             <div class="col-9 d-flex ">
                 <div class="">
@@ -17,7 +17,7 @@ import { store } from '../../../store';
                 <div class="px-4">
                     <h2 class="fw-bold">Poke House</h2>
                     <div class="pt-2">
-                        ‪15 - 25‬ min· Poke·Sushi
+                        15 - 25 min· Poke·Sushi
                     </div>
                     <div class="pt-3">
                         Distanza: 1.18 km · Chiude alle 22:30 · Minimo d'ordine: 10,00 € · Consegna gratuita
@@ -53,11 +53,145 @@ import { store } from '../../../store';
             </div>
         </div>
     </div>
+
     <hr class="hr-shadow">
+
+    <div class="body-products">
+        <div class="container-fluid">
+            <div class="row justify-content-between">
+                <div class="col-9 flex-column">
+                    <div class="description card p-4">
+                        <h5>Le informazioni sul nostro ristorante</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, minima! Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, ratione.</p>
+                    </div>
+                    <div class="py-5">
+                        <h4>I nostri prodotti</h4>
+                        <div class="grid">
+
+                            <div class="card p-3 flex-row justify-content-between">
+                                <div class="product-text mx-2 flex-grow-1">
+                                    <h6>nome prodotto</h6>
+                                    <p>ingredienti</p>
+                                </div>
+                                <div class="product-img">
+                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                </div>
+                                <div class="product-add">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-3 flex-row justify-content-between">
+                                <div class="product-text mx-2 flex-grow-1">
+                                    <h6>nome prodotto</h6>
+                                    <p>ingredienti</p>
+                                </div>
+                                <div class="product-img">
+                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                </div>
+                                <div class="product-add">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+
+                            <div class="card p-3 flex-row justify-content-between">
+                                <div class="product-text mx-2 flex-grow-1">
+                                    <h6>nome prodotto</h6>
+                                    <p>ingredienti</p>
+                                </div>
+                                <div class="product-img">
+                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                </div>
+                                <div class="product-add">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                            <div class="card p-3 flex-row justify-content-between">
+                                <div class="product-text mx-2 flex-grow-1">
+                                    <h6>nome prodotto</h6>
+                                    <p>ingredienti</p>
+                                </div>
+                                <div class="product-img">
+                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                </div>
+                                <div class="product-add">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                            <div class="card p-3 flex-row justify-content-between">
+                                <div class="product-text mx-2 flex-grow-1">
+                                    <h6>nome prodotto</h6>
+                                    <p>ingredienti</p>
+                                </div>
+                                <div class="product-img">
+                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                </div>
+                                <div class="product-add">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                            <div class="card p-3 flex-row justify-content-between">
+                                <div class="product-text mx-2 flex-grow-1">
+                                    <h6>nome prodotto</h6>
+                                    <p>ingredienti</p>
+                                </div>
+                                <div class="product-img">
+                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                </div>
+                                <div class="product-add">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+                            <div class="card p-3 flex-row justify-content-between">
+                                <div class="product-text mx-2 flex-grow-1">
+                                    <h6>nome prodotto</h6>
+                                    <p>ingredienti</p>
+                                </div>
+                                <div class="product-img">
+                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                </div>
+                                <div class="product-add">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CART -->
+                <div class="col-3">
+                    <div class="card d-flex justify-content-end p-4">
+                        <p>il carrello è vuoto</p>
+                        <button class="btn btn-secondary ">Vai al pagamento</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <style lang="scss">
 @import "../../../../style/partials/variables.scss";
+
+.grid{
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.body-products{
+    background-color: #f9fafa;
+}
+
+.col-3{
+
+    .card{
+    height: 100%;
+    min-height: 250px;
+    content: '';
+}
+}
+
 
 .col-9 {
     display: flex;
@@ -79,6 +213,27 @@ img {
 }
 
 .green {
+    color: $main-brand-color;
+}
+
+.router-link{
+    color: $main-brand-color;
+    text-decoration: none;
+}
+
+.product-img{
+    max-width: 100px;
+}
+
+.product-add{
+    height: 100%;
+    border: 1px solid #bfbfbf;
+    border-radius: 2px;
+    width: 35px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: $main-brand-color;
 }
 </style>
