@@ -21,7 +21,7 @@
       </div>
       {{-- fine modale  --}}
 
-    <div class="container">
+    <div class="container my-3">
         <div class="row justify-content-center gap-5">
             <div class="title d-flex align-items-center justify-content-between">
                 <h1>Restaurant Menu</h1>
