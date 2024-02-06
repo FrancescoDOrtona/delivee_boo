@@ -67,7 +67,9 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
-        //
+       
+        $types = Type::all();
+        return view('admin.restaurant.edit',compact('restaurant','types'));
     }
 
     /**
@@ -75,7 +77,25 @@ class RestaurantController extends Controller
      */
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant)
     {
-        //
+        $data = $request->validated();
+
+        if ($request->has('restaurant_image')) {
+            if ($restaurant->restaurant_image) {
+                Storage::delete($restaurant->restaurant_image);
+            }
+            // Salvo l'immagine
+            // e l aggiungo sia all data che poi viene aggiurnato nel databese sia nella cartella public con percorso uploads/image.jpg esempio
+            $imagePath = Storage::put('uploads', $request->restaurant_image);
+            $data['restaurant_image'] = $imagePath;
+        }
+        $restaurant->update($data);
+        if ($request->has('types')) {
+            $restaurant->types()->sync($request->get('types'));
+        } else {
+            $restaurant->types()->detach();
+        }
+
+        return redirect()->route('dashboard', compact('restaurant'));
     }
 
     /**
