@@ -5,11 +5,13 @@
             <p>Seleziona la categoria che preferisci e scegli cosa prenotare tra una moltitudine di aziende partner.</p>
         </div>
         <div class="types-section_badges top-row">
-            <div v-for="type in store.dataRT.types" :key="type" class="badge">
-                <img  class="badge-img" :src="type.img_url" alt="">
-                <div class="badge-title">
-                    <h5>{{ type.name }}</h5>
-                </div>
+            <div v-for="type in store.dataRT.types" :key="type"  class="badge">
+                <router-link :to="{ name: 'restaurants.index'}">
+                    <img  class="badge-img" :src="type.img_url" alt="">
+                    <div class="badge-title">
+                        <h5>{{ type.name }}</h5>
+                    </div>                    
+                </router-link>
             </div>
         </div>           
     </div>
@@ -87,6 +89,7 @@ import { store } from '../../../store';
     h5{
         margin: 0;
         font-weight: 600 !important;
+        text-transform: capitalize;
     }
 }
 
