@@ -18,8 +18,11 @@
             @if (!isset($restaurant['id']))
                 <a href="{{route('admin.restaurant.create')}}">Add your restaurant information</a>
             @else
-
-            <h2>Restaurant Infomation</h2>
+            <div class="d-flex justify-content-between align-items-center">
+              <h2>Restaurant Infomation</h2>
+              {{-- @dd($restaurant) --}}
+              <a class="btn btn-primary" href="{{route('admin.restaurant.edit',$restaurant['id'])}}">Edit</a>
+            </div>
             <p class="text-secondary fw-semibold"> Manage your restaurant information</p>
             <div class="row">
                 <div class="col-sm-6 mb-4">
