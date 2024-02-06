@@ -4,43 +4,29 @@ import { store } from '../../../store';
 </script>
 
 <template>
-    <div class="container-fluid justify-content-between">
+    <div class="container mt-5">
         <div class="row p-4">
             <div class="my-4">
                 <router-link :to="{ name: 'restaurants.index' }" class="router-link"><i class="fa-solid fa-arrow-left green"></i> Indietro</router-link>
             </div>
-            <div class="col-9 d-flex ">
-                <div class="">
-                    <img src="https://blog.giallozafferano.it/trasentieriefornelli/wp-content/uploads/2022/03/IMG_0015-960x640.jpg"
-                        alt="">
-                </div>
-                <div class="px-4">
-                    <h2 class="fw-bold">Poke House</h2>
-                    <div class="pt-2">
+            <div class="row justify-content-center align-content-center">
+                <div class="col-8 col-sm-7 col-md-7">
+                    <img class="img-restaurant" src="https://blog.giallozafferano.it/trasentieriefornelli/wp-content/uploads/2022/03/IMG_0015-960x640.jpg" alt="">
+                </div>        
+                <div class="col-12 col-sm-5 col-md-4 d-flex d-sm-block align-items-center info-restaurant">
+                    <h2 class="fw-bold py-3 py-sm-1">Poke House</h2>
+                    <div class="pt-2 d-none d-sm-block">
                         15 - 25 min· Poke·Sushi
                     </div>
-                    <div class="pt-3">
+                    <div>
                         Distanza: 1.18 km · Chiude alle 22:30 · Minimo d'ordine: 10,00 € · Consegna gratuita
                     </div>
-                </div>
-            </div>
-            <div class="col-3 ">
-                <div class="d-flex justify-content-end">
-                    <p class="px-3">
-                        Consegna in 15 - 30 min
-                    </p>
-                    <p class="green">
-                        Cambia
-                    </p>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <button class="btn btn-dark">Avvia ordine di gruppo</button>
                 </div>
             </div>
         </div>
     </div>
     <hr>
-    <div class="container-fluid p-2">
+    <div class="container p-2">
         <div class="row">
             <div class="col-12">
                 <ul class="d-flex gap-4">
@@ -57,7 +43,7 @@ import { store } from '../../../store';
     <hr class="hr-shadow">
 
     <div class="body-products">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row justify-content-between">
                 <div class="col-9 flex-column">
                     <div class="description card p-4">
@@ -126,11 +112,11 @@ import { store } from '../../../store';
                 
                 <!-- CART -->
                 <div class="col-3">
-                    <div class="card d-flex justify-content-end p-4">
+                    <div class="card justify-content-end p-4">
                         <p>il carrello è vuoto</p>
                         <button class="btn btn-secondary ">Vai al pagamento</button>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
@@ -139,9 +125,26 @@ import { store } from '../../../store';
 <style lang="scss" scoped>
 @import "../../../../style/partials/variables.scss";
 
+
+.test{
+    visibility: hidden;
+}
+
+@media (max-width: 575.98px) {
+    .info-restaurant{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+.img-restaurant {
+    width: 100%;
+}
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 20px;
 }
 
@@ -170,7 +173,7 @@ import { store } from '../../../store';
 }
 
 img {
-    max-width: 600px;
+    width: 100%;
     border-radius: 5px;
 }
 
