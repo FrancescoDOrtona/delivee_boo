@@ -67,14 +67,13 @@ import { store } from '../../../store';
                     <div class="py-5">
                         <h4>I nostri prodotti</h4>
                         <div class="grid">
-
                             <div class="card p-3 flex-row justify-content-between">
                                 <div class="product-text mx-2 flex-grow-1">
                                     <h6>nome prodotto</h6>
                                     <p>ingredienti</p>
                                 </div>
-                                <div class="product-img">
-                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                <div class="">
+                                    <img class="product-img" src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
                                 </div>
                                 <div class="product-add">
                                     <i class="fa-solid fa-plus"></i>
@@ -86,8 +85,8 @@ import { store } from '../../../store';
                                     <h6>nome prodotto</h6>
                                     <p>ingredienti</p>
                                 </div>
-                                <div class="product-img">
-                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                <div class="">
+                                    <img class="product-img" src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
                                 </div>
                                 <div class="product-add">
                                     <i class="fa-solid fa-plus"></i>
@@ -99,56 +98,21 @@ import { store } from '../../../store';
                                     <h6>nome prodotto</h6>
                                     <p>ingredienti</p>
                                 </div>
-                                <div class="product-img">
-                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                <div class="">
+                                    <img class="product-img" src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
                                 </div>
                                 <div class="product-add">
                                     <i class="fa-solid fa-plus"></i>
                                 </div>
                             </div>
+
                             <div class="card p-3 flex-row justify-content-between">
                                 <div class="product-text mx-2 flex-grow-1">
                                     <h6>nome prodotto</h6>
                                     <p>ingredienti</p>
                                 </div>
-                                <div class="product-img">
-                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
-                                </div>
-                                <div class="product-add">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-                            <div class="card p-3 flex-row justify-content-between">
-                                <div class="product-text mx-2 flex-grow-1">
-                                    <h6>nome prodotto</h6>
-                                    <p>ingredienti</p>
-                                </div>
-                                <div class="product-img">
-                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
-                                </div>
-                                <div class="product-add">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-                            <div class="card p-3 flex-row justify-content-between">
-                                <div class="product-text mx-2 flex-grow-1">
-                                    <h6>nome prodotto</h6>
-                                    <p>ingredienti</p>
-                                </div>
-                                <div class="product-img">
-                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
-                                </div>
-                                <div class="product-add">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-                            <div class="card p-3 flex-row justify-content-between">
-                                <div class="product-text mx-2 flex-grow-1">
-                                    <h6>nome prodotto</h6>
-                                    <p>ingredienti</p>
-                                </div>
-                                <div class="product-img">
-                                    <img src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
+                                <div class="">
+                                    <img class="product-img" src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png" alt="">
                                 </div>
                                 <div class="product-add">
                                     <i class="fa-solid fa-plus"></i>
@@ -175,8 +139,10 @@ import { store } from '../../../store';
 <style lang="scss" scoped>
 @import "../../../../style/partials/variables.scss";
 
-.grid{
+.grid {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .body-products{
@@ -223,6 +189,7 @@ img {
 
 .product-img{
     max-width: 100px;
+    max-height: 100px;
 }
 
 .product-add{
