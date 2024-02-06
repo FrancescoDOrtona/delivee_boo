@@ -38,6 +38,7 @@ body{
 .cover{
     object-fit: cover;
 }
+// Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) { 
     .products{
         grid-template-columns: repeat(1,1fr);
