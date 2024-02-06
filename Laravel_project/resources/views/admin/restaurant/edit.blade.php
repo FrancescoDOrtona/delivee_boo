@@ -5,12 +5,12 @@
         <div class="row mt-3 mb-3">
             <h1>Restaurant Information</h1>
 
-            <form id="myForm" action="{{ route('admin.restaurant.store') }}" method="POST" enctype="multipart/form-data" >
+            <form id="myForm" action="{{ route('admin.restaurant.update') }}" method="POST" enctype="multipart/form-data" >
 
                 @csrf
                 <div class="mb-4 row">
                     <label for="restaurant_name"
-                        class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Name *') }}</label>
+                        class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Name') }}</label>
 
                     <div class="col-md-6">
                         <input id="restaurant_name" type="text"
@@ -27,7 +27,7 @@
 
 
                 <div class="mb-4 row">
-                    <h5 class="fw-bold fs-6">Types *</h5>
+                    <h5>Restaurant Type</h5>
                     @foreach ($types as $type)
                         <div class="col-4">                           
                             <input type="checkbox" name="types[]" id="type-{{ $type->id }}" value="{{ $type->id }}" @checked(in_array($type->id, old('types', [])))>
@@ -45,7 +45,7 @@
 
         <div class="mb-4 row">
             <label for="restaurant_address"
-                class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Address *') }}</label>
+                class="col-md-4 col-form-label text-md-right">{{ __('Restaurant address') }}</label>
 
             <div class="col-md-6">
                 <input id="restaurant_address" type="text"
@@ -61,7 +61,7 @@
         </div>
 
         <div class="mb-4 row">
-            <label for="phone_number" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Phone Number *') }}</label>
+            <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 
             <div class="col-md-6">
                 <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror"
@@ -76,7 +76,7 @@
         </div>
 
         <div class="mb-4 row">
-            <label for="vat_number" class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Vat Number *') }}</label>
+            <label for="vat_number" class="col-md-4 col-form-label text-md-right">{{ __('Vat Number') }}</label>
 
             <div class="col-md-6">
                 <input id="vat_number" type="text" class="form-control @error('vat_number') is-invalid @enderror"
@@ -92,7 +92,7 @@
 
         <div class="mb-4 row">
             <label for="restaurant_image"
-                class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Image') }}</label>
+                class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Image') }}</label>
 
             <div class="col-md-6">
                 <input id="restaurant_image" type="file"
@@ -109,7 +109,7 @@
 
         <div class="mb-4 row">
             <label for="restaurant_description"
-                class="col-md-4 col-form-label text-md-right fw-bold">{{ __('Description *') }}</label>
+                class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Description') }}</label>
 
             <div class="col-md-6">
                 <textarea id="restaurant_description" type="file"
@@ -121,14 +121,10 @@
                 @enderror
             </div>
         </div>
-        <div class="mb-4 ">
-            <p class="fw-bold fs-6">
-               ( * )  Required fields
-            </p>
-        </div>
+
         <div>
             <button class="btn btn-primary" type="submit">
-                Save
+                Edit
             </button>
         </div>
 

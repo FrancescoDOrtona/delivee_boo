@@ -21,7 +21,7 @@
                     <li><a href="">Tipi di cucina</a></li>
                 </ul>
                 <ul class="py-2 px-3">
-                    <li class="fs-5 pb-2"><strong>Scarica Deliveboo</strong></li>
+                    <li class="fs-5 pb-2"><strong>Scarica Deliveboo sul tuo smartphone</strong></li>
                     <div class="download">
                         <img class="footer_download" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Download_on_the_App_Store_Badge_IT_RGB_blk.svg/2560px-Download_on_the_App_Store_Badge_IT_RGB_blk.svg.png" alt="">
                         <img class="footer_download h-43" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Play_Store_badge_IT.svg" alt="">

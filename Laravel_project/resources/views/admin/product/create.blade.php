@@ -88,7 +88,7 @@
         
                 <div>
                     <button class="btn btn-primary" type="submit">
-                        Crea
+                        Save
                     </button>
                 </div>
 

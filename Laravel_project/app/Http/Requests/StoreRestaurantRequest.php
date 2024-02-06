@@ -27,7 +27,7 @@ class StoreRestaurantRequest extends FormRequest
             'restaurant_address' => 'required|max:255|string',
             'restaurant_image' =>   'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:7168',
             // Nella validazione seguente la regex permette all'utente di inserire un numero di telefono composto da 20 cifre totali compresi i caratteri '+', '()' e '-' per numeri internazionali.
-            'phone_number' =>   'required|string|max:20|regex:/^\+?[0-9()\-\s]+$/|unique:restaurants',
+            'phone_number' =>   'required|string|max:20|regex:/^\+?[0-9()\-\s]+$/',
             //  Il campo deve corrispondere al modello regolare specificato, che richiede esattamente 11 cifre numeriche.
             'vat_number' => 'required|max:11|regex:/^[0-9]{11}$/|unique:restaurants',
             'types' => 'required|array|min:1',
