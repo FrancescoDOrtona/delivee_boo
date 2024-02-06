@@ -33,8 +33,7 @@ Route::middleware('auth')
     ->name('admin.')
     ->prefix('admin')
     ->group(function () {
-
-
+        
         Route::resource('restaurant', RestaurantController::class);
         Route::resource('product', ProductController::class);
     });
