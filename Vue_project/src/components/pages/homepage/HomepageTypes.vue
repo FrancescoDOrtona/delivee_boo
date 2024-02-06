@@ -1,7 +1,8 @@
 <template>
     <div class="types-section container">
         <div class="title">
-            <h1>Types</h1>
+            <h2>Le categorie più richieste</h2>
+            <p>Seleziona la categoria che preferisci e scegli cosa prenotare tra una moltitudine di aziende partner.</p>
         </div>
         <div class="types-section_badges top-row">
             <div class="badge">
@@ -92,6 +93,18 @@
 <style lang="scss" scoped>
 @use '../../../../style/partials/variables' as *;
 
+.title{
+    color: $text-gray !important;
+    h2{
+        font-weight: bolder !important;
+        font-size: 42px !important;
+    }
+    p{
+        font-size: 18px;
+        margin-bottom: 40px;
+    }
+}
+
 .types-section{
     padding:32px 64px;
 }
@@ -105,9 +118,6 @@
     filter: drop-shadow(7px 5px 3px rgba(0, 0, 0, 0.555));
 }
 
-.badge-title{
-    color: $text-gray;
-}
 
 /* .types-section_badges {
     display: grid;
@@ -135,11 +145,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(1, 204, 188, 0.7);
-    color: $light-gray-footer;
+    color: black;
     padding: 5px 10px;
     border-radius: 10px;
     h5{
         margin: 0;
+        font-weight: 600 !important;
     }
 }
 
