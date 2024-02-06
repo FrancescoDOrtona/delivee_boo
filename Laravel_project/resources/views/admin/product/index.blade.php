@@ -1,6 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- inizio modale  --}}
+    <div class="modal" tabindex="-1" id="modalDelete">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">are you sure to delete?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-modal">are you sure to delete : </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+              <button type="button" id="button-modal-delete" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{-- fine modale  --}}
+
     <div class="container">
         <div class="row justify-content-center gap-5">
             <div class="title d-flex align-items-center justify-content-between">
@@ -34,10 +54,10 @@
                         <a href="{{route('admin.product.show',$product)}}" class="btn btn-primary">Product Details</a>
                         <a href="{{route('admin.product.edit', $product)}}" class="btn btn-secondary">Edit Product</a>
                     
-                        <form class="margin-left-auto" action="{{route('admin.product.destroy',$product)}}" method="POST">
+                        <form class="margin-left-auto form-delete" action="{{route('admin.product.destroy',$product)}}" method="POST" data-delete-name="{{$product->name}}">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger w-100">Delete</button>
+                            <button class="btn btn-danger w-100 form-delete-btn">Delete</button>
                         </form>
                     </div>
                     {{-- <h1>Register your restaurant</h1>
