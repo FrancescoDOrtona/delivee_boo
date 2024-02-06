@@ -11,9 +11,9 @@
             <ul>
                 <li>{{ $product->price }} € </li>
                 @if($product->available == false)
-                <li>Non disponibile</li>
+                <li>Not Available</li>
                 @else
-                <li>Disponibile</li>
+                <li>Available</li>
                 @endif
 
                 <li>{{$product->description}}</li>
