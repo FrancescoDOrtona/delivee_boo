@@ -5,7 +5,7 @@
         <div class="container container-custom py-5 jumbotron_content">
             <div class="jumbotron_content-text">
                 <h1 class="display-5 fw-bold">I piatti dei ristoranti che ami e la spesa, a domicilio</h1>
-                <p class="col-md-8 fs-4">
+                <p class="col-md-8">
                     Cerca tra centinaia di ristoranti nella tua zona, scegli il tuo piatto preferito e ricevilo direttamente
                     a casa con il nostro servizio di consegna a domicilio.
                 </p>
@@ -129,6 +129,16 @@ export default {
 
     p {
         margin: 50px 0px;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    @media (min-width: 768px) { 
+        p {
+        margin: 50px 0px;
+        font-size: 20px;
+        text-align: center;
+        } 
     }
 }
 
