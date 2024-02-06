@@ -28,7 +28,7 @@ export default {
 <template>
     <!-- said-bar -->
     <div class="line-header d-flex justify-content-center align-items-center">
-        <input type="text" class="z-3 search-input" placeholder="Ristoranti, spesa, piatti">
+        <input type="text" class="z-3 search-input d-none d-xl-block" placeholder="Ristoranti, spesa, piatti">
     </div>
     <div class="container-fluid ">
         <div class="d-flex">
@@ -289,6 +289,7 @@ export default {
     border-bottom: 1px solid lightgray;
     width: 100%;
     padding-bottom: 15px;
+    height: 100px;
     content: '';
 }
 
@@ -337,6 +338,10 @@ input[type="radio"] {
     border: 1px solid rgb(223, 223, 223);
     padding: 5px;
     z-index: 20;
+
+    @media (max-width: 1199.98px) { 
+        display: none;
+    }
 }
 
 .grid {
