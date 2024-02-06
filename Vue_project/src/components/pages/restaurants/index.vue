@@ -10,7 +10,7 @@ export default {
     },
     data() {
         return {
-            store: store,
+            store,
             BASE_URL: 'http://127.0.0.1:8000/api',
         }
     }, methods: {
@@ -51,17 +51,40 @@ export default {
                                 <label for="Ritiro">Ritiro</label>
                             </li>
                         </ul>
+
+
                         <div class="accordion" id="accordionPanelsStayOpenExample">
 
-                            <div class="bottom-line ">
+                            <div class="bottom-line">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
                                         aria-controls="panelsStayOpen-collapseOne">
-                                        Ordina
+                                        Categorie
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                    <div class="accordion-body">
+                                        <ul class="fw-light">
+                                            <li v-for="type in store.dataRT.types" :key="type" class="pb-3 d-flex">
+                                                <input :name="type.name" type="checkbox" class="me-1">
+                                                <label class="input_label" :for="type.name">{{ type.name }}</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="bottom-line ">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseTwo">
+                                        Ordina
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                                     <div class="accordion-body">
                                         <ul class="fw-light">
                                             <li class="pb-3 d-flex">
@@ -147,94 +170,6 @@ export default {
                                                 <input type="radio" name="option5" value="ticket-restaurant"
                                                     id="ticket-restaurant">
                                                 <label for="ticket-restaurant">Ticket Restaurant</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bottom-line">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseFive">
-                                        Cucine
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        <ul class="fw-light">
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Americano
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Cinese
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Colazione
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Giapponese
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Italiano
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Messicano
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Spagnolo
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bottom-line">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseSix">
-                                        Piatti
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        <ul class="fw-light">
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Hamburger
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Kebab
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Pasta
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Piadina
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Pokè
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Pollo
-                                            </li>
-                                            <li class="pb-3 d-flex">
-                                                <label for=""></label>
-                                                <input type="checkbox" class="me-1">Pizza
                                             </li>
                                         </ul>
                                     </div>
@@ -369,5 +304,9 @@ input[type="radio"] {
     .card-body {
         padding: 20px;
     }
+}
+
+.input_label{
+    text-transform: capitalize;
 }
 </style>
