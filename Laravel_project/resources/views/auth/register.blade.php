@@ -53,17 +53,21 @@
                             </div>
                         </div>
 
-                        <div class="mb-4 row">
+                        <div class="mb-1 row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" oninput="ConfirmPasswordMatch()">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" oninput="ConfirmPasswordMatch()"> 
                             </div>
-                            <span id="confirmMessage" class="confirm-message"></span><br>
+                            
+                        </div>
+                        <div class="mb-4 row">
+
+                            <div id="confirmMessage" class="confirm-message col-md-6"></div>
                         </div>
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" id='submit' class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -84,10 +88,16 @@ function ConfirmPasswordMatch() {
     let confirmPassword = document.getElementById('password-confirm').value;
     
     if (password !== confirmPassword) {
-        document.getElementById('confirmMessage').innerHTML = 'Cazzo Fai?';
+        document.getElementById('confirmMessage').innerHTML = 'Password do not match!';
+        document.getElementById('password-confirm').classList.add('confirm-error');
+        document.getElementById("submit").disabled = true;
+        
     } else {
         document.getElementById('confirmMessage').innerHTML = '';
+        document.getElementById('password-confirm').classList.remove('confirm-error');
+        document.getElementById("submit").disabled = false;
     }
 }
 
 </script>
+

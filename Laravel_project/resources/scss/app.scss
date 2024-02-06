@@ -1,12 +1,13 @@
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
+@import "./partials/register.scss";
 
-body{
+body {
     background-image: url(https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg);
 }
 
-.products{
+.products {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px , 300px));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
     gap: 15px;
 }
 
@@ -21,20 +22,19 @@ body{
     background-color: white;
 }
 
-.app-logo{
+.app-logo {
     width: 80px;
 }
 
-.card-img{
+.card-img {
     text-align: center;
 
-    img{
+    img {
         max-height: 200px;
         object-fit: cover;
     }
 }
 
-.cover{
+.cover {
     object-fit: cover;
 }
-
