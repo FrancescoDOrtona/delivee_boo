@@ -43,7 +43,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" oninput="ConfirmPasswordMatch()">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -57,10 +57,10 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" oninput="ConfirmPasswordMatch()">
                             </div>
+                            <span id="confirmMessage" class="confirm-message"></span><br>
                         </div>
-
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -75,3 +75,19 @@
     </div>
 </div>
 @endsection
+
+
+
+<script> 
+function ConfirmPasswordMatch() {
+    let password = document.getElementById('password').value;
+    let confirmPassword = document.getElementById('password-confirm').value;
+    
+    if (password !== confirmPassword) {
+        document.getElementById('confirmMessage').innerHTML = 'Cazzo Fai?';
+    } else {
+        document.getElementById('confirmMessage').innerHTML = '';
+    }
+}
+
+</script>
