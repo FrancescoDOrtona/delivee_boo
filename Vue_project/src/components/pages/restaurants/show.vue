@@ -1,6 +1,33 @@
 <script>
 import axios from 'axios';
 import { store } from '../../../store';
+
+export default {
+    props: {
+        id: String,
+    },
+    data() {
+        return {
+            store,
+            restaurant: null,
+            BASE_URL: 'http://127.0.0.1:8000/api',
+        }
+    },
+    methods:{
+        fetchShow() {
+            axios.get(`${this.BASE_URL}/restaurants/${this.id}`)
+                .then(res => {
+                    console.log(res.data);
+                    this.restaurant = res.data.restaurant;
+                }).catch((error) => {
+                    console.log('post not found', error.response)
+                })
+        }
+    },
+    created() {
+        this.fetchShow()
+    },
+}
 </script>
 
 <template>
@@ -11,13 +38,13 @@ import { store } from '../../../store';
                         class="fa-solid fa-arrow-left green"></i> Indietro</router-link>
             </div>
             <div class="row restaurant-head ">
-                <div class="col-6">
-                    <img class="img-restaurant"
-                        src="https://blog.giallozafferano.it/trasentieriefornelli/wp-content/uploads/2022/03/IMG_0015-960x640.jpg"
-                        alt="">
+                <div class="col-6" v-if="restaurant">
+                    <img class="img-restaurant" :src="restaurant.restaurant_image" alt="">
                 </div>
                 <div class="col-6 d-flex d-sm-block align-items-center info-restaurant">
-                    <h2 class="fw-bold py-3 py-sm-1">Poke House</h2>
+                    <h2 class="fw-bold py-3 py-sm-1" v-if="restaurant">
+                        {{restaurant.restaurant_name}}
+                    </h2>
                     <div class="pt-2 d-none d-sm-block">
                         15 - 25 min· Poke·Sushi
                     </div>
@@ -36,73 +63,29 @@ import { store } from '../../../store';
                 <div class="col-12 flex-column">
                     <div class="description card p-3">
                         <h5>Le informazioni sul nostro ristorante</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, minima! Lorem ipsum dolor
-                            sit amet consectetur adipisicing elit. Tempora, ratione.</p>
+                        <p v-if="restaurant">
+                            {{restaurant.restaurant_description}}
+                        </p>
+                        
                     </div>
                     <div class="py-5">
                         <h4>I nostri prodotti</h4>
-                        <div class="grid">
-                            <div class="card p-3 flex-row justify-content-between">
+                        <div class="grid" v-if="restaurant">
+
+                            <div class="card p-3 flex-row justify-content-between" v-for="product in restaurant.products" >
                                 <div class="product-text mx-2 flex-grow-1">
-                                    <h6>nome prodotto</h6>
+                                    <h6>{{ product.name }}</h6>
                                     <p>ingredienti</p>
                                 </div>
                                 <div class="">
                                     <img class="product-img"
-                                        src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png"
+                                        :src="product.image"
                                         alt="">
                                 </div>
                                 <div class="product-add">
                                     <i class="fa-solid fa-plus"></i>
                                 </div>
                             </div>
-
-                            <div class="card p-3 flex-row justify-content-between">
-                                <div class="product-text mx-2 flex-grow-1">
-                                    <h6>nome prodotto</h6>
-                                    <p>ingredienti</p>
-                                </div>
-                                <div class="">
-                                    <img class="product-img"
-                                        src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png"
-                                        alt="">
-                                </div>
-                                <div class="product-add">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-
-                            <div class="card p-3 flex-row justify-content-between">
-                                <div class="product-text mx-2 flex-grow-1">
-                                    <h6>nome prodotto</h6>
-                                    <p>ingredienti</p>
-                                </div>
-                                <div class="">
-                                    <img class="product-img"
-                                        src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png"
-                                        alt="">
-                                </div>
-                                <div class="product-add">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-
-                            <div class="card p-3 flex-row justify-content-between">
-                                <div class="product-text mx-2 flex-grow-1">
-                                    <h6>nome prodotto</h6>
-                                    <p>ingredienti</p>
-                                </div>
-                                <div class="">
-                                    <img class="product-img"
-                                        src="https://blog.giallozafferano.it/nonsolodolciit/wp-content/uploads/2021/01/45188dc1-add3-4e3a-b0b3-7e198ce8fa75.png"
-                                        alt="">
-                                </div>
-                                <div class="product-add">
-                                    <i class="fa-solid fa-plus"></i>
-                                </div>
-                            </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -126,7 +109,8 @@ import { store } from '../../../store';
 .test {
     visibility: hidden;
 }
-@media (max-width: 1400px){
+
+@media (max-width: 1400px) {
     .grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr) !important;
@@ -142,9 +126,10 @@ import { store } from '../../../store';
         }
     }
 
-    .search-badge{
+    .search-badge {
         display: none !important;
     }
+
     .grid {
         display: grid;
         grid-template-columns: repeat(1, 1fr) !important;
@@ -153,10 +138,11 @@ import { store } from '../../../store';
 }
 
 
-.row{
+.row {
     margin: 0px;
     padding: 0px;
 }
+
 .img-restaurant {
     width: 100%;
 }
