@@ -2,10 +2,10 @@
   <header>
     <div class="header">
       <div class="header-logo ">
-        <a href="/">
+        <router-link :to="{ name : 'home' }">
           <img class="logo-1" src="../../logo-no-bg.png" alt="" />
           <img class="logo-2" src="../../logo-teal-titolo.svg" alt="" />
-        </a>
+        </router-link>
       </div>
 
       <!-- DROPDOWN HAMBURGER MENU -->

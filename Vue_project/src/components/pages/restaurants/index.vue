@@ -2,36 +2,30 @@
 import axios from 'axios';
 import { store } from '../../../store';
 export default {
-    props: {
-        restaurant: {
-            type: Object,
-            required: true,
-        },
-    },
     data() {
         return {
             store,
             BASE_URL: 'http://127.0.0.1:8000/api',
         }
-    }, methods: {
+    },
+    methods: {
         fetchRestaurants() {
             axios.get(`${this.BASE_URL}/restaurants`).then((res) => {
-                // this.dataRT = res.data.results;
-                // console.log(this.dataRT);
-
                 this.store.dataRT = res.data.results;
-                console.log(this.store.dataRT);
-
             });
-        }
-    }, created() {
+        },
+        isChecked(typeId) {
+            return typeId === parseInt(this.$route.params.id);
+        },
+    },
+    created() {
         this.fetchRestaurants();
-    }
+    },
 }
 </script>
 
 <template>
-    <!-- said-bar -->
+    <!-- side-bar -->
     <div class="line-header d-flex justify-content-center align-items-center">
         <input type="text" class="z-3 search-input d-none d-xl-block" placeholder="Ristoranti, spesa, piatti">
     </div>
@@ -67,7 +61,7 @@ export default {
                                     <div class="accordion-body">
                                         <ul class="fw-light">
                                             <li v-for="type in store.dataRT.types" :key="type" class="pb-3 d-flex">
-                                                <input :name="type.name" type="checkbox" class="me-1">
+                                                <input :checked="isChecked(type.id)" :name="type.name" type="checkbox" class="me-1">
                                                 <label class="input_label" :for="type.name">{{ type.name }}</label>
                                             </li>
                                         </ul>
@@ -182,36 +176,31 @@ export default {
             <div class="main-content">
                 <h3 class="py-3">Ristoranti che consegnano a "Milano"</h3>
                 <div class="grid">
-                    <div class="card" v-for="restaurant in store.dataRT.restaurants">
-                        <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
-                            <div>
-                                <img src="https://www.welfarecare.org/wp-content/uploads/2021/10/Progetto-senza-titolo-56-1.jpg"
-                                    alt="">
-                            </div>
-
-                            <div class="card-body" >
-                                <h5>
-                                    {{ restaurant.restaurant_name }}
-                                </h5>
-                                <p> 5.1 Valutazione</p>
-                                <p>{{ restaurant.phone_number }}</p>
-                                <span>{{ restaurant.restaurant_address }}</span> -
-                                <span>Consegna gratuita</span>
-                            </div>
-                        </router-link>
+                    <div class="card" v-for="restaurant in store.dataRT.restaurants" :key="restaurant.id">
+                            <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
+                                <div>
+                                    <img :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="">
+                                </div>        
+                                <div class="card-body">
+                                    <h5>
+                                        {{ restaurant.restaurant_name }}
+                                    </h5>
+                                    <p> 5.1 Valutazione</p>
+                                    <p>{{ restaurant.phone_number }}</p>
+                                    <span>{{ restaurant.restaurant_address }}</span>
+                                </div>
+                            </router-link>                                                            
                     </div>
-                    
                 </div>
             </div>
         </div>
-
-    </div>
+    </div>   
 </template>
   
 <style lang="scss" scoped>
 @import "../../../../style/partials/variables.scss";
 
-.reset{
+.reset {
     text-decoration: none;
     color: currentColor;
 }
@@ -222,7 +211,6 @@ export default {
     padding-top: 5px;
     width: 250px;
     margin-left: 0px;
-    position: sticky;
 }
 
 .line-header {
@@ -279,7 +267,7 @@ input[type="radio"] {
     padding: 5px;
     z-index: 20;
 
-    @media (max-width: 1199.98px) { 
+    @media (max-width: 1199.98px) {
         display: none;
     }
 }
@@ -306,7 +294,7 @@ input[type="radio"] {
     }
 }
 
-.input_label{
+.input_label {
     text-transform: capitalize;
 }
 </style>

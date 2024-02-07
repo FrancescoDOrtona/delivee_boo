@@ -31,7 +31,7 @@ export default {
         // console.log(this.dataRT);
 
          this.store.dataRT = res.data.results;
-        console.log(this.store.dataRT);
+        // console.log(this.store.dataRT);
 
       });
     },

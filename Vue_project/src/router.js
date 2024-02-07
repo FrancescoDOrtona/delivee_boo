@@ -5,6 +5,10 @@ import RestaurantShow from './components/pages/restaurants/show.vue';
 
 
 const router = createRouter({
+  scrollBehavior(to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
+  },
   history: createWebHistory(),
   routes: [
     {
@@ -13,7 +17,7 @@ const router = createRouter({
       component: Homepage,
     },
     {
-      path: '/restaurants',
+      path: '/restaurants/',
       name: 'restaurants.index',
       component: Restaurants,
     },
