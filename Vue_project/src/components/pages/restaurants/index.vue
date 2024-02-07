@@ -83,7 +83,7 @@ export default {
       <div class="">
         <div class="side-bar">
           <ul>
-            <li class="bottom-line">Caserta</li>
+            <li class="bottom-line">Milano</li>
             <ul class="bottom-line">
               <li class="pb-3 fw-light d-flex">
                 <input type="radio" name="option1" id="consegna" />
