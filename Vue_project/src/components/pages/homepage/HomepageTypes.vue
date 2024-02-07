@@ -6,7 +6,7 @@
         </div>
         <div class="types-section_badges top-row">
             <div v-for="type in store.dataRT.types" :key="type"  class="badge">
-                <router-link :to="{ name: 'restaurants.index'}">
+                <router-link :to="{ name: 'restaurants.index' , params: { id: type.id} }">
                     <img  class="badge-img" :src="type.img_url" alt="">
                     <div class="badge-title">
                         <h5>{{ type.name }}</h5>
@@ -24,7 +24,7 @@ import { store } from '../../../store';
             return {
                 store,
             }
-        },
+        }
     }
 </script>
 
