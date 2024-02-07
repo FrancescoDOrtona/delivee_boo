@@ -7,23 +7,36 @@ export default {
             store,
             BASE_URL: 'http://127.0.0.1:8000/api',
             selectedTypeIds: [], // Aggiungi un array per memorizzare gli ID dei tipi selezionati
+            restaurants: [],
+            types:[]
         }
     },
     methods: {
         fetchFilteredRestaurants() {
-            axios.get(`${this.BASE_URL}/restaurants`, {
-                params: {
-                    type_id: this.selectedTypeIds.join(','), // Passa gli ID dei tipi come stringa separata da virgole
-                }
-            }).then((res) => {
-                this.store.dataRT.restaurants = res.data.results; // Aggiorna solo l'array dei ristoranti
-            }).catch(error => {
-                console.error('Errore durante il recupero dei ristoranti filtrati:', error);
-            });
+            let params = {}; // Inizializza un oggetto per i parametri della richiesta
+
+            // Verifica se ci sono tipi selezionati
+            if (this.selectedTypeIds.length > 0) {
+                // Se ci sono tipi selezionati, aggiungi il parametro 'types'
+                params.types = this.selectedTypeIds.join(',');
+            }
+
+            // Effettua la chiamata API
+            axios.get(`${this.BASE_URL}/restaurants`, { params })
+                .then((res) => {
+                    // Aggiorna solo l'array dei ristoranti
+                    this.store.dataRT.restaurants = res.data.results;
+                    this.restaurants = res.data.results.restaurants;
+                    this.types =res.data.results.types;
+                })
+                .catch(error => {
+                    console.error('Errore durante il recupero dei ristoranti:', error);
+                });
         },
         isChecked(typeId) {
             // Controlla se l'ID del tipo è presente nei tipi selezionati
-            return this.selectedTypeIds.includes(typeId);
+            console.log(typeId === parseInt(this.$route.params.id));
+            return this.selectedTypeIds.includes(typeId) && typeId === parseInt(this.$route.params.id);
         },
         toggleFilter(typeId) {
             if (this.selectedTypeIds.includes(typeId)) {
@@ -42,6 +55,10 @@ export default {
         // Esegui la richiesta al backend per ottenere i ristoranti filtrati
         this.fetchFilteredRestaurants();
     },
+    created(){
+        this.fetchFilteredRestaurants();
+    }
+
 }
 </script>
 
@@ -81,8 +98,8 @@ export default {
                                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                                     <div class="accordion-body">
                                         <ul class="fw-light">
-                                            <li v-for="type in store.dataRT.types" :key="type.id" class="pb-3 d-flex">
-                                                <input :checked="isChecked(type.id)" @change="toggleFilter(type.id)"
+                                            <li v-for="type in types" :key="type.id" class="pb-3 d-flex">
+                                                <input  :checked="isChecked(type.id)" @change="toggleFilter(type.id)"
                                                     :id="`type-${type.id}`" type="checkbox" class="me-1">
                                                 <label class="input_label" :for="`type-${type.id}`">{{ type.name }}</label>
                                             </li>
@@ -198,10 +215,10 @@ export default {
             <div class="main-content">
                 <h3 class="py-3">Ristoranti che consegnano a "Milano"</h3>
                 <div class="grid">
-                    <div class="card" v-for="restaurant in store.dataRT.restaurants" :key="restaurant.id">
+                    <div class="card" v-for="restaurant in restaurants" :key="restaurant.id">
                         <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
                             <div>
-                                {{ restaurant }}
+                                <!-- {{ restaurant }} -->
                                 <img :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="">
                             </div>
                             <div class="card-body">
