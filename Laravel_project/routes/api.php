@@ -24,4 +24,6 @@ Route::get('/restaurants',[RestaurantController::class,'index']);
 
 Route::get('/restaurants/{restaurant}',[RestaurantController::class,'show']);
 
+// Route::get('/restaurants/filter', [RestaurantController::class, 'filter']);
+
 // Route::get('/search',[RestaurantController::class,'search']);

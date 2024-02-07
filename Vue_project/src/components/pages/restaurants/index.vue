@@ -6,20 +6,41 @@ export default {
         return {
             store,
             BASE_URL: 'http://127.0.0.1:8000/api',
+            selectedTypeIds: [], // Aggiungi un array per memorizzare gli ID dei tipi selezionati
         }
     },
     methods: {
-        fetchRestaurants() {
-            axios.get(`${this.BASE_URL}/restaurants`).then((res) => {
-                this.store.dataRT = res.data.results;
+        fetchFilteredRestaurants() {
+            axios.get(`${this.BASE_URL}/restaurants`, {
+                params: {
+                    type_id: this.selectedTypeIds.join(','), // Passa gli ID dei tipi come stringa separata da virgole
+                }
+            }).then((res) => {
+                this.store.dataRT.restaurants = res.data.results; // Aggiorna solo l'array dei ristoranti
+            }).catch(error => {
+                console.error('Errore durante il recupero dei ristoranti filtrati:', error);
             });
         },
         isChecked(typeId) {
-            return typeId === parseInt(this.$route.params.id);
+            // Controlla se l'ID del tipo è presente nei tipi selezionati
+            return this.selectedTypeIds.includes(typeId);
+        },
+        toggleFilter(typeId) {
+            if (this.selectedTypeIds.includes(typeId)) {
+                this.selectedTypeIds = this.selectedTypeIds.filter(id => id !== typeId);
+            } else {
+                this.selectedTypeIds.push(typeId);
+            }
+            this.fetchFilteredRestaurants();
         },
     },
-    created() {
-        this.fetchRestaurants();
+    computed() {
+        // Leggi i parametri dall'URL all'avvio del componente
+        const urlParams = new URLSearchParams(window.location.search);
+        const typeIds = urlParams.getAll('type_id[]');
+        this.selectedTypeIds = typeIds.map(id => parseInt(id));
+        // Esegui la richiesta al backend per ottenere i ristoranti filtrati
+        this.fetchFilteredRestaurants();
     },
 }
 </script>
@@ -60,9 +81,10 @@ export default {
                                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                                     <div class="accordion-body">
                                         <ul class="fw-light">
-                                            <li v-for="type in store.dataRT.types" :key="type" class="pb-3 d-flex">
-                                                <input :checked="isChecked(type.id)" :name="type.name" type="checkbox" class="me-1">
-                                                <label class="input_label" :for="type.name">{{ type.name }}</label>
+                                            <li v-for="type in store.dataRT.types" :key="type.id" class="pb-3 d-flex">
+                                                <input :checked="isChecked(type.id)" @change="toggleFilter(type.id)"
+                                                    :id="`type-${type.id}`" type="checkbox" class="me-1">
+                                                <label class="input_label" :for="`type-${type.id}`">{{ type.name }}</label>
                                             </li>
                                         </ul>
                                     </div>
@@ -177,24 +199,25 @@ export default {
                 <h3 class="py-3">Ristoranti che consegnano a "Milano"</h3>
                 <div class="grid">
                     <div class="card" v-for="restaurant in store.dataRT.restaurants" :key="restaurant.id">
-                            <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
-                                <div>
-                                    <img :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="">
-                                </div>        
-                                <div class="card-body">
-                                    <h5>
-                                        {{ restaurant.restaurant_name }}
-                                    </h5>
-                                    <p> 5.1 Valutazione</p>
-                                    <p>{{ restaurant.phone_number }}</p>
-                                    <span>{{ restaurant.restaurant_address }}</span>
-                                </div>
-                            </router-link>                                                            
+                        <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
+                            <div>
+                                {{ restaurant }}
+                                <img :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="">
+                            </div>
+                            <div class="card-body">
+                                <h5>
+                                    {{ restaurant.restaurant_name }}
+                                </h5>
+                                <p> 5.1 Valutazione</p>
+                                <p>{{ restaurant.phone_number }}</p>
+                                <span>{{ restaurant.restaurant_address }}</span>
+                            </div>
+                        </router-link>
                     </div>
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
 </template>
   
 <style lang="scss" scoped>
