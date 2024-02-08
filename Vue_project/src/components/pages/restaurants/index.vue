@@ -106,7 +106,7 @@ export default {
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                   <div class="accordion-body">
                     <ul class="fw-light">
-                      <li v-for="type in types" :key="type.id" class="pb-3 d-flex">
+                      <li v-for="(type) in types" :key="type.id" class="pb-3 d-flex">
                         <input :checked="(isChecked(type.id), checked(type.id))" @change="toggleFilter(type.id)"
                           :id="`type-${type.id}`" type="checkbox" class="me-1" />
                         <label class="input_label" :for="`type-${type.id}`">{{
@@ -228,7 +228,7 @@ export default {
                 <img v-if="restaurant.restaurant_image" class="img-fluid img-card" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="" />
                 <img v-else class="img-fluid img-card" src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="" />
                 <div  class="image_badge">
-                  <small v-for="type in restaurant.types" :key="type.id" class="card_badge">{{ type.name }}</small>
+                  <small v-for="(type) in restaurant.types" :key="type.id" class="card_badge">{{ type.name }}</small>
                 </div>
               </div>
               <div class="card-body">
@@ -249,10 +249,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 @import '../../../../style/partials/variables.scss';
 *{
   color: $text-gray !important;
-
 }
 
 .mt-100{
