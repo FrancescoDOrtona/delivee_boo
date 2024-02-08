@@ -126,7 +126,7 @@ export default {
     <div class="d-flex ">
 
       <div class="side-bar d-none d-md-block">
-        <ul>
+        <ul class="p-0">
           <li class="bottom-line">Milano</li>
          
           <!-- search bar  -->
@@ -145,126 +145,129 @@ export default {
               </li>
             </ul>
           </li>
-          <div class="accordion" id="accordionPanelsStayOpenExample">
-            <div class="bottom-line">
-              <h2 class="accordion-header">
-                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
-                  aria-controls="panelsStayOpen-collapseOne">
-                  Categorie
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                <div class="accordion-body">
-                  <ul class="fw-light">
-                    <li v-for="(type) in types" :key="type.id" class="pb-3 d-flex">
-                      <input :checked="(isChecked(type.id), checked(type.id))" @change="toggleFilter(type.id)"
-                        :id="`type-${type.id}`" type="checkbox" class="me-1" />
-                      <label class="input_label" :for="`type-${type.id}`">{{
-                        type.name
-                      }}</label>
-                    </li>
-                  </ul>
+          <li>
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+              <div class="bottom-line">
+                <h2 class="accordion-header">
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseOne">
+                    Categorie
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                  <div class="accordion-body">
+                    <ul class="fw-light">
+                      <li v-for="(type) in types" :key="type.id" class="pb-3 d-flex">
+                        <input :checked="(isChecked(type.id), checked(type.id))" @change="toggleFilter(type.id)"
+                          :id="`type-${type.id}`" type="checkbox" class="me-1" />
+                        <label class="input_label" :for="`type-${type.id}`">{{
+                          type.name
+                        }}</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="bottom-line">
+                <h2 class="accordion-header">
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
+                    Ordina
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <ul class="fw-light">
+                      <li class="pb-3 d-flex">
+                        <input type="radio" value="consegna" id="consegna" name="option2" />
+                        <label for="consegna">Consegna più rapida</label>
+                      </li>
+                      <li class="pb-3 d-flex">
+                        <input type="radio" id="consigliati" name="option2" value="consigliati" />
+                        <label for="consigliati">Consigliati</label>
+                      </li>
+                      <li class="pb-3 d-flex">
+                        <input type="radio" id="distanza" name="option2" value="distanza" />
+                        <label for="distanza">Distanza</label>
+                      </li>
+                      <li class="pb-3 d-flex">
+                        <input type="radio" name="option2" id="votati" value="votati" />
+                        <label for="votati">I più votati</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="bottom-line">
+                <h2 class="accordion-header">
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
+                    Offerte
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <ul class="fw-light">
+                      <li class="d-flex">
+                        <input type="checkbox" class="me-1" id="accetta-contanti" value="accetta-contanti" name="option3" />
+                        <label for="accetta-contanti">Accetta contanti</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="bottom-line">
+                <h2 class="accordion-header">
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseThree">
+                    Regime alimentari
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <ul class="fw-light">
+                      <li class="pb-3 d-flex">
+                        <input type="checkbox" class="me-1" value="senza-glutine" name="option4" id="senza-glutine" />
+                        <label for="">Senza Glutine</label>
+                      </li>
+                      <li class="pb-3 d-flex">
+                        <input type="checkbox" class="me-1" name="option4" value="vegetariano" id="vegetariano" />
+                        <label for="vegetariano">Vegetariano</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="bottom-line">
+                <h2 class="accordion-header">
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseFoor" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseFoor">
+                    Buono pasto
+                  </button>
+                </h2>
+                <div id="panelsStayOpen-collapseFoor" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <ul class="fw-light">
+                      <li class="d-flex">
+                        <input type="radio" name="option5" value="ticket-restaurant" id="ticket-restaurant" />
+                        <label for="ticket-restaurant">Ticket Restaurant</label>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="bottom-line">
-              <h2 class="accordion-header">
-                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                  aria-controls="panelsStayOpen-collapseTwo">
-                  Ordina
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                <div class="accordion-body">
-                  <ul class="fw-light">
-                    <li class="pb-3 d-flex">
-                      <input type="radio" value="consegna" id="consegna" name="option2" />
-                      <label for="consegna">Consegna più rapida</label>
-                    </li>
-                    <li class="pb-3 d-flex">
-                      <input type="radio" id="consigliati" name="option2" value="consigliati" />
-                      <label for="consigliati">Consigliati</label>
-                    </li>
-                    <li class="pb-3 d-flex">
-                      <input type="radio" id="distanza" name="option2" value="distanza" />
-                      <label for="distanza">Distanza</label>
-                    </li>
-                    <li class="pb-3 d-flex">
-                      <input type="radio" name="option2" id="votati" value="votati" />
-                      <label for="votati">I più votati</label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="bottom-line">
-              <h2 class="accordion-header">
-                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                  aria-controls="panelsStayOpen-collapseTwo">
-                  Offerte
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                <div class="accordion-body">
-                  <ul class="fw-light">
-                    <li class="d-flex">
-                      <input type="checkbox" class="me-1" id="accetta-contanti" value="accetta-contanti" name="option3" />
-                      <label for="accetta-contanti">Accetta contanti</label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="bottom-line">
-              <h2 class="accordion-header">
-                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                  aria-controls="panelsStayOpen-collapseThree">
-                  Regime alimentari
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-                <div class="accordion-body">
-                  <ul class="fw-light">
-                    <li class="pb-3 d-flex">
-                      <input type="checkbox" class="me-1" value="senza-glutine" name="option4" id="senza-glutine" />
-                      <label for="">Senza Glutine</label>
-                    </li>
-                    <li class="pb-3 d-flex">
-                      <input type="checkbox" class="me-1" name="option4" value="vegetariano" id="vegetariano" />
-                      <label for="vegetariano">Vegetariano</label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div class="bottom-line">
-              <h2 class="accordion-header">
-                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#panelsStayOpen-collapseFoor" aria-expanded="false"
-                  aria-controls="panelsStayOpen-collapseFoor">
-                  Buono pasto
-                </button>
-              </h2>
-              <div id="panelsStayOpen-collapseFoor" class="accordion-collapse collapse">
-                <div class="accordion-body">
-                  <ul class="fw-light">
-                    <li class="d-flex">
-                      <input type="radio" name="option5" value="ticket-restaurant" id="ticket-restaurant" />
-                      <label for="ticket-restaurant">Ticket Restaurant</label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+          </li>
         </ul>
 
       </div>
@@ -273,7 +276,7 @@ export default {
           <!-- bottone modale  -->
           <div class="d-md-none d-flex my-3 gap-3">
             <input class="w-100 search-input" type="search" placeholder="Cerca Ristoranti">
-            <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-light btn-modal-open" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <i class="fa-solid fa-sliders"></i>
             </button>
 
@@ -395,7 +398,7 @@ input[type='radio'] {
 
 .main-content {
   flex-grow: 1;
-  padding: 0px 48px 40px 48px;
+  padding: 0px 0px 40px 48px;
 }
 
 .card {
@@ -537,7 +540,10 @@ input[type='radio'] {
   grid-template-columns: repeat(2,1fr);
   gap: 10px;
 }
-
+.btn-modal-open{
+  color: $main-brand-color;
+  border: 1px solid lightgray;
+}
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
   .main-content {
