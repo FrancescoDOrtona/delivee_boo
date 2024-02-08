@@ -130,13 +130,22 @@ export default {
                 <!-- CART -->
                 <div class="col-3">
                     <div class="card justify-content-end p-4">
-                        <ul v-for="product in this.products">
+                        <ul class="chart" v-for="product in this.products">
                             <li>{{ product.name }}</li>
-                            <li>{{ product.price }}</li>
                             <li>
-                                <button @click="increaseQuantity(product)">+</button>
-                                {{ product.quantity }}
-                                <button @click="decreaseQuantity(product)">-</button>
+                                <span>{{ product.price }}€</span>                               
+                            </li>
+                            <li class="chart_quantity">
+                                <button class="round_button" @click="decreaseQuantity(product)">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="total_quantity">
+                                    {{ product.quantity }}
+                                </span>
+                                <button class="round_button" @click="increaseQuantity(product)">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                                <span>{{ (Math.round((product.price * product.quantity) * 100 ) / 100).toFixed(2) }} €</span>
                             </li>
                         </ul>
                         <button class="btn btn-secondary ">Vai al pagamento</button>
@@ -239,7 +248,7 @@ export default {
 }
 
 .container-fluid {
-    padding: 50px 48px;
+    padding: 50px 0px;
     max-width: 1980px !important;
 }
 
@@ -274,6 +283,37 @@ export default {
     color: $main-brand-color;
 }
 
+.round_button{
+    display: flex;
+    align-items: center;
+    color: $main-brand-color;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid $main-brand-color;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+    aspect-ratio: 1;
+}
+
+.chart_quantity{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.total_quantity{
+    min-width: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.chart{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0px 10px;
+}
 
 @media (max-width: 575.98px) {}
 
