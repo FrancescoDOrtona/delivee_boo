@@ -82,9 +82,9 @@ export default {
                                         :src="`http://127.0.0.1:8000/storage/${product.image}`"
                                         alt="">
                                 </div>
-                                <div class="product-add">
+                                <button class="product-add">
                                     <i class="fa-solid fa-plus"></i>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -137,6 +137,14 @@ export default {
     }
 }
 
+@media (max-width: 500px) {
+    .col-3{
+        width: 100% !important;
+        .card{
+            width: 100% !important;
+        }
+    }
+}
 
 .row {
     margin: 0px;
