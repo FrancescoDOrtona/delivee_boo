@@ -36,9 +36,9 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div>
-                            <div class="mb-2 mt-1 row">
-                                <div id="emailConfirmMessage" class="confirm-message col-md-6"></div>
+                                <div class="mb-2 mt-2 row">
+                                    <div id="emailConfirmMessage" class="confirm-message col-md-6"></div>
+                                </div>
                             </div>
                         </div>
 
@@ -61,12 +61,13 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" oninput="ConfirmPasswordMatch()"> 
+                                <div class="mb-1 mt-2 row">
+                                    <div id="confirmMessage" class="confirm-message col-md-6"></div>
+                               </div>
                             </div>
                             
                         </div>
-                        <div class="mb-1 row">
-                             <div id="confirmMessage" class="confirm-message col-md-6"></div>
-                        </div>
+                        
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" id='submit' class="btn btn-primary">
