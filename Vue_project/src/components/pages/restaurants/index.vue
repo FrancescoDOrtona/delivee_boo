@@ -406,30 +406,23 @@ input[type='radio'] {
 .input_label {
   text-transform: capitalize;
 }
-// // Extra small devices (portrait phones, less than 576px)
-// @media (max-width: 575.98px) {
-//     .grid {
-//         grid-template-columns: repeat(1, 1fr);
-//         // grid-row-gap:10px;
-//     }
-// }
+ // Extra small devices (portrait phones, less than 576px)
+ @media (max-width: 575.98px) {
+  .main-content{
+    padding: 0px 0px 40px 0px;
+  }
+ }
+ // Small devices (landscape phones, 576px and up)
+ @media (min-width: 576px) and (max-width: 767.98px) {
+    .main-content{
+      padding: 0px 0px 40px 0px;
+    }
+ }
+ // Medium devices (tablets, 768px and up)
+ @media (min-width: 768px) and (max-width: 991.98px) {
 
-// // Small devices (landscape phones, 576px and up)
-// @media (min-width: 576px) and (max-width: 767.98px) {
-//     .grid {
-//         grid-template-columns: repeat(2, 1fr);
-//     }
-// }
+ }
+ @media (min-width: 992px) and (max-width: 1499.98px) {
 
-// // Medium devices (tablets, 768px and up)
-// @media (min-width: 768px) and (max-width: 991.98px) {
-//     .grid {
-//         grid-template-columns: repeat(3, 1fr);
-//     }
-// }
-// @media (min-width: 992px) and (max-width: 1499.98px) {
-//     .grid {
-//         grid-template-columns: repeat(4, 1fr);
-//     }
-// }
+ }
 </style>
