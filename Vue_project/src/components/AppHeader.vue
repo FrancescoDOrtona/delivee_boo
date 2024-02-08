@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="container-fluid">
     <div class="header">
       <div class="header-logo ">
         <router-link :to="{ name: 'home' }">
@@ -97,7 +97,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 60px;
+  padding: 10px 0px;
+
 }
 
 .header-logo {
@@ -124,7 +125,7 @@ header {
   }
 
   .header {
-    padding: 10px 12px;
+    padding: 10px 0px;
   }
 }
 
@@ -135,7 +136,7 @@ header {
   }
 
   .header {
-    padding: 10px 12px;
+    padding: 10px 0px;
   }
 }
 
