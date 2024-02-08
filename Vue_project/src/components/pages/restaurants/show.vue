@@ -215,7 +215,7 @@ export default {
     height: 100%;
     border: 1px solid #bfbfbf;
     border-radius: 2px;
-    width: 35px;
+    padding: 10px;
     margin-left: 20px;
     display: flex;
     align-items: center;
