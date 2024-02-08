@@ -75,6 +75,7 @@ export default {
                             <div class="card p-3 flex-row justify-content-between" v-for="product in restaurant.products" >
                                 <div class="product-text mx-2 flex-grow-1">
                                     <h6>{{ product.name }}</h6>
+                                    
                                     <p>{{ product.description }}</p>
                                 </div>
                                 <div class="">
