@@ -48,8 +48,17 @@ export default {
                 this.products.push(newProduct)
                 console.log(this.products)
             }
-            
-
+        },
+        increaseQuantity(product){
+            product.quantity = product.quantity + 1
+        },
+        decreaseQuantity(product){
+            if(product.quantity == 1){
+                this.products.pop(product)  
+            }
+            else if(product.quantity > 0){
+                product.quantity = product.quantity - 1
+            }
         }
     },
     created() {
@@ -124,7 +133,11 @@ export default {
                         <ul v-for="product in this.products">
                             <li>{{ product.name }}</li>
                             <li>{{ product.price }}</li>
-                            <li>{{ product.quantity }}</li>
+                            <li>
+                                <button @click="increaseQuantity(product)">+</button>
+                                {{ product.quantity }}
+                                <button @click="decreaseQuantity(product)">-</button>
+                            </li>
                         </ul>
                         <button class="btn btn-secondary ">Vai al pagamento</button>
                     </div>
