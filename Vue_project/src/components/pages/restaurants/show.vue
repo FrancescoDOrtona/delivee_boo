@@ -39,7 +39,7 @@ export default {
             </div>
             <div class="row restaurant-head ">
                 <div class="col-6" v-if="restaurant">
-                    <img class="img-restaurant" :src="restaurant.restaurant_image" alt="">
+                    <img class="img-restaurant" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="">
                 </div>
                 <div class="col-6 d-flex d-sm-block align-items-center info-restaurant">
                     <h2 class="fw-bold py-3 py-sm-1" v-if="restaurant">
@@ -75,11 +75,11 @@ export default {
                             <div class="card p-3 flex-row justify-content-between" v-for="product in restaurant.products" >
                                 <div class="product-text mx-2 flex-grow-1">
                                     <h6>{{ product.name }}</h6>
-                                    <p>ingredienti</p>
+                                    <p>{{ product.description }}</p>
                                 </div>
                                 <div class="">
                                     <img class="product-img"
-                                        :src="product.image"
+                                        :src="`http://127.0.0.1:8000/storage/${product.image}`"
                                         alt="">
                                 </div>
                                 <div class="product-add">
@@ -145,6 +145,9 @@ export default {
 
 .img-restaurant {
     width: 100%;
+    border-radius: 5px;
+    max-height: 500px;
+    object-fit: cover;
 }
 
 .grid {
@@ -177,13 +180,7 @@ export default {
 
 .container-fluid {
     padding: 50px 0 !important;
-
     max-width: 1980px !important;
-}
-
-img {
-    width: 100%;
-    border-radius: 5px;
 }
 
 .hr-shadow {
@@ -200,8 +197,9 @@ img {
 }
 
 .product-img {
-    max-width: 100px;
-    max-height: 100px;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
 }
 
 .product-add {
