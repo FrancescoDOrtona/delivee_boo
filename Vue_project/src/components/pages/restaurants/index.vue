@@ -221,8 +221,9 @@ export default {
       <div class="main-content">
         <h3 class="py-3">Ristoranti che consegnano a "Milano"</h3>
         <div class="grid">
-          <div class="card overflow-hidden" v-for="restaurant in restaurants" :key="restaurant.id">
+          <div class="card" v-for="restaurant in restaurants" :key="restaurant.id">
             <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
+              <span class="ribbon4"><i class="fa-solid fa-person-biking"></i>Gratis</span>
               <div class="card_content_image">
                 <img v-if="restaurant.restaurant_image" class="img-fluid img-card" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="" />
                 <img v-else class="img-fluid img-card" src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="" />
@@ -335,9 +336,12 @@ input[type='radio'] {
 }
 
 .card {
+  position: relative;
   border: none;
   box-shadow: 0 1px 4px #00000014, 0 0 0 1px #0000000a;
   .img-card{
+    border-top-right-radius: 0.375rem;
+    border-top-left-radius: 0.375rem;
     width: 100%;
     height: 150px;
     object-fit: cover;
@@ -393,7 +397,9 @@ input[type='radio'] {
 
 
 .card_badge{
-  background-color: $main-brand-color;
+    background: rgb(0,58,96);
+    background: linear-gradient(90deg, rgba(0,58,96,1) 0%, rgba(9,71,121,1) 5%, rgba(1,200,245,1) 90%, rgba(18,230,255,0.9668242296918768) 100%);
+    /* background-color: $main-brand-color; */
     border-radius: 999px;
     padding: 3px 6px;
     text-transform: capitalize;
@@ -401,8 +407,45 @@ input[type='radio'] {
     font-weight: bold;
     color: white !important;
     box-shadow: inset 3px 3px 10px -8.5px #ffffff;
-    box-shadow: 0px 0 3px 0.5px rgba(221, 221, 221, 0.87);
+    
 }
+
+// Badge Spedizione Gratutia
+
+.ribbon4 {
+  position: absolute;
+  font-size: smaller;
+  font-weight: bold;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  z-index: 10;
+  top: 15px;
+  padding: 3px 7px;
+  background: #00B3ED;
+  box-shadow: -1px 2px 3px rgba(0,0,0,.3);
+}
+.ribbon4:before, .ribbon4:after {
+  content: "";
+  position: absolute;
+}
+.ribbon4:before {
+  width: 7px;
+  height: 100%;
+  top: 0;
+  left: -6.5px;
+  padding: 0 0 32px;
+  background: inherit;
+  border-radius: 5px 0 0 5px;
+}
+.ribbon4:after {
+  width: 5px;
+  height: 5px;
+  bottom: -5px;
+  left: -4.5px;
+  background: lightblue;
+  border-radius: 5px 0 0 5px;
+ }
 .input_label {
   text-transform: capitalize;
 }
