@@ -138,6 +138,12 @@ export default {
     }
 }
 
+@media( max-width: 766px ){
+    .container-fluid{
+        padding: 50px 0px !important;
+    }
+}
+
 @media (max-width: 500px) {
     .col-3{
         width: 100% !important;
@@ -188,7 +194,7 @@ export default {
 }
 
 .container-fluid {
-    padding: 50px 0 !important;
+    padding: 50px 48px ;
     max-width: 1980px !important;
 }
 
@@ -221,4 +227,22 @@ export default {
     align-items: center;
     justify-content: center;
     color: $main-brand-color;
-}</style>
+}
+
+
+@media (max-width: 575.98px) {
+
+  }
+ // Small devices (landscape phones, 576px and up)
+ @media (min-width: 576px) and (max-width: 767.98px) {
+
+    }
+ // Medium devices (tablets, 768px and up)
+ @media (min-width: 768px) and (max-width: 991.98px) {
+
+ }
+ @media (min-width: 992px) and (max-width: 1499.98px) {
+
+ }
+
+</style>
