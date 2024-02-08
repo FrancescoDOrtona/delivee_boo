@@ -87,6 +87,7 @@ import { useLink } from 'vue-router';
   display: flex;
   gap: 10px;
   align-items: center;
+  border: 1px solid lightgray;
 }
 
 header {

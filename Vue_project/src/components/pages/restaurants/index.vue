@@ -71,61 +71,44 @@ export default {
 
 <template>
   <!-- side-bar -->
-  <div class="line-header d-flex justify-content-center align-items-center">
-    <input
-      type="text"
-      class="z-3 search-input d-none d-xl-block"
-      placeholder="Ristoranti, spesa, piatti"
-    />
-  </div>
-  <div class="container-fluid">
-    <div class="d-flex">
-      <div class="">
-        <div class="side-bar">
+
+  <div class="container-fluid mt-100 ">
+    <div class="d-flex ">
+      
+        <div class="side-bar d-none d-md-block">
           <ul>
             <li class="bottom-line">Milano</li>
-            <ul class="bottom-line">
-              <li class="pb-3 fw-light d-flex">
-                <input type="radio" name="option1" id="consegna" />
-                <label for="consegna">Consegna</label>
-              </li>
-              <li class="fw-light d-flex">
-                <input type="radio" name="option1" id="Ritiro" />
-                <label for="Ritiro">Ritiro</label>
-              </li>
-            </ul>
+            <!-- search bar  -->
+            <li class="bottom-line">
+              <input type="text" class="z-3 search-input" placeholder="Cerca Ristoranti" />
+            </li>
+            <li>
+              <ul class="bottom-line">
+                <li class="pb-3 fw-light d-flex">
+                  <input type="radio" name="option1" id="consegna" />
+                  <label for="consegna">Consegna</label>
+                </li>
+                <li class="fw-light d-flex">
+                  <input type="radio" name="option1" id="Ritiro" />
+                  <label for="Ritiro">Ritiro</label>
+                </li>
+              </ul>
+            </li>
             <div class="accordion" id="accordionPanelsStayOpenExample">
               <div class="bottom-line">
                 <h2 class="accordion-header">
-                  <button
-                    class="accordion-button fw-bold"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseOne"
-                    aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseOne"
-                  >
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseOne">
                     Categorie
                   </button>
                 </h2>
-                <div
-                  id="panelsStayOpen-collapseOne"
-                  class="accordion-collapse collapse show"
-                >
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                   <div class="accordion-body">
                     <ul class="fw-light">
-                      <li
-                        v-for="type in types"
-                        :key="type.id"
-                        class="pb-3 d-flex"
-                      >
-                        <input
-                          :checked="(isChecked(type.id), checked(type.id))"
-                          @change="toggleFilter(type.id)"
-                          :id="`type-${type.id}`"
-                          type="checkbox"
-                          class="me-1"
-                        />
+                      <li v-for="type in types" :key="type.id" class="pb-3 d-flex">
+                        <input :checked="(isChecked(type.id), checked(type.id))" @change="toggleFilter(type.id)"
+                          :id="`type-${type.id}`" type="checkbox" class="me-1" />
                         <label class="input_label" :for="`type-${type.id}`">{{
                           type.name
                         }}</label>
@@ -137,57 +120,29 @@ export default {
 
               <div class="bottom-line">
                 <h2 class="accordion-header">
-                  <button
-                    class="accordion-button fw-bold"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseTwo"
-                  >
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
                     Ordina
                   </button>
                 </h2>
-                <div
-                  id="panelsStayOpen-collapseTwo"
-                  class="accordion-collapse collapse"
-                >
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li class="pb-3 d-flex">
-                        <input
-                          type="radio"
-                          value="consegna"
-                          id="consegna"
-                          name="option2"
-                        />
+                        <input type="radio" value="consegna" id="consegna" name="option2" />
                         <label for="consegna">Consegna più rapida</label>
                       </li>
                       <li class="pb-3 d-flex">
-                        <input
-                          type="radio"
-                          id="consigliati"
-                          name="option2"
-                          value="consigliati"
-                        />
+                        <input type="radio" id="consigliati" name="option2" value="consigliati" />
                         <label for="consigliati">Consigliati</label>
                       </li>
                       <li class="pb-3 d-flex">
-                        <input
-                          type="radio"
-                          id="distanza"
-                          name="option2"
-                          value="distanza"
-                        />
+                        <input type="radio" id="distanza" name="option2" value="distanza" />
                         <label for="distanza">Distanza</label>
                       </li>
                       <li class="pb-3 d-flex">
-                        <input
-                          type="radio"
-                          name="option2"
-                          id="votati"
-                          value="votati"
-                        />
+                        <input type="radio" name="option2" id="votati" value="votati" />
                         <label for="votati">I più votati</label>
                       </li>
                     </ul>
@@ -197,31 +152,18 @@ export default {
 
               <div class="bottom-line">
                 <h2 class="accordion-header">
-                  <button
-                    class="accordion-button fw-bold"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseTwo"
-                  >
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
                     Offerte
                   </button>
                 </h2>
-                <div
-                  id="panelsStayOpen-collapseTwo"
-                  class="accordion-collapse collapse"
-                >
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li class="d-flex">
-                        <input
-                          type="checkbox"
-                          class="me-1"
-                          id="accetta-contanti"
-                          value="accetta-contanti"
-                          name="option3"
-                        />
+                        <input type="checkbox" class="me-1" id="accetta-contanti" value="accetta-contanti"
+                          name="option3" />
                         <label for="accetta-contanti">Accetta contanti</label>
                       </li>
                     </ul>
@@ -231,41 +173,21 @@ export default {
 
               <div class="bottom-line">
                 <h2 class="accordion-header">
-                  <button
-                    class="accordion-button fw-bold"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseThree"
-                    aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseThree"
-                  >
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseThree">
                     Regime alimentari
                   </button>
                 </h2>
-                <div
-                  id="panelsStayOpen-collapseThree"
-                  class="accordion-collapse collapse"
-                >
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li class="pb-3 d-flex">
-                        <input
-                          type="checkbox"
-                          class="me-1"
-                          value="senza-glutine"
-                          name="option4"
-                          id="senza-glutine"
-                        />
+                        <input type="checkbox" class="me-1" value="senza-glutine" name="option4" id="senza-glutine" />
                         <label for="">Senza Glutine</label>
                       </li>
                       <li class="pb-3 d-flex">
-                        <input
-                          type="checkbox"
-                          class="me-1"
-                          name="option4"
-                          value="vegetariano"
-                          id="vegetariano"
-                        />
+                        <input type="checkbox" class="me-1" name="option4" value="vegetariano" id="vegetariano" />
                         <label for="vegetariano">Vegetariano</label>
                       </li>
                     </ul>
@@ -275,30 +197,17 @@ export default {
 
               <div class="bottom-line">
                 <h2 class="accordion-header">
-                  <button
-                    class="accordion-button fw-bold"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseFoor"
-                    aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseFoor"
-                  >
+                  <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseFoor" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseFoor">
                     Buono pasto
                   </button>
                 </h2>
-                <div
-                  id="panelsStayOpen-collapseFoor"
-                  class="accordion-collapse collapse"
-                >
+                <div id="panelsStayOpen-collapseFoor" class="accordion-collapse collapse">
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li class="d-flex">
-                        <input
-                          type="radio"
-                          name="option5"
-                          value="ticket-restaurant"
-                          id="ticket-restaurant"
-                        />
+                        <input type="radio" name="option5" value="ticket-restaurant" id="ticket-restaurant" />
                         <label for="ticket-restaurant">Ticket Restaurant</label>
                       </li>
                     </ul>
@@ -307,34 +216,27 @@ export default {
               </div>
             </div>
           </ul>
+        
         </div>
-      </div>
       <div class="main-content">
         <h3 class="py-3">Ristoranti che consegnano a "Milano"</h3>
         <div class="grid">
-          <div
-            class="card"
-            v-for="restaurant in restaurants"
-            :key="restaurant.id"
-          >
-            <router-link
-              :to="{ name: 'restaurants.show', params: { id: restaurant.id } }"
-              class="reset"
-            >
-              <div>
+          <div class="card overflow-hidden" v-for="restaurant in restaurants" :key="restaurant.id">
+            <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
+              <div class="overflow-hidden">
                 <!-- {{ restaurant }} -->
-                <img
-                  :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`"
-                  alt=""
-                />
+                <img v-if="restaurant.restaurant_image" class="img-fluid img-card" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="" />
+                <img v-else class="img-fluid img-card" src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="" />
               </div>
               <div class="card-body">
-                <h5>
+                <ul>
+                  <li class="card_title">
                   {{ restaurant.restaurant_name }}
-                </h5>
-                <p>5.1 Valutazione</p>
-                <p>{{ restaurant.phone_number }}</p>
-                <span>{{ restaurant.restaurant_address }}</span>
+                  </li>
+                  <li>{{ restaurant.phone_number }}</li>
+                  <li>{{ restaurant.restaurant_address }}</li>
+                </ul>
+
               </div>
             </router-link>
           </div>
@@ -346,7 +248,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../../../style/partials/variables.scss';
+*{
+  color: $text-gray !important;
 
+}
+
+.mt-100{
+  margin-top: 100px;
+}
 .reset {
   text-decoration: none;
   color: currentColor;
@@ -358,6 +267,7 @@ export default {
   padding-top: 5px;
   width: 250px;
   margin-left: 0px;
+  flex-shrink: 0;
 }
 
 .line-header {
@@ -403,43 +313,78 @@ input[type='radio'] {
 }
 
 .search-input {
-  margin-top: 15px;
   border-radius: 5px;
-  width: 20%;
+  width: 100%;
   height: 50px;
   color: lightgrey;
   background-color: rgb(239, 239, 239);
   border: 1px solid rgb(223, 223, 223);
   padding: 5px;
-  z-index: 20;
-
-  @media (max-width: 1199.98px) {
-    display: none;
-  }
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
+  grid-template-columns: repeat(auto-fill,minmax(264px,1fr));
   gap: 20px;
 }
 
 .main-content {
   flex-grow: 1;
-  padding: 0px 40px 40px 40px;
+  padding: 0px 48px 40px 48px;
 }
 
 .card {
+  .img-card{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
   img {
     max-width: 100%;
   }
 
   .card-body {
-    padding: 20px;
+    padding: 8px 12px;
+   ul{
+    padding: 0;
+    margin: 0;
+   }
+
+  }
+  .card_title{
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: capitalize;
   }
 }
 
 .input_label {
   text-transform: capitalize;
 }
+// // Extra small devices (portrait phones, less than 576px)
+// @media (max-width: 575.98px) {
+//     .grid {
+//         grid-template-columns: repeat(1, 1fr);
+//         // grid-row-gap:10px;
+//     }
+// }
+
+// // Small devices (landscape phones, 576px and up)
+// @media (min-width: 576px) and (max-width: 767.98px) {
+//     .grid {
+//         grid-template-columns: repeat(2, 1fr);
+//     }
+// }
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) and (max-width: 991.98px) {
+//     .grid {
+//         grid-template-columns: repeat(3, 1fr);
+//     }
+// }
+// @media (min-width: 992px) and (max-width: 1499.98px) {
+//     .grid {
+//         grid-template-columns: repeat(4, 1fr);
+//     }
+// }
 </style>
