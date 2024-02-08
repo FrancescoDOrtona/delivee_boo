@@ -11,9 +11,11 @@ export default {
             store,
             restaurant: null,
             BASE_URL: 'http://127.0.0.1:8000/api',
+            products: [],
+
         }
     },
-    methods:{
+    methods: {
         fetchShow() {
             axios.get(`${this.BASE_URL}/restaurants/${this.id}`)
                 .then(res => {
@@ -22,10 +24,46 @@ export default {
                 }).catch((error) => {
                     console.log('post not found', error.response)
                 })
+        },
+        productExists(newProduct){
+            return this.products.some((product)=>product.name === newProduct.name )
+        },
+        addProduct(product) {
+            let newProduct = {
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                quantity: 1,
+            }
+            if (this.productExists(newProduct)){
+                console.log('il prodotto è gia presente')
+                this.products.forEach((product)=> {
+                    if(product.name == newProduct.name){
+                        product.quantity = product.quantity + 1
+                        console.log(product.quantity)
+                    }
+                })
+            }else{
+                console.log('il prodotto non è presente')
+                this.products.push(newProduct)
+                console.log(this.products)
+            }
+        },
+        increaseQuantity(product){
+            product.quantity = product.quantity + 1
+        },
+        decreaseQuantity(product){
+            if(product.quantity == 1){
+                this.products.pop(product)  
+            }
+            else if(product.quantity > 0){
+                product.quantity = product.quantity - 1
+            }
         }
     },
     created() {
         this.fetchShow()
+
     },
 }
 </script>
@@ -39,11 +77,12 @@ export default {
             </div>
             <div class="row restaurant-head ">
                 <div class="col-6" v-if="restaurant">
-                    <img class="img-restaurant" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="">
+                    <img class="img-restaurant" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`"
+                        alt="">
                 </div>
                 <div class="col-6 d-flex d-sm-block align-items-center info-restaurant">
                     <h2 class="fw-bold py-3 py-sm-1" v-if="restaurant">
-                        {{restaurant.restaurant_name}}
+                        {{ restaurant.restaurant_name }}
                     </h2>
                     <div class="pt-2 d-none d-sm-block">
                         15 - 25 min· Poke·Sushi
@@ -64,26 +103,23 @@ export default {
                     <div class="description card p-3">
                         <h5>Le informazioni sul nostro ristorante</h5>
                         <p v-if="restaurant">
-                            {{restaurant.restaurant_description}}
+                            {{ restaurant.restaurant_description }}
                         </p>
-                        
                     </div>
                     <div class="py-5">
                         <h4>I nostri prodotti</h4>
                         <div class="grid" v-if="restaurant">
 
-                            <div class="card p-3 flex-row justify-content-between" v-for="product in restaurant.products" >
+                            <div class="card p-3 flex-row justify-content-between" v-for="product in restaurant.products">
                                 <div class="product-text mx-2 flex-grow-1">
                                     <h6>{{ product.name }}</h6>
-                                    
+
                                     <p>{{ product.description }}</p>
                                 </div>
                                 <div class="">
-                                    <img class="product-img"
-                                        :src="`http://127.0.0.1:8000/storage/${product.image}`"
-                                        alt="">
+                                    <img class="product-img" :src="`http://127.0.0.1:8000/storage/${product.image}`" alt="">
                                 </div>
-                                <button class="product-add">
+                                <button @click="addProduct(product)" class="product-add">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
                             </div>
@@ -94,7 +130,15 @@ export default {
                 <!-- CART -->
                 <div class="col-3">
                     <div class="card justify-content-end p-4">
-                        <p>il carrello è vuoto</p>
+                        <ul v-for="product in this.products">
+                            <li>{{ product.name }}</li>
+                            <li>{{ product.price }}</li>
+                            <li>
+                                <button @click="increaseQuantity(product)">+</button>
+                                {{ product.quantity }}
+                                <button @click="decreaseQuantity(product)">-</button>
+                            </li>
+                        </ul>
                         <button class="btn btn-secondary ">Vai al pagamento</button>
                     </div>
                 </div>
@@ -138,16 +182,17 @@ export default {
     }
 }
 
-@media( max-width: 766px ){
-    .container-fluid{
+@media(max-width: 766px) {
+    .container-fluid {
         padding: 50px 0px !important;
     }
 }
 
 @media (max-width: 500px) {
-    .col-3{
+    .col-3 {
         width: 100% !important;
-        .card{
+
+        .card {
             width: 100% !important;
         }
     }
@@ -194,7 +239,7 @@ export default {
 }
 
 .container-fluid {
-    padding: 50px 48px ;
+    padding: 50px 48px;
     max-width: 1980px !important;
 }
 
@@ -230,19 +275,13 @@ export default {
 }
 
 
-@media (max-width: 575.98px) {
+@media (max-width: 575.98px) {}
 
-  }
- // Small devices (landscape phones, 576px and up)
- @media (min-width: 576px) and (max-width: 767.98px) {
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {}
 
-    }
- // Medium devices (tablets, 768px and up)
- @media (min-width: 768px) and (max-width: 991.98px) {
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {}
 
- }
- @media (min-width: 992px) and (max-width: 1499.98px) {
-
- }
-
+@media (min-width: 992px) and (max-width: 1499.98px) {}
 </style>

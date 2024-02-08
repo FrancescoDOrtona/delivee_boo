@@ -287,11 +287,13 @@ export default {
             <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
               <span class="ribbon4"><i class="fa-solid fa-person-biking"></i>Gratis</span>
               <div class="card_content_image">
+
                 <img v-if="restaurant.restaurant_image" class="img-fluid img-card"
                   :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="" />
                 <img v-else class="img-fluid img-card"
                   src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="" />
                 <div class="image_badge">
+
                   <small v-for="(type) in restaurant.types" :key="type.id" class="card_badge">{{ type.name }}</small>
                 </div>
               </div>
@@ -313,11 +315,11 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 @import '../../../../style/partials/variables.scss';
 
 * {
   color: $text-gray !important;
-
 }
 
 .mt-100 {
