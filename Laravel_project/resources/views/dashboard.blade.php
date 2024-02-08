@@ -6,7 +6,7 @@
         Dashboard
     </h1>
     <div class="row justify-content-around">
-        <div class="col-3 p-5 text-center">
+        <div class="col-md-4 p-md-5 text-center">
             <svg class="icon-profile" height="150px" width="150px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60.671 60.671" xml:space="preserve">
                 <ellipse style="fill:#010002;" cx="30.336" cy="12.097" rx="11.997" ry="12.097"/>
                 <path style="fill:#010002;" d="M35.64,30.079H25.031c-7.021,0-12.714,5.739-12.714,12.821v17.771h36.037V42.9 C48.354,35.818,42.661,30.079,35.64,30.079z"/>
@@ -14,12 +14,12 @@
             <h2 class="fs-1 fw-bold">{{ Auth::user()->name }} </h2>
             <p class="text-secondary ">{{ Auth::user()->email }}</p>
         </div>
-        <div class="col-8 py-5">
+        <div class="col-10 col-sm-12 col-md-8 py-3 py-md-5">
             @if (!isset($restaurant['id']))
                 <a href="{{route('admin.restaurant.create')}}">Add your restaurant information</a>
             @else
             <div class="d-flex justify-content-between align-items-center">
-              <h2>Restaurant Infomation</h2>
+              <h2 class="fs-4">Restaurant Infomation</h2>
               {{-- @dd($restaurant) --}}
               <a class="btn btn-primary" href="{{route('admin.restaurant.edit',$restaurant['id'])}}">Edit</a>
             </div>

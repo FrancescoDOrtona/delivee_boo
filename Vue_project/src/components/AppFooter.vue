@@ -34,7 +34,7 @@
                     <a href=""><i class="fa-brands fa-instagram fs-5"></i></a>
                     <a href=""><i class="fa-brands fa-x-twitter fs-5"></i></a>
                 </div>
-                <div class='col-2'>
+                <div class='col-5 col-sm-2'>
                     <p>© 2024 Deliveboo</p>
                 </div>
             </div>
@@ -75,6 +75,23 @@ a {
         }
     }
 }
+
+@media (max-width: 575.98px) { 
+    .grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
+        }
+}
+
+
+@media (min-width: 575.98px) and (max-width: 768px) {
+    .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+ }
 
 .footer_download{
     width: 130px;
