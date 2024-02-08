@@ -51,6 +51,23 @@ export default {
       }
       this.fetchFilteredRestaurants();
     },
+    toggleFilterModal(typeId) {
+      if (this.selectedTypeIds.includes(typeId)) {
+        this.selectedTypeIds = this.selectedTypeIds.filter(
+          (id) => id !== typeId
+        );
+      } else {
+        this.selectedTypeIds.push(typeId);
+      }
+     
+    },
+    
+    clearCheckbox(){
+      // svuota l array nella modale 
+      this.selectedTypeIds = [];
+      // rifa la chiamata senza nessun filtro 
+      this.fetchFilteredRestaurants();
+    }
   },
   computed() {
     // Leggi i parametri dall'URL all'avvio del componente
@@ -70,30 +87,65 @@ export default {
 </script>
 
 <template>
+  <!-- modale  -->
+  <!-- Modal -->
+<form action="">
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Filtra</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="fw-light">
+            <li v-for="(type) in types" :key="type.id" class="pb-3 d-flex">
+              <input :checked="(isChecked(type.id), checked(type.id))" 
+                :id="`type-${type.id}`" type="checkbox" class="me-1" @change="toggleFilterModal(type.id)"/>
+              <label class="input_label" :for="`type-${type.id}`">{{
+                type.name
+              }}</label>
+            </li>
+            <!-- @change="toggleFilter(type.id)" -->
+          </ul>
+        </div>
+        <div class="modal-footer_custom">
+          <input  @click="clearCheckbox()"  type="reset" data-bs-dismiss="modal" class="btn btn-primary" value="Pulisci">
+          <button  type="button" class="btn btn_done" @click="fetchFilteredRestaurants()"  data-bs-dismiss="modal">Fatto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
   <!-- side-bar -->
 
   <div class="container-fluid mt-100 ">
     <div class="d-flex ">
-      
-        <div class="side-bar d-none d-md-block">
-          <ul>
-            <li class="bottom-line">Milano</li>
-            <!-- search bar  -->
-            <li class="bottom-line">
-              <input type="text" class="z-3 search-input" placeholder="Cerca Ristoranti" />
-            </li>
-            <li>
-              <ul class="bottom-line">
-                <li class="pb-3 fw-light d-flex">
-                  <input type="radio" name="option1" id="consegna" />
-                  <label for="consegna">Consegna</label>
-                </li>
-                <li class="fw-light d-flex">
-                  <input type="radio" name="option1" id="Ritiro" />
-                  <label for="Ritiro">Ritiro</label>
-                </li>
-              </ul>
-            </li>
+
+      <div class="side-bar d-none d-md-block">
+        <ul class="p-0">
+          <li class="bottom-line">Milano</li>
+         
+          <!-- search bar  -->
+          <li class="bottom-line">
+            <input type="text" class="z-3 search-input" placeholder="Cerca Ristoranti" />
+          </li>
+          <li>
+            <ul class="bottom-line">
+              <li class="pb-3 fw-light d-flex">
+                <input type="radio" name="option1" id="consegna" />
+                <label for="consegna">Consegna</label>
+              </li>
+              <li class="fw-light d-flex">
+                <input type="radio" name="option1" id="Ritiro" />
+                <label for="Ritiro">Ritiro</label>
+              </li>
+            </ul>
+          </li>
+          <li>
             <div class="accordion" id="accordionPanelsStayOpenExample">
               <div class="bottom-line">
                 <h2 class="accordion-header">
@@ -117,7 +169,7 @@ export default {
                   </div>
                 </div>
               </div>
-
+  
               <div class="bottom-line">
                 <h2 class="accordion-header">
                   <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -149,7 +201,7 @@ export default {
                   </div>
                 </div>
               </div>
-
+  
               <div class="bottom-line">
                 <h2 class="accordion-header">
                   <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -162,15 +214,14 @@ export default {
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li class="d-flex">
-                        <input type="checkbox" class="me-1" id="accetta-contanti" value="accetta-contanti"
-                          name="option3" />
+                        <input type="checkbox" class="me-1" id="accetta-contanti" value="accetta-contanti" name="option3" />
                         <label for="accetta-contanti">Accetta contanti</label>
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
-
+  
               <div class="bottom-line">
                 <h2 class="accordion-header">
                   <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -194,7 +245,7 @@ export default {
                   </div>
                 </div>
               </div>
-
+  
               <div class="bottom-line">
                 <h2 class="accordion-header">
                   <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
@@ -215,26 +266,41 @@ export default {
                 </div>
               </div>
             </div>
-          </ul>
-        
-        </div>
+
+          </li>
+        </ul>
+
+      </div>
       <div class="main-content">
-        <h3 class="py-3">Ristoranti che consegnano a "Milano"</h3>
+          <h3 class="py-3 d-none d-md-block">Ristoranti che consegnano a "Milano"</h3>
+          <!-- bottone modale  -->
+          <div class="d-md-none d-flex my-3 gap-3">
+            <input class="w-100 search-input" type="search" placeholder="Cerca Ristoranti">
+            <button type="button" class="btn btn-light btn-modal-open" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa-solid fa-sliders"></i>
+            </button>
+
+          </div>
+
         <div class="grid">
           <div class="card" v-for="restaurant in restaurants" :key="restaurant.id">
             <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
               <span class="ribbon4"><i class="fa-solid fa-person-biking"></i>Gratis</span>
               <div class="card_content_image">
-                <img v-if="restaurant.restaurant_image" class="img-fluid img-card" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="" />
-                <img v-else class="img-fluid img-card" src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="" />
-                <div  class="image_badge">
+
+                <img v-if="restaurant.restaurant_image" class="img-fluid img-card"
+                  :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="" />
+                <img v-else class="img-fluid img-card"
+                  src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="" />
+                <div class="image_badge">
+
                   <small v-for="(type) in restaurant.types" :key="type.id" class="card_badge">{{ type.name }}</small>
                 </div>
               </div>
               <div class="card-body">
                 <ul>
                   <li class="card_title">
-                  {{ restaurant.restaurant_name }}
+                    {{ restaurant.restaurant_name }}
                   </li>
                   <li>{{ restaurant.phone_number }}</li>
                   <li>{{ restaurant.restaurant_address }}</li>
@@ -251,13 +317,15 @@ export default {
 <style lang="scss" scoped>
 
 @import '../../../../style/partials/variables.scss';
-*{
+
+* {
   color: $text-gray !important;
 }
 
-.mt-100{
+.mt-100 {
   margin-top: 100px;
 }
+
 .reset {
   text-decoration: none;
   color: currentColor;
@@ -326,49 +394,54 @@ input[type='radio'] {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(264px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
   gap: 20px;
 }
 
 .main-content {
   flex-grow: 1;
-  padding: 0px 48px 40px 48px;
+  padding: 0px 0px 40px 48px;
 }
 
 .card {
   position: relative;
   border: none;
   box-shadow: 0 1px 4px #00000014, 0 0 0 1px #0000000a;
-  .img-card{
+
+  .img-card {
     border-top-right-radius: 0.375rem;
     border-top-left-radius: 0.375rem;
     width: 100%;
     height: 150px;
     object-fit: cover;
   }
+
   img {
     max-width: 100%;
   }
 
   .card-body {
     padding: 8px 12px;
-   ul{
-    padding: 0;
-    margin: 0;
-   }
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
 
   }
-  .card_title{
+
+  .card_title {
     font-size: 16px;
     font-weight: 700;
     text-transform: capitalize;
   }
 }
 
-.card_content_image{
+.card_content_image {
   overflow: hidden;
   position: relative;
-  .image_badge{
+
+  .image_badge {
     display: flex;
     gap: 10px;
     position: absolute;
@@ -380,11 +453,13 @@ input[type='radio'] {
 
 .card_content_image img:hover {
   transform: scale(1.05);
-  transition: transform .15s ease-in-out; /* Utilizza ease-in-out per una transizione più fluida */
+  transition: transform .15s ease-in-out;
+  /* Utilizza ease-in-out per una transizione più fluida */
 }
 
 .card_content_image img {
-  transition: transform .15s ease-in-out; /* Applica la stessa transizione quando il mouse esce dall'immagine */
+  transition: transform .15s ease-in-out;
+  /* Applica la stessa transizione quando il mouse esce dall'immagine */
 }
 
 .card_content_image img:hover {
@@ -392,22 +467,23 @@ input[type='radio'] {
 }
 
 .card_content_image img:not(:hover) {
-  transform: scale(1); /* Quando il mouse non è sopra l'immagine, torna alla sua forma originaria */
+  transform: scale(1);
+  /* Quando il mouse non è sopra l'immagine, torna alla sua forma originaria */
 }
 
 
-.card_badge{
-    background: rgb(0,58,96);
-    background: linear-gradient(90deg, rgba(0,58,96,1) 0%, rgba(9,71,121,1) 5%, rgba(1,200,245,1) 90%, rgba(18,230,255,0.9668242296918768) 100%);
-    /* background-color: $main-brand-color; */
-    border-radius: 999px;
-    padding: 3px 6px;
-    text-transform: capitalize;
-    font-size: smaller;
-    font-weight: bold;
-    color: white !important;
-    box-shadow: inset 3px 3px 10px -8.5px #ffffff;
-    
+.card_badge {
+  background: rgb(0, 58, 96);
+  background: linear-gradient(90deg, rgba(0, 58, 96, 1) 0%, rgba(9, 71, 121, 1) 5%, rgba(1, 200, 245, 1) 90%, rgba(18, 230, 255, 0.9668242296918768) 100%);
+  /* background-color: $main-brand-color; */
+  border-radius: 999px;
+  padding: 3px 6px;
+  text-transform: capitalize;
+  font-size: smaller;
+  font-weight: bold;
+  color: white !important;
+  box-shadow: inset 3px 3px 10px -8.5px #ffffff;
+
 }
 
 // Badge Spedizione Gratutia
@@ -423,12 +499,15 @@ input[type='radio'] {
   top: 15px;
   padding: 3px 7px;
   background: #00B3ED;
-  box-shadow: -1px 2px 3px rgba(0,0,0,.3);
+  box-shadow: -1px 2px 3px rgba(0, 0, 0, .3);
 }
-.ribbon4:before, .ribbon4:after {
+
+.ribbon4:before,
+.ribbon4:after {
   content: "";
   position: absolute;
 }
+
 .ribbon4:before {
   width: 7px;
   height: 100%;
@@ -438,6 +517,7 @@ input[type='radio'] {
   background: inherit;
   border-radius: 5px 0 0 5px;
 }
+
 .ribbon4:after {
   width: 5px;
   height: 5px;
@@ -445,27 +525,46 @@ input[type='radio'] {
   left: -4.5px;
   background: lightblue;
   border-radius: 5px 0 0 5px;
- }
+}
+
 .input_label {
   text-transform: capitalize;
 }
- // Extra small devices (portrait phones, less than 576px)
- @media (max-width: 575.98px) {
-  .main-content{
+.btn_done{
+  background-color: $main-brand-color;
+  &:hover{
+    background-color: #00c2b3;
+  }
+}
+.modal-footer_custom{
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px;
+}
+.btn-modal-open{
+  color: $main-brand-color;
+  border: 1px solid lightgray;
+}
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+  .main-content {
     padding: 0px 0px 40px 0px;
   }
- }
- // Small devices (landscape phones, 576px and up)
- @media (min-width: 576px) and (max-width: 767.98px) {
-    .main-content{
-      padding: 0px 0px 40px 0px;
-    }
- }
- // Medium devices (tablets, 768px and up)
- @media (min-width: 768px) and (max-width: 991.98px) {
+  .modal-footer_custom{
+    grid-template-columns: repeat(1,1fr)
+  }
+}
 
- }
- @media (min-width: 992px) and (max-width: 1499.98px) {
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .main-content {
+    padding: 0px 0px 40px 0px;
+  }
+}
 
- }
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+@media (min-width: 992px) and (max-width: 1499.98px) {}
 </style>
