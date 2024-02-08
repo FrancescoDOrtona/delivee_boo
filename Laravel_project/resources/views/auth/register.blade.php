@@ -143,7 +143,7 @@
             // add a class to style the error
             document.getElementById('password').classList.remove('confirm-error');
             // disable submit button
-            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").disabled = false;
         }
     }
 
