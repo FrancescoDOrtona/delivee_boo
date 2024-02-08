@@ -223,10 +223,12 @@ export default {
         <div class="grid">
           <div class="card overflow-hidden" v-for="restaurant in restaurants" :key="restaurant.id">
             <router-link :to="{ name: 'restaurants.show', params: { id: restaurant.id } }" class="reset">
-              <div class="overflow-hidden">
-                <!-- {{ restaurant }} -->
+              <div class="card_content_image">
                 <img v-if="restaurant.restaurant_image" class="img-fluid img-card" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="" />
                 <img v-else class="img-fluid img-card" src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="" />
+                <div  class="image_badge">
+                  <small v-for="type in restaurant.types" :key="type.id" class="card_badge">{{ type.name }}</small>
+                </div>
               </div>
               <div class="card-body">
                 <ul>
@@ -236,7 +238,6 @@ export default {
                   <li>{{ restaurant.phone_number }}</li>
                   <li>{{ restaurant.restaurant_address }}</li>
                 </ul>
-
               </div>
             </router-link>
           </div>
@@ -334,6 +335,8 @@ input[type='radio'] {
 }
 
 .card {
+  border: none;
+  box-shadow: 0 1px 4px #00000014, 0 0 0 1px #0000000a;
   .img-card{
     width: 100%;
     height: 150px;
@@ -358,6 +361,48 @@ input[type='radio'] {
   }
 }
 
+.card_content_image{
+  overflow: hidden;
+  position: relative;
+  .image_badge{
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+.card_content_image img:hover {
+  transform: scale(1.05);
+  transition: transform .15s ease-in-out; /* Utilizza ease-in-out per una transizione più fluida */
+}
+
+.card_content_image img {
+  transition: transform .15s ease-in-out; /* Applica la stessa transizione quando il mouse esce dall'immagine */
+}
+
+.card_content_image img:hover {
+  transform: scale(1.05);
+}
+
+.card_content_image img:not(:hover) {
+  transform: scale(1); /* Quando il mouse non è sopra l'immagine, torna alla sua forma originaria */
+}
+
+
+.card_badge{
+  background-color: $main-brand-color;
+    border-radius: 999px;
+    padding: 3px 6px;
+    text-transform: capitalize;
+    font-size: smaller;
+    font-weight: bold;
+    color: white !important;
+    box-shadow: inset 3px 3px 10px -8.5px #ffffff;
+    box-shadow: 0px 0 3px 0.5px rgba(221, 221, 221, 0.87);
+}
 .input_label {
   text-transform: capitalize;
 }
