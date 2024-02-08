@@ -28,13 +28,13 @@
                     </div>
                 </ul>
             </div>
-            <div class="row justify-content-between">
+            <div class="row justify-content-between social">
                 <div class="col-2 d-flex gap-3">
-                    <a href=""><i class="fa-brands fa-facebook fs-5"></i></a>
-                    <a href=""><i class="fa-brands fa-instagram fs-5"></i></a>
-                    <a href=""><i class="fa-brands fa-x-twitter fs-5"></i></a>
+                    <a href="https://www.facebook.com/DeliverooIT/?brand_redir=298497216936972&locale=it_IT"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/deliveroo_italy/?hl=it"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://twitter.com/Deliveroo_Italy"><i class="fa-brands fa-x-twitter"></i></a>
                 </div>
-                <div class='col-5 col-sm-2'>
+                <div class='col-2 copyright'>
                     <p>© 2024 Deliveboo</p>
                 </div>
             </div>
@@ -51,6 +51,31 @@
 <style lang="scss" scoped>
 @use '../../style/partials/mixins' as *;
 @import "../../style/partials/variables";
+
+
+    @media (max-width: 575.98px) { 
+        .social{
+            font-size: 15px;
+
+            i {
+                font-size: 15px;
+            }
+        }
+}
+
+@media (min-width: 575.98px) { 
+        .social{
+
+            i {
+                font-size: 20px;
+            }
+        }
+}
+
+
+.copyright {
+    width: fit-content;
+}
 
 footer{
     padding: 20px;
