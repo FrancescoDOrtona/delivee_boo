@@ -238,6 +238,7 @@ export default {
         content: '';
         display: flex;
         flex-shrink: 0;
+        overflow: auto;
     }
 }
 
@@ -313,6 +314,7 @@ export default {
     flex-direction: column;
     gap: 6px;
     padding: 0px 10px;
+    
 }
 
 @media (max-width: 575.98px) {}
