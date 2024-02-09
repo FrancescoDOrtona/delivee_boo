@@ -122,7 +122,6 @@ export default {
   <!-- side-bar -->
 
   <div class="container-fluid mt-100 ">
-    {{ this.selectedTypeIds }}
     <div class="d-flex ">
 
       <div class="side-bar d-none d-md-block">

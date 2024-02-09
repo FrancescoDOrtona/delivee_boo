@@ -15,14 +15,6 @@
         </button>
         <ul class="dropdown-menu">
           <li>
-            <router-link class="buttons_icon btn btn-light" :to="{ name: 'restaurants.index' }">
-              <span class="color-brand ">
-                <i class="fa-solid fa-utensils"></i>
-              </span>
-              <span>Ristoranti</span>
-            </router-link>
-          </li>
-          <li>
             <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/login">
               <span class="color-brand">
                 <i class="fa-solid fa-right-to-bracket"></i>
@@ -42,12 +34,6 @@
       </div>
 
       <div class="header-buttons d-none d-lg-flex">
-        <router-link class="buttons_icon btn btn-light" :to="{ name: 'restaurants.index' }">
-          <span class="color-brand ">
-            <i class="fa-solid fa-utensils"></i>
-          </span>
-          <span>Ristoranti</span>
-        </router-link>
         <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/login">
           <span class="color-brand">
             <i class="fa-solid fa-right-to-bracket"></i>

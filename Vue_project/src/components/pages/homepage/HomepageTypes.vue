@@ -16,7 +16,6 @@
                 <button class="btn btn-primary">Vai ai Risultati</button>
             </router-link>
         </div>
-        {{ this.selectedTypeIds }}
     </div>
 </template>
 
