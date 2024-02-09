@@ -75,11 +75,13 @@ export default {
     this.fetchFilteredRestaurants();
   },
   created() {
-    this.$route.params.idArray.forEach(el => {
-      if (parseInt(el)) {
-        this.selectedTypeIds.push(parseInt(el));
-      }
-    });
+    if (this.$route.params.idArray) {
+      this.$route.params.idArray.forEach(el => {
+        if (parseInt(el)) {
+          this.selectedTypeIds.push(parseInt(el));
+        }
+      });     
+    }
     this.fetchFilteredRestaurants();     
   },
 };
