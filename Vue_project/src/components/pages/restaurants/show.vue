@@ -31,6 +31,7 @@ export default {
         },
         addProduct(product) {
             let newProduct = {
+                id: product.id,
                 name: product.name,
                 price: product.price,
                 image: product.image,
@@ -153,7 +154,6 @@ export default {
                         </div>
                         <div class="chart_items">
                             <ul class="chart" v-for="product in this.products">
-                                {{  product.quantity }}
                                 <li>
                                     <p>{{ product.name }}</p>
                                 </li>
