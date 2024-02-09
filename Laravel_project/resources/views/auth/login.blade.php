@@ -19,7 +19,7 @@
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email" autofocus
-                                        oninput="mailValidation()" onblur="mailValidation()">
+                                        oninput="mailValidation()" onblur="mailValidation(), passwordValidation()">
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
