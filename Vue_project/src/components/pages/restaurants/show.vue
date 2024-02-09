@@ -12,6 +12,7 @@ export default {
             restaurant: null,
             BASE_URL: 'http://127.0.0.1:8000/api',
             products: [],
+            totalPrice: 0,
 
         }
     },
@@ -25,8 +26,8 @@ export default {
                     console.log('post not found', error.response)
                 })
         },
-        productExists(newProduct){
-            return this.products.some((product)=>product.name === newProduct.name )
+        productExists(newProduct) {
+            return this.products.some((product) => product.name === newProduct.name)
         },
         addProduct(product) {
             let newProduct = {
@@ -35,30 +36,41 @@ export default {
                 image: product.image,
                 quantity: 1,
             }
-            if (this.productExists(newProduct)){
+            if (this.productExists(newProduct)) {
                 console.log('il prodotto è gia presente')
-                this.products.forEach((product)=> {
-                    if(product.name == newProduct.name){
+                this.products.forEach((product) => {
+                    if (product.name == newProduct.name) {
                         product.quantity = product.quantity + 1
                         console.log(product.quantity)
                     }
                 })
-            }else{
+            } else {
                 console.log('il prodotto non è presente')
                 this.products.push(newProduct)
                 console.log(this.products)
             }
         },
-        increaseQuantity(product){
-            product.quantity = product.quantity + 1
+        increaseTotalPrice() {
+            this.totalPrice = this.products.reduce((total, product) => {
+                return +(Math.round((total += product.price * product.quantity) * 100) / 100).toFixed(2);
+            }, 0);
         },
-        decreaseQuantity(product){
-            if(product.quantity == 1){
-                this.products.pop(product)  
+        decreaseTotalPrice() {
+            this.totalPrice = this.products.reduce((total, product) => {
+                return +(Math.round((total += product.price * product.quantity) * 100) / 100).toFixed(2);
+            }, 0);
+        },
+        increaseQuantity(product) {
+            product.quantity = product.quantity + 1;
+            this.increaseTotalPrice();
+        },
+        decreaseQuantity(product) {
+            if (product.quantity == 1) {
+                this.products.splice(this.products.indexOf(product), 1);
+            } else if (product.quantity > 0) {
+                product.quantity = product.quantity - 1;
             }
-            else if(product.quantity > 0){
-                product.quantity = product.quantity - 1
-            }
+            this.decreaseTotalPrice();
         }
     },
     created() {
@@ -119,7 +131,7 @@ export default {
                                 <div class="">
                                     <img class="product-img" :src="`http://127.0.0.1:8000/storage/${product.image}`" alt="">
                                 </div>
-                                <button @click="addProduct(product)" class="product-add">
+                                <button @click="addProduct(product), increaseTotalPrice()" class="product-add">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
                             </div>
@@ -133,21 +145,25 @@ export default {
                         <ul class="chart" v-for="product in this.products">
                             <li>{{ product.name }}</li>
                             <li>
-                                <span>{{ product.price }}€</span>                               
+                                <span>{{ product.price }}€</span>
                             </li>
                             <li class="chart_quantity">
-                                <button class="round_button" @click="decreaseQuantity(product)">
+                                <button class="round_button" @click="decreaseQuantity(product, minus)">
                                     <i class="fa-solid fa-minus"></i>
                                 </button>
                                 <span class="total_quantity">
                                     {{ product.quantity }}
                                 </span>
-                                <button class="round_button" @click="increaseQuantity(product)">
+                                <button class="round_button" @click="increaseQuantity(product, plus)">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
-                                <span>{{ (Math.round((product.price * product.quantity) * 100 ) / 100).toFixed(2) }} €</span>
+                                <span>{{ (Math.round((product.price * product.quantity) * 100) / 100).toFixed(2) }}
+                                    €</span>
                             </li>
                         </ul>
+                        <div class="chart_total">
+                            <h5>Totale: {{ this.totalPrice }} €</h5>
+                        </div>
                         <button class="btn btn-secondary ">Vai al pagamento</button>
                     </div>
                 </div>
@@ -284,7 +300,7 @@ export default {
     color: $main-brand-color;
 }
 
-.round_button{
+.round_button {
     display: flex;
     align-items: center;
     color: $main-brand-color;
@@ -297,24 +313,24 @@ export default {
     aspect-ratio: 1;
 }
 
-.chart_quantity{
+.chart_quantity {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.total_quantity{
+.total_quantity {
     min-width: 20px;
     display: flex;
     justify-content: center;
 }
 
-.chart{
+.chart {
     display: flex;
     flex-direction: column;
     gap: 6px;
     padding: 0px 10px;
-    
+
 }
 
 @media (max-width: 575.98px) {}
