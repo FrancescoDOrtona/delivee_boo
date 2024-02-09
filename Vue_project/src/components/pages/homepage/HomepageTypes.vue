@@ -5,15 +5,17 @@
             <p>Seleziona la categoria che preferisci e scegli cosa prenotare tra una moltitudine di aziende partner.</p>
         </div>
         <div class="types-section_badges top-row">
-            <div @click="addTypeId(type.id)" v-for="type in store.dataRT.types" :key="type" class="badge">
+            <div @click="addTypeId(type.id), toggleEffect(type.id)" v-for="type in store.dataRT.types" :key="type" class="badge" :class="{ 'active': isActive(type.id) }">
                 <img class="badge-img" :src="type.img_url" alt="">
                 <div class="badge-title">
                     <h5>{{ type.name }}</h5>
                 </div>
             </div>
-            
+
+        </div>
+        <div class="types-section_search">
             <router-link :to="{ name: 'restaurants.index', params: { idArray: selectedTypeIds } }">
-                <button class="btn btn-primary">Vai ai Risultati</button>
+                <button class="btn btn-light badge_button">Vai ai Risultati</button>
             </router-link>
         </div>
     </div>
@@ -26,6 +28,7 @@ export default {
         return {
             store,
             selectedTypeIds: [],
+            activeEffects: [],
         }
     }, methods: {
         addTypeId(typeId) {
@@ -36,6 +39,19 @@ export default {
             } else {
                 this.selectedTypeIds.push(typeId);
             }
+        },
+        toggleEffect(typeId) {
+            const index = this.activeEffects.indexOf(typeId);
+            if (index === -1) {
+                // L'effetto non è attivo, lo attiviamo
+                this.activeEffects.push(typeId);
+            } else {
+                // L'effetto è già attivo, lo disattiviamo
+                this.activeEffects.splice(index, 1);
+            }
+        },
+        isActive(typeId) {
+            return this.activeEffects.includes(typeId);
         }
     },
 }
@@ -69,6 +85,18 @@ export default {
     height: 80px;
     object-fit: cover;
     filter: drop-shadow(7px 5px 3px rgba(0, 0, 0, 0.555));
+    cursor: pointer;
+}
+
+.active{
+    transform: rotate(20deg);
+    .badge-img{
+        filter: drop-shadow(7px 5px 3px #01ccbbad);
+    }
+}
+
+.inactive{
+    transform: rotate(0deg);
 }
 
 
@@ -91,6 +119,7 @@ export default {
     text-align: center;
     position: relative;
     padding: 15px 0px;
+    transition: 2s ease-in-out;
 }
 
 .badge-title {
@@ -101,6 +130,7 @@ export default {
     color: black;
     padding: 5px 10px;
     border-radius: 10px;
+    cursor: pointer;
 
     h5 {
         margin: 0;
@@ -115,5 +145,27 @@ export default {
 
 .badge:nth-child(even):nth-child(n+7) {
     grid-column: span 2;
+}
+
+.types-section_search {
+    padding: 20px 0px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.badge_button {
+    background-color: $main-brand-color;
+    font-weight: bold;
+    padding: 15px 30px;
+
+    &:hover {
+        background-color: orange;
+        transform: scale(1.05);
+
+        &:after {
+            content: " !";
+        }
+    }
 }
 </style>
