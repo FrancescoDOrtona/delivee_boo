@@ -19,7 +19,6 @@
                             value="{{ old('restaurant_name', $restaurant->restaurant_name) }}" required
                             autocomplete="restaurant_name" autofocus onblur="inputValidation('restaurant_name')"
                             oninput="inputValidation('restaurant_name')">
-
                         @error('restaurant_name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -60,7 +59,6 @@
                             value="{{ old('restaurant_address', $restaurant->restaurant_address) }}" required
                             autocomplete="restaurant_address" oninput="inputValidation('restaurant_address')";
                             onblur="inputValidation('restaurant_address')";>
-
                         @error('restaurant_address')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -82,7 +80,6 @@
                             value="{{ old('phone_number', $restaurant->phone_number) }}" required
                             autocomplete="phone_number" onblur="inputValidation('phone_number')";
                             oninput="inputValidation('phone_number')";>
-
                         @error('phone_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -103,7 +100,6 @@
                             class="form-control @error('vat_number') is-invalid @enderror" name="vat_number"
                             value="{{ old('vat_number', $restaurant->vat_number) }}" required autocomplete="vat_number"
                             onblur="inputValidation('vat_number')"; oninput="inputValidation('vat_number')">
-
                         @error('vat_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -123,7 +119,6 @@
                         <input id="restaurant_image" type="file"
                             class="form-control @error('restaurant_image') is-invalid @enderror" name="restaurant_image"
                             value="{{ old('restaurant_image', $restaurant->restaurant_image) }}">
-
                         @error('restaurant_image')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -141,18 +136,14 @@
                             class="form-control @error('restaurant_description') is-invalid @enderror" name="restaurant_description"
                             rows="10" onblur="inputValidation('restaurant_description')"
                             oninput="inputValidation('restaurant_description')">{!! old('restaurant_description', $restaurant->restaurant_description) !!}</textarea>
-
-
                         @error('restaurant_description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-
                         <div class="mb-1 mt-2 row">
                             <div id="restaurant_descriptionConfirmMessage" class="confirm-message col-md-6"></div>
                         </div>
-
                     </div>
                 </div>
                 <div class="mb-4 ">
@@ -165,8 +156,6 @@
                         Edit
                     </button>
                 </div>
-
-
             </form>
         </div>
     </div>
@@ -180,13 +169,13 @@
         console.log(inputName);
         let input = document.getElementById(`${inputName}`);
         let inputValue = input.value;
-        console.log(inputValue);
+        // reformat the message input name
         let formattedName = inputName.includes('_') ?
             inputName.split('_').map((word, index) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
             .join(' ') :
             inputName.map((word, index) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
             .join(' ');
-
+        // only allows for number for a given name input
         if (inputName === 'phone_number' || inputName === 'vat_number') {
             inputValue = input.value.replace(/\D/g, '');
 
@@ -207,7 +196,5 @@
             // disable submit button
             document.getElementById("submit").disabled = false;
         }
-
-
     }
 </script>
