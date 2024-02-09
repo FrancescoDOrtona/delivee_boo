@@ -19,7 +19,8 @@
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
                                         value="{{ old('name') }}" required autocomplete="name" autofocus
-                                        onblur="nameValidation()">
+                                        onblur="nameValidation()" oninput="nameValidation()">
+
                                     <div class="
                                         mt-2 row">
                                         <div id="nameConfirmMessage" class="confirm-message col-md-6"></div>
@@ -61,7 +62,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password" oninput="passwordMatchValidation()"
+                                        required autocomplete="new-password" oninput="passwordValidation()"
                                         onblur="passwordValidation()">
 
                                     <div class="mb-1 mt-2 row">
@@ -113,7 +114,7 @@
     function nameValidation() {
         // get the name values
         let name = document.getElementById('name');
-        let nameInput = document.getElementById('name').value
+        let nameInput = name.value
 
         if (!nameInput) {
             // display an error message

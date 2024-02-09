@@ -39,7 +39,8 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="current-password" onblur="passwordValidation()">
+                                        required autocomplete="current-password" onblur="passwordValidation()"
+                                        oninput="passwordValidation()">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -114,7 +115,7 @@
     function passwordValidation() {
         // get the name values
         let password = document.getElementById('password');
-        let passwordInput = document.getElementById('password').value
+        let passwordInput = password.value
 
         if (!passwordInput) {
             // display an error message
