@@ -81,27 +81,34 @@ export default {
 </script>
 
 <template>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid page-top-margin">
         <div class="row">
-            <div class="">
-                <router-link :to="{ name: 'restaurants.index' }" class="router-link"><i
-                        class="fa-solid fa-arrow-left green"></i> Indietro</router-link>
+            <div class="mb-3">
+                <router-link :to="{ name: 'restaurants.index' }" class="btn btn-light router-link">
+                    <i class="fa-solid fa-arrow-left brand-color"></i>Indietro</router-link>
             </div>
             <div class="row restaurant-head ">
-                <div class="col-6" v-if="restaurant">
-                    <img class="img-restaurant" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`"
+                <div class="col-4">
+                    <img v-if="restaurant.restaurant_image" class="img-restaurant" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`"
                         alt="">
+                    <img v-else class="img-restaurant" src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="">
                 </div>
-                <div class="col-6 d-flex d-sm-block align-items-center info-restaurant">
-                    <h2 class="fw-bold py-3 py-sm-1" v-if="restaurant">
-                        {{ restaurant.restaurant_name }}
-                    </h2>
-                    <div class="pt-2 d-none d-sm-block">
-                        15 - 25 min· Poke·Sushi
+                <div class="col-4">
+                    <div class="info-restaurant">
+                        <h2 class="fw-bold">
+                            {{ restaurant.restaurant_name }}
+                        </h2>                    
+                        <p class="icons_align"><i class="fa-solid fa-clock fs-5"></i>15 - 25 min· Poke·Sushi</p>
+                        <p class="icons_align"><i class="fa-solid fa-map-location fs-5"></i>Distanza: 1.18 km · Chiude alle 22:30 · Consegna gratuita</p>                   
+                        <p class="icons_align"><i class="fa-solid fa-circle-info fs-5"></i>{{ restaurant.restaurant_description }}</p>
                     </div>
-                    <div>
-                        Distanza: 1.18 km · Chiude alle 22:30 · Minimo d'ordine: 10,00 € · Consegna gratuita
+                </div>
+                <div class="col-4 d-flex flex-column align-items-center">
+                    <div class="d-flex gap-2 justify-content-center">
+                        <span><i class="fa-solid fa-person-biking"></i></span>
+                        <h5>Consegna in 25-30 minuti</h5>
                     </div>
+                    <button class="btn btn-light head_button">Avvia ordine di Gruppo</button>
                 </div>
             </div>
         </div>
@@ -110,61 +117,66 @@ export default {
 
     <div class="body-products">
         <div class="container-fluid ">
-            <div class="row justify-content-between">
-                <div class="col-12 flex-column">
-                    <div class="description card p-3">
-                        <h5>Le informazioni sul nostro ristorante</h5>
-                        <p v-if="restaurant">
-                            {{ restaurant.restaurant_description }}
-                        </p>
-                    </div>
-                    <div class="py-5">
-                        <h4>I nostri prodotti</h4>
-                        <div class="grid" v-if="restaurant">
-
-                            <div class="card p-3 flex-row justify-content-between" v-for="product in restaurant.products">
-                                <div class="product-text mx-2 flex-grow-1">
-                                    <h6>{{ product.name }}</h6>
-
-                                    <p>{{ product.description }}</p>
-                                </div>
-                                <div class="">
-                                    <img class="product-img" :src="`http://127.0.0.1:8000/storage/${product.image}`" alt="">
-                                </div>
-                                <button @click="addProduct(product), increaseTotalPrice()" class="product-add">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
+            <div class="row justify-content-between row-gap-5">
+                <div class="col-md-12">
+                    <h4>I nostri prodotti</h4>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="grid">
+                        <div class="card p-3 flex-row justify-content-between" v-for="(product, index) in restaurant.products" :key="index">
+                            <div class="product-text mx-2 flex-grow-1">
+                                <h6 class="fw-bold">{{ product.name }}</h6>
+                                <p>{{ product.description }}</p>
+                                <small>{{ product.price }} €</small>
+                            </div>
+                            <div class="product-card_quantity">
+                                <img class="product-img" :src="`http://127.0.0.1:8000/storage/${product.image}`" alt="">
+                                <div>
+                                    <button class="round_button" @click="decreaseQuantity(product)">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </button>
+                                    <span>0</span>
+                                    <button class="round_button" @click="addProduct(product), increaseQuantity(product)">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </div>                                   
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- CART -->
-                <div class="col-3">
-                    <div class="card justify-content-end p-4">
-                        <ul class="chart" v-for="product in this.products">
-                            <li>{{ product.name }}</li>
-                            <li>
-                                <span>{{ product.price }}€</span>
-                            </li>
-                            <li class="chart_quantity">
-                                <button class="round_button" @click="decreaseQuantity(product, minus)">
-                                    <i class="fa-solid fa-minus"></i>
-                                </button>
-                                <span class="total_quantity">
-                                    {{ product.quantity }}
-                                </span>
-                                <button class="round_button" @click="increaseQuantity(product, plus)">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
-                                <span>{{ (Math.round((product.price * product.quantity) * 100) / 100).toFixed(2) }}
-                                    €</span>
-                            </li>
-                        </ul>
+                <div class="col-12 col-lg-3 chart-side">
+                    <div class="card chart_container p-4">
+                        <div class="chart_title">
+                            <h4>Il tuo ordine</h4>
+                        </div>
+                        <div class="chart_items">
+                            <ul class="chart" v-for="product in this.products">
+                                {{  product.quantity }}
+                                <li>
+                                    <p>{{ product.name }}</p>
+                                </li>
+
+                                <li class="chart_quantity">
+                                    <button class="round_button" @click="decreaseQuantity(product)">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </button>
+                                    <span class="total_quantity">
+                                        {{ product.quantity }}
+                                    </span>
+                                    <button class="round_button" @click="increaseQuantity(product)">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                    <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100) / 100).toFixed(2) }}
+                                        €</span>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="chart_total">
                             <h5>Totale: {{ this.totalPrice }} €</h5>
+                            <button class="btn btn-secondary ">Vai al pagamento</button>
                         </div>
-                        <button class="btn btn-secondary ">Vai al pagamento</button>
                     </div>
                 </div>
             </div>
@@ -180,6 +192,9 @@ export default {
     visibility: hidden;
 }
 
+p{
+    margin: 0;
+}
 @media (max-width: 1400px) {
     .grid {
         display: grid;
@@ -223,11 +238,23 @@ export default {
     }
 }
 
+.page-top-margin{
+    margin-top: 100px;
+}
+
 .row {
     margin: 0px;
     padding: 0px;
 }
 
+.icons_align{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    i{
+        color: lightgray;
+    }
+}
 .img-restaurant {
     width: 100%;
     border-radius: 5px;
@@ -235,6 +262,16 @@ export default {
     object-fit: cover;
 }
 
+.info-restaurant{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.head_button{
+    color: $main-brand-color;
+    border: 1px solid lightgray;
+}
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -245,47 +282,40 @@ export default {
     background-color: #f9fafa;
 }
 
-.col-3 {
-
-    .card {
-        height: 300px;
-        width: 300px;
-        min-height: 250px;
-        content: '';
-        display: flex;
-        flex-shrink: 0;
-        overflow: auto;
-    }
-}
-
 
 .col-9 {
     display: flex;
     justify-content: start;
 }
 
-.container-fluid {
-    padding: 50px 0px;
-    max-width: 1980px !important;
-}
-
 .hr-shadow {
     box-shadow: 2px 4px 10px 2px #767676;
 }
 
-.green {
+.brand-color {
     color: $main-brand-color;
 }
 
 .router-link {
     color: $main-brand-color;
     text-decoration: none;
+    border: 1px solid lightgray;
+    &:hover{
+        color: $main-brand-color;
+    }
+    i{
+        margin-right: 10px;
+    }
 }
 
 .product-img {
     width: 100px;
     height: 100px;
     border-radius: 5px;
+}
+
+.product-card_quantity{
+    display: flex;
 }
 
 .product-add {
@@ -298,6 +328,11 @@ export default {
     align-items: center;
     justify-content: center;
     color: $main-brand-color;
+}
+
+.product_price{
+    min-width: 60px;
+    text-align: end;
 }
 
 .round_button {
@@ -325,12 +360,49 @@ export default {
     justify-content: center;
 }
 
+.chart_container{
+    height: 800px;
+    display: flex;
+    position: sticky;
+    top: 20px;
+}
+
 .chart {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     gap: 6px;
-    padding: 0px 10px;
+    padding: 15px 0px;
+    margin: 0;
 
+}
+
+.chart_title{
+    border-bottom: 1px solid lightgray;
+    h4{
+        margin: 0;
+        padding-bottom: 15px;
+    }
+}
+
+.chart_items{
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.chart_total{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid lightgray;
+    h5{
+        margin: 0;
+        padding: 15px 0;
+    }
+    button{
+        background-color: $main-brand-color;
+        border: none;
+        padding: 10px 0;
+    }
 }
 
 @media (max-width: 575.98px) {}
