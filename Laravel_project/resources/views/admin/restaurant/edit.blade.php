@@ -36,7 +36,7 @@
                     @foreach ($types as $type)
                         <div class="col-4">
                             <input type="checkbox" name="types[]" id="type-{{ $type->id }}" value="{{ $type->id }}"
-                                @checked(in_array($type->id, old('types', $restaurant->types->pluck('id')->all())))>
+                                @checked(in_array($type->id, old('types', $restaurant->types->pluck('id')->all()))) onchange="checkBoxValidation('type-{{ $type->id }}')">
                             <label for="type-{{ $type->id }}"
                                 class="col-md-4 col-form-label text-md-right text-capitalize">{{ __($type->name) }}
                             </label>
@@ -46,6 +46,9 @@
                     @error('types')
                         <div class="alert alert-danger mt-2">{{ $message }}</div>
                     @enderror
+                    <div class="mb-1 mt-2 row">
+                        <div id="checkBoxConfirmMessage" class="confirm-message col-md-6"></div>
+                    </div>
 
                 </div>
 
@@ -165,20 +168,19 @@
     // Input validation
     function inputValidation(inputName) {
         // get the input values
-
-        console.log(inputName);
         let input = document.getElementById(`${inputName}`);
         let inputValue = input.value;
+
         // reformat the message input name
         let formattedName = inputName.includes('_') ?
             inputName.split('_').map((word, index) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
             .join(' ') :
             inputName.map((word, index) => index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word)
             .join(' ');
+
         // only allows for number for a given name input
         if (inputName === 'phone_number' || inputName === 'vat_number') {
             inputValue = input.value.replace(/\D/g, '');
-
         }
 
         if (!inputValue) {
@@ -195,6 +197,32 @@
             document.getElementById(`${inputName}`).classList.remove('confirm-error');
             // disable submit button
             document.getElementById("submit").disabled = false;
+        }
+    }
+
+    function checkBoxValidation(inputName) {
+        // get the input values
+        let input = document.getElementById(`${inputName}`);
+        let inputValue = input.value;
+
+        // Get all checkboxes with the same name
+        let checkboxes = document.querySelectorAll(`input[name="${input.name}"]`);
+
+        // Count the number of checked checkboxes
+        let checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+
+        if (checkedCount < 1) {
+            // Display an error message
+            document.getElementById('checkBoxConfirmMessage').innerHTML = `Please check at least on Type`;
+            // Disable submit button
+            document.getElementById("submit").disabled = true;
+            return;
+        } else {
+            // Clear any previous error message
+            document.getElementById('checkBoxConfirmMessage').innerHTML = '';
+            // Enable submit button
+            document.getElementById("submit").disabled = false;
+            return;
         }
     }
 </script>
