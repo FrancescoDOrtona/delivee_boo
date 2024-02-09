@@ -122,7 +122,14 @@
             document.getElementById('name').classList.add('confirm-error');
             // disable submit button
             document.getElementById("submit").disabled = true;
-        };
+        } else {
+            // display an error message
+            document.getElementById('nameConfirmMessage').innerHTML = '';
+            // add a class to style the error
+            document.getElementById('name').classList.remove('confirm-error');
+            // disable submit button
+            document.getElementById("submit").disabled = false;
+        }
     }
     // Password validation
     function passwordValidation() {
