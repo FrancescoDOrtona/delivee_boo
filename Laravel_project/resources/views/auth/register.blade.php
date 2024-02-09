@@ -63,7 +63,7 @@
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password" oninput="passwordValidation()"
-                                        onblur="passwordValidation()">
+                                        onblur="passwordValidation(), passwordMatchValidation()">
 
                                     <div class="mb-1 mt-2 row">
                                         <div id="passwordConfirmMessage" class="confirm-message col-md-6"></div>
@@ -83,7 +83,7 @@
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password"
-                                        oninput="passwordMatchValidation()">
+                                        onfocus="passwordMatchValidation()" oninput="passwordMatchValidation()">
 
                                     <div class="mb-1 mt-2 row">
                                         <div id="passwordMatchConfirmMessage" class="confirm-message col-md-6"></div>
