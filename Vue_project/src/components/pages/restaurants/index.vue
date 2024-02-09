@@ -38,9 +38,6 @@ export default {
       // Controlla se l'ID del tipo è presente nei tipi selezionati
       return this.selectedTypeIds.includes(typeId);
     },
-    checked(typeId) {
-      return typeId === parseInt(this.$route.params.id);
-    },
     toggleFilter(typeId) {
       if (this.selectedTypeIds.includes(typeId)) {
         this.selectedTypeIds = this.selectedTypeIds.filter(
@@ -78,10 +75,12 @@ export default {
     this.fetchFilteredRestaurants();
   },
   created() {
-    if (parseInt(this.$route.params.id)) {
-      this.selectedTypeIds.push(parseInt(this.$route.params.id));
-    }
-    this.fetchFilteredRestaurants();
+    this.$route.params.idArray.forEach(el => {
+      if (parseInt(el)) {
+        this.selectedTypeIds.push(parseInt(el));
+      }
+    });
+    this.fetchFilteredRestaurants();     
   },
 };
 </script>
@@ -101,7 +100,7 @@ export default {
         <div class="modal-body">
           <ul class="fw-light">
             <li v-for="(type) in types" :key="type.id" class="pb-3 d-flex">
-              <input :checked="(isChecked(type.id), checked(type.id))" 
+              <input :checked="isChecked(type.id)" 
                 :id="`type-${type.id}`" type="checkbox" class="me-1" @change="toggleFilterModal(type.id)"/>
               <label class="input_label" :for="`type-${type.id}`">{{
                 type.name
@@ -123,6 +122,7 @@ export default {
   <!-- side-bar -->
 
   <div class="container-fluid mt-100 ">
+    {{ this.selectedTypeIds }}
     <div class="d-flex ">
 
       <div class="side-bar d-none d-md-block">
@@ -159,7 +159,7 @@ export default {
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li v-for="(type) in types" :key="type.id" class="pb-3 d-flex">
-                        <input :checked="(isChecked(type.id), checked(type.id))" @change="toggleFilter(type.id)"
+                        <input :checked="isChecked(type.id)" @change="toggleFilter(type.id)"
                           :id="`type-${type.id}`" type="checkbox" class="me-1" />
                         <label class="input_label" :for="`type-${type.id}`">{{
                           type.name

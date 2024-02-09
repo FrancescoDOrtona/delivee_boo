@@ -5,51 +5,67 @@
             <p>Seleziona la categoria che preferisci e scegli cosa prenotare tra una moltitudine di aziende partner.</p>
         </div>
         <div class="types-section_badges top-row">
-            <div v-for="type in store.dataRT.types" :key="type"  class="badge">
-                <router-link :to="{ name: 'restaurants.index' , params: { id: type.id} }">
-                    <img  class="badge-img" :src="type.img_url" alt="">
-                    <div class="badge-title">
-                        <h5>{{ type.name }}</h5>
-                    </div>                    
-                </router-link>
+            <div @click="addTypeId(type.id)" v-for="type in store.dataRT.types" :key="type" class="badge">
+                <img class="badge-img" :src="type.img_url" alt="">
+                <div class="badge-title">
+                    <h5>{{ type.name }}</h5>
+                </div>
             </div>
-        </div>           
+            
+            <router-link :to="{ name: 'restaurants.index', params: { idArray: selectedTypeIds } }">
+                <button class="btn btn-primary">Vai ai Risultati</button>
+            </router-link>
+        </div>
+        {{ this.selectedTypeIds }}
     </div>
 </template>
 
 <script>
 import { store } from '../../../store';
-    export default {
-        data() {
-            return {
-                store,
+export default {
+    data() {
+        return {
+            store,
+            selectedTypeIds: [],
+        }
+    }, methods: {
+        addTypeId(typeId) {
+            if (this.selectedTypeIds.includes(typeId)) {
+                this.selectedTypeIds = this.selectedTypeIds.filter(
+                    (id) => id !== typeId
+                );
+            } else {
+                this.selectedTypeIds.push(typeId);
             }
         }
-    }
+    },
+}
 </script>
 
 <style lang="scss" scoped>
 @use '../../../../style/partials/variables' as *;
 
-.title{
+.title {
     color: $text-gray !important;
-    h2{
+
+    h2 {
         font-weight: bolder !important;
         font-size: 42px !important;
     }
-    p{
+
+    p {
         font-size: 18px;
         margin-bottom: 40px;
     }
 }
 
-.types-section{
-    padding:32px 64px;
+.types-section {
+    padding: 32px 64px;
 }
 
-.badge-img{
+.badge-img {
     //clip-path: polygon(20.7% 0%, 100% 0%, 79.3% 100%, 0% 100%); 
-    border-radius: 47% 53% 54% 46% / 38% 36% 64% 62% ;
+    border-radius: 47% 53% 54% 46% / 38% 36% 64% 62%;
     width: 120px;
     height: 80px;
     object-fit: cover;
@@ -86,19 +102,19 @@ import { store } from '../../../store';
     color: black;
     padding: 5px 10px;
     border-radius: 10px;
-    h5{
+
+    h5 {
         margin: 0;
         font-weight: 600 !important;
         text-transform: capitalize;
     }
 }
 
-.badge:nth-child(odd):nth-child(-n+5){
-    grid-column: span 2;
-}
-.badge:nth-child(even):nth-child(n+7){
+.badge:nth-child(odd):nth-child(-n+5) {
     grid-column: span 2;
 }
 
-
+.badge:nth-child(even):nth-child(n+7) {
+    grid-column: span 2;
+}
 </style>
