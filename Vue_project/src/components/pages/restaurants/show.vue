@@ -89,12 +89,12 @@ export default {
                     <i class="fa-solid fa-arrow-left brand-color"></i>Indietro</router-link>
             </div>
             <div class="row restaurant-head ">
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <img v-if="restaurant.restaurant_image" class="img-restaurant" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`"
                         alt="">
                     <img v-else class="img-restaurant" src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="">
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <div class="info-restaurant">
                         <h2 class="fw-bold">
                             {{ restaurant.restaurant_name }}
@@ -104,7 +104,7 @@ export default {
                         <p class="icons_align"><i class="fa-solid fa-circle-info fs-5"></i>{{ restaurant.restaurant_description }}</p>
                     </div>
                 </div>
-                <div class="col-4 d-flex flex-column align-items-center">
+                <div class="col-12 col-md-4 d-flex flex-column align-items-center">
                     <div class="d-flex gap-2 justify-content-center">
                         <span><i class="fa-solid fa-person-biking"></i></span>
                         <h5>Consegna in 25-30 minuti</h5>
@@ -124,23 +124,29 @@ export default {
                 </div>
                 <div class="col-12 col-lg-9">
                     <div class="grid">
-                        <div class="card p-3 flex-row justify-content-between" v-for="(product, index) in restaurant.products" :key="index">
-                            <div class="product-text mx-2 flex-grow-1">
-                                <h6 class="fw-bold">{{ product.name }}</h6>
+                        <div class="card p-3 flex-column flex-lg-row" v-for="(product, index) in restaurant.products" :key="index">
+                            <div class="col-12 col-md-6 col-lg-8 product-text mx-2 flex-grow-1">
+                                <div class="products-card_title">
+                                    <h6 class="fw-bold">{{ product.name }}</h6>
+                                    <template v-for="(p, idx) in this.products" :key="idx">
+                                        <template v-if="p.id === product.id">
+                                            <span>x{{ p.quantity }}</span>
+                                        </template>                                        
+                                    </template>
+                                </div>
                                 <p>{{ product.description }}</p>
                                 <small>{{ product.price }} €</small>
                             </div>
-                            <div class="product-card_quantity">
+                            <div class="col-12 col-md-6 col-lg-4 justify-content-lg-end products_card_side">
                                 <img class="product-img" :src="`http://127.0.0.1:8000/storage/${product.image}`" alt="">
-                                <div>
-                                    <button class="round_button" @click="decreaseQuantity(product)">
+                                <div class="product-card_quantity">
+                                    <button class="square_button btn btn-light" @click="decreaseQuantity(product)">
                                         <i class="fa-solid fa-minus"></i>
                                     </button>
-                                    <span>0</span>
-                                    <button class="round_button" @click="addProduct(product), increaseQuantity(product)">
+                                    <button class="btn btn-light square_button" @click="addProduct(product), increaseQuantity(product)">
                                         <i class="fa-solid fa-plus"></i>
                                     </button>
-                                </div>                                   
+                                </div>                                  
                             </div>
                         </div>
                     </div>
@@ -195,48 +201,6 @@ export default {
 p{
     margin: 0;
 }
-@media (max-width: 1400px) {
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 20px;
-    }
-
-}
-
-@media (max-width: 1000px) {
-    .restaurant-head {
-        .col-6 {
-            width: 100%;
-        }
-    }
-
-    .search-badge {
-        display: none !important;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr) !important;
-        gap: 20px;
-    }
-}
-
-@media(max-width: 766px) {
-    .container-fluid {
-        padding: 50px 0px !important;
-    }
-}
-
-@media (max-width: 500px) {
-    .col-3 {
-        width: 100% !important;
-
-        .card {
-            width: 100% !important;
-        }
-    }
-}
 
 .page-top-margin{
     margin-top: 100px;
@@ -274,7 +238,7 @@ p{
 }
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
@@ -310,12 +274,41 @@ p{
 
 .product-img {
     width: 100px;
-    height: 100px;
+    object-fit: cover;
     border-radius: 5px;
 }
 
 .product-card_quantity{
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.square_button{
+    border: 1px solid lightgray;
+    color: $main-brand-color;
+}
+
+.products-card_title{
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    padding: 8px 0px;
+    line-height: 10px;
+    span{
+        font-weight: bold;
+        color: $review-4-5-green;
+    }
+    h6{
+        margin: 0;
+    }
+}
+
+.products_card_side{
+    display: flex;
+    gap: 6px;
+    padding-right: 10px;
+
 }
 
 .product-add {
@@ -405,13 +398,42 @@ p{
     }
 }
 
-@media (max-width: 575.98px) {}
+@media (max-width: 575.98px) {
+
+    .restaurant-head{
+        row-gap: 20px;
+    }
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) and (max-width: 767.98px) {}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .restaurant-head{
+        row-gap: 20px;
+    }
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 768px) and (max-width: 991.98px) {}
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .search-badge {
+        display: none !important;
+    }
 
-@media (min-width: 992px) and (max-width: 1499.98px) {}
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1499.98px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }    
+
+}
+
 </style>
