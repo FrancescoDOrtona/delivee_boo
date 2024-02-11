@@ -34,8 +34,6 @@
                 <div class="mb-4 row">
                     <h5 class="fw-bold fs-6 col-4">Types *</h5>
                     <div class="col-6 d-flex flex-wrap">
-
-
                         @foreach ($types as $type)
                             <div class="col-4 pl-3">
                                 <input class="ms-5" type="checkbox" name="types[]" id="type-{{ $type->id }}"

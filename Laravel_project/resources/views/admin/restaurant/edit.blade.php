@@ -33,16 +33,19 @@
 
 
                 <div class="mb-4 row">
-                    <h5 class="fw-bold fs-6">Types *</h5>
-                    @foreach ($types as $type)
-                        <div class="col-4">
-                            <input type="checkbox" name="types[]" id="type-{{ $type->id }}" value="{{ $type->id }}"
-                                @checked(in_array($type->id, old('types', $restaurant->types->pluck('id')->all()))) onchange="inputValidation('type-{{ $type->id }}')">
-                            <label for="type-{{ $type->id }}"
-                                class="col-md-4 col-form-label text-md-right text-capitalize">{{ __($type->name) }}
-                            </label>
-                        </div>
-                    @endforeach
+                    <h5 class="fw-bold fs-6 col-4">Types *</h5>
+                    <div class="col-6 d-flex flex-wrap ">
+                        @foreach ($types as $type)
+                            <div class="col-4 pl-3">
+                                <input class="ms-5" type="checkbox" name="types[]" id="type-{{ $type->id }}"
+                                    value="{{ $type->id }}" @checked(in_array($type->id, old('types', $restaurant->types->pluck('id')->all())))
+                                    onchange="inputValidation('type-{{ $type->id }}')">
+                                <label for="type-{{ $type->id }}"
+                                    class="col-md-5 col-form-label text-md-right text-capitalize">{{ __($type->name) }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
 
                     @error('types')
                         <div class="alert alert-danger mt-2">{{ $message }}</div>
