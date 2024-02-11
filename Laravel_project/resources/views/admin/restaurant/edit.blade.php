@@ -24,6 +24,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                        {{-- Error message from validation --}}
                         <div class="mb-1 mt-2 row">
                             <div id="restaurant_nameConfirmMessage" class="confirm-message col-md-6"></div>
                         </div>
@@ -46,6 +47,7 @@
                     @error('types')
                         <div class="alert alert-danger mt-2">{{ $message }}</div>
                     @enderror
+                    {{-- Error message from validation --}}
                     <div class="mb-1 mt-2 row">
                         <div id="checkBoxConfirmMessage" class="confirm-message col-md-6"></div>
                     </div>
@@ -60,13 +62,14 @@
                         <input id="restaurant_address" type="text"
                             class="form-control @error('restaurant_address') is-invalid @enderror" name="restaurant_address"
                             value="{{ old('restaurant_address', $restaurant->restaurant_address) }}" required
-                            autocomplete="restaurant_address" oninput="inputValidation('restaurant_address')";
-                            onblur="inputValidation('restaurant_address')";>
+                            autocomplete="restaurant_address" oninput="inputValidation('restaurant_address')"
+                            onblur="inputValidation('restaurant_address')">
                         @error('restaurant_address')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                        {{-- Error message from validation --}}
                         <div class="mb-1 mt-2 row">
                             <div id="restaurant_addressConfirmMessage" class="confirm-message col-md-6"></div>
                         </div>
@@ -81,13 +84,14 @@
                         <input id="phone_number" type="text"
                             class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"
                             value="{{ old('phone_number', $restaurant->phone_number) }}" required
-                            autocomplete="phone_number" onblur="inputValidation('phone_number')";
-                            oninput="inputValidation('phone_number')";>
+                            autocomplete="phone_number" onblur="inputValidation('phone_number')"
+                            oninput="inputValidation('phone_number')">
                         @error('phone_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                        {{-- Error message from validation --}}
                         <div class="mb-1 mt-2 row">
                             <div id="phone_numberConfirmMessage" class="confirm-message col-md-6"></div>
                         </div>
@@ -102,12 +106,13 @@
                         <input id="vat_number" maxlength="11" type="text"
                             class="form-control @error('vat_number') is-invalid @enderror" name="vat_number"
                             value="{{ old('vat_number', $restaurant->vat_number) }}" required autocomplete="vat_number"
-                            onblur="inputValidation('vat_number')"; oninput="inputValidation('vat_number')">
+                            onblur="inputValidation('vat_number')" oninput="inputValidation('vat_number')">
                         @error('vat_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                        {{-- Error message from validation --}}
                         <div class="mb-1 mt-2 row">
                             <div id="vat_numberConfirmMessage" class="confirm-message col-md-6"></div>
                         </div>
@@ -144,6 +149,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                        {{-- Error message from validation --}}
                         <div class="mb-1 mt-2 row">
                             <div id="restaurant_descriptionConfirmMessage" class="confirm-message col-md-6"></div>
                         </div>
