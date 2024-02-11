@@ -45,16 +45,14 @@
                                 </label>
                             </div>
                         @endforeach
+                        @error('types')
+                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                        @enderror
+                        {{-- Error message from validation --}}
+                        <div class="mb-1 mt-2 row">
+                            <div id="checkBoxConfirmMessage" class="confirm-message col-md-6"></div>
+                        </div>
                     </div>
-
-                    @error('types')
-                        <div class="alert alert-danger mt-2">{{ $message }}</div>
-                    @enderror
-                    {{-- Error message from validation --}}
-                    <div class="mb-1 mt-2 row">
-                        <div id="checkBoxConfirmMessage" class="confirm-message col-md-6"></div>
-                    </div>
-
                 </div>
 
                 <div class="mb-4 row">

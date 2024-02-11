@@ -16,7 +16,8 @@
                         <input id="restaurant_name" type="text"
                             class="form-control @error('restaurant_name') is-invalid @enderror" name="restaurant_name"
                             value="{{ old('restaurant_name') }}" required autocomplete="restaurant_name" autofocus
-                            onblur="inputValidation('restaurant_name')" oninput="inputValidation('restaurant_name')">
+                            onblur="inputValidation('restaurant_name'), inputValidation('type-1')"
+                            oninput="inputValidation('restaurant_name')">
 
                         @error('restaurant_name')
                             <span class="invalid-feedback" role="alert">
@@ -44,16 +45,14 @@
                                 </label>
                             </div>
                         @endforeach
+                        @error('types')
+                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                        @enderror
+                        {{-- Error message from validation --}}
+                        <div class="mb-1 mt-2 row">
+                            <div id="checkBoxConfirmMessage" class="confirm-message col-md-6"></div>
+                        </div>
                     </div>
-
-                    @error('types')
-                        <div class="alert alert-danger mt-2">{{ $message }}</div>
-                    @enderror
-                    {{-- Error message from validation --}}
-                    <div class="mb-1 mt-2 row">
-                        <div id="checkBoxConfirmMessage" class="confirm-message col-md-6"></div>
-                    </div>
-
                 </div>
 
                 <div class="mb-4 row">
