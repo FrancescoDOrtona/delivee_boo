@@ -10,9 +10,12 @@ export default {
         return {
             store,
             restaurant: null,
+            currentRestaurantId: 0, // Variabile per tenere traccia dell'ID del ristorante attualmente visualizzato
+            cartId: 0, 
             BASE_URL: 'http://127.0.0.1:8000/api',
             products: [],
             totalPrice: 0,
+            cartVisible: false // Variabile per mostrare o nascondere il carrello
 
         }
     },
@@ -20,8 +23,8 @@ export default {
         fetchShow() {
             axios.get(`${this.BASE_URL}/restaurants/${this.id}`)
                 .then(res => {
-                    console.log(res.data);
                     this.restaurant = res.data.restaurant;
+                    this.currentRestaurantId = this.restaurant.id; // Imposta l'ID del ristorante attualmente visualizzato
                 }).catch((error) => {
                     console.log('post not found', error.response)
                 })
@@ -30,6 +33,14 @@ export default {
             return this.products.some((product) => product.name === newProduct.name)
         },
         addProduct(product) {
+            // Assegniamo l'id del carrello tramite il prodotto aggiunto del ristorante
+            this.cartId = this.restaurant.id
+            console.log(this.cartId)
+            // Verifica se il carrello è vuoto o associato a un altro ristorante
+            if (!this.cartVisible || this.currentRestaurantId !== this.restaurant.id) {
+                this.products = [];
+                this.cartVisible = true; // Mostra il carrello
+            }
             let newProduct = {
                 id: product.id,
                 name: product.name,
@@ -38,18 +49,33 @@ export default {
                 quantity: 1,
             }
             if (this.productExists(newProduct)) {
-                console.log('il prodotto è gia presente')
                 this.products.forEach((product) => {
                     if (product.name == newProduct.name) {
                         product.quantity = product.quantity + 1
-                        console.log(product.quantity)
                     }
                 })
             } else {
-                console.log('il prodotto non è presente')
                 this.products.push(newProduct)
-                console.log(this.products)
             }
+            this.increaseTotalPrice();
+            localStorage.setItem('cart', JSON.stringify(this.products));
+            localStorage.setItem('cartId', this.cartId);
+            localStorage.setItem('price', this.totalPrice);
+        },
+        removeProduct(productToRemove) {
+            for (let i = 0; i < this.products.length; i++) {
+                const product = this.products[i];
+                if (product === productToRemove) {
+                    if (product.quantity === 1) {
+                        this.products.splice(i, 1);
+                    } else {
+                        product.quantity--;
+                    }
+                    break; // Esci dal ciclo dopo aver modificato il prodotto
+                }
+            }
+            this.decreaseTotalPrice();
+            localStorage.setItem('cart', JSON.stringify(this.products));
         },
         increaseTotalPrice() {
             this.totalPrice = this.products.reduce((total, product) => {
@@ -61,23 +87,47 @@ export default {
                 return +(Math.round((total += product.price * product.quantity) * 100) / 100).toFixed(2);
             }, 0);
         },
-        increaseQuantity(product) {
-            product.quantity = product.quantity + 1;
-            this.increaseTotalPrice();
-        },
-        decreaseQuantity(product) {
-            if (product.quantity == 1) {
-                this.products.splice(this.products.indexOf(product), 1);
-            } else if (product.quantity > 0) {
-                product.quantity = product.quantity - 1;
+        cartShow(current) {
+            console.log(this.cartVisible, this.currentRestaurantId, this.restaurant.id)
+            if (!this.cartVisible || current === this.cartId) {
+                return this.cartVisible = true;
             }
-            this.decreaseTotalPrice();
         }
     },
     created() {
-        this.fetchShow()
+        this.fetchShow();
+
+    }, mounted() {
+        const cartData = localStorage.getItem('cart');
+        if (cartData) {
+            this.products = JSON.parse(cartData);
+        };
+
+        const cartDataId = localStorage.getItem('cartId');
+        if (cartDataId) {
+            this.cartId = +cartDataId;
+        }
+
+        const price = localStorage.getItem('price');
+        if (price) {
+            this.totalPrice = +price;
+        }
+
+        this.cartShow(this.currentRestaurantId);
+        console.log(this.cartId, typeof(this.cartId))
+        
 
     },
+    watch: {
+        'restaurant.id'(newId, oldId) {
+            console.log(newId,oldId)
+            if (newId !== oldId) {
+                if (this.products.length > 0) {
+                    this.cartVisible = false; // Nascondi il carrello solo se ci sono prodotti nel carrello
+                }
+            }
+        }
+    }
 }
 </script>
 
@@ -90,18 +140,21 @@ export default {
             </div>
             <div class="row restaurant-head ">
                 <div class="col-12 col-md-4">
-                    <img v-if="restaurant.restaurant_image" class="img-restaurant" :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`"
-                        alt="">
-                    <img v-else class="img-restaurant" src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="">
+                    <img v-if="restaurant.restaurant_image" class="img-restaurant"
+                        :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="">
+                    <img v-else class="img-restaurant"
+                        src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="">
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="info-restaurant">
                         <h2 class="fw-bold">
                             {{ restaurant.restaurant_name }}
-                        </h2>                    
+                        </h2>
                         <p class="icons_align"><i class="fa-solid fa-clock fs-5"></i>15 - 25 min· Poke·Sushi</p>
-                        <p class="icons_align"><i class="fa-solid fa-map-location fs-5"></i>Distanza: 1.18 km · Chiude alle 22:30 · Consegna gratuita</p>                   
-                        <p class="icons_align"><i class="fa-solid fa-circle-info fs-5"></i>{{ restaurant.restaurant_description }}</p>
+                        <p class="icons_align"><i class="fa-solid fa-map-location fs-5"></i>Distanza: 1.18 km · Chiude alle
+                            22:30 · Consegna gratuita</p>
+                        <p class="icons_align"><i class="fa-solid fa-circle-info fs-5"></i>{{
+                            restaurant.restaurant_description }}</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center">
@@ -124,14 +177,15 @@ export default {
                 </div>
                 <div class="col-12 col-lg-9">
                     <div class="grid">
-                        <div class="card p-3 flex-column flex-lg-row" v-for="(product, index) in restaurant.products" :key="index">
+                        <div class="card p-3 flex-column flex-lg-row" v-for="(product, index) in restaurant.products"
+                            :key="index">
                             <div class="col-12 col-md-6 col-lg-8 product-text mx-2 flex-grow-1">
                                 <div class="products-card_title">
                                     <h6 class="fw-bold">{{ product.name }}</h6>
                                     <template v-for="(p, idx) in this.products" :key="idx">
                                         <template v-if="p.id === product.id">
                                             <span>x{{ p.quantity }}</span>
-                                        </template>                                        
+                                        </template>
                                     </template>
                                 </div>
                                 <p>{{ product.description }}</p>
@@ -140,13 +194,13 @@ export default {
                             <div class="col-12 col-md-6 col-lg-4 justify-content-lg-end products_card_side">
                                 <img class="product-img" :src="`http://127.0.0.1:8000/storage/${product.image}`" alt="">
                                 <div class="product-card_quantity">
-                                    <button class="square_button btn btn-light" @click="decreaseQuantity(product)">
+                                    <button class="square_button btn btn-light" @click="removeProduct(product)">
                                         <i class="fa-solid fa-minus"></i>
                                     </button>
-                                    <button class="btn btn-light square_button" @click="addProduct(product), increaseQuantity(product)">
+                                    <button class="btn btn-light square_button" @click="addProduct(product)">
                                         <i class="fa-solid fa-plus"></i>
                                     </button>
-                                </div>                                  
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -158,27 +212,30 @@ export default {
                         <div class="chart_title">
                             <h4>Il tuo ordine</h4>
                         </div>
-                        <div class="chart_items">
-                            <ul class="chart" v-for="product in this.products">
-                                <li>
-                                    <p>{{ product.name }}</p>
-                                </li>
-
-                                <li class="chart_quantity">
-                                    <button class="round_button" @click="decreaseQuantity(product)">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </button>
-                                    <span class="total_quantity">
-                                        {{ product.quantity }}
-                                    </span>
-                                    <button class="round_button" @click="increaseQuantity(product)">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                    <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100) / 100).toFixed(2) }}
-                                        €</span>
-                                </li>
-                            </ul>
-                        </div>
+                        <template v-if="cartVisible && currentRestaurantId === cartId">
+                            <div class="chart_items" >
+                                <ul class="chart" v-for="product in this.products">
+                                    <li>
+                                        <p>{{ product.name }}</p>
+                                    </li>
+    
+                                    <li class="chart_quantity">
+                                        <button class="round_button" @click="removeProduct(product)">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                        <span class="total_quantity">
+                                            {{ product.quantity }}
+                                        </span>
+                                        <button class="round_button" @click="addProduct(product)">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                        <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100) /
+                                            100).toFixed(2) }}
+                                            €</span>
+                                    </li>
+                                </ul>
+                            </div>                            
+                        </template>
                         <div class="chart_total">
                             <h5>Totale: {{ this.totalPrice }} €</h5>
                             <button class="btn btn-secondary ">Vai al pagamento</button>
@@ -194,15 +251,19 @@ export default {
 @import "../../../../style/partials/variables.scss";
 
 
+.active {
+    border: 1px solid green;
+}
+
 .test {
     visibility: hidden;
 }
 
-p{
+p {
     margin: 0;
 }
 
-.page-top-margin{
+.page-top-margin {
     margin-top: 100px;
 }
 
@@ -211,14 +272,16 @@ p{
     padding: 0px;
 }
 
-.icons_align{
+.icons_align {
     display: flex;
     align-items: center;
     gap: 10px;
-    i{
+
+    i {
         color: lightgray;
     }
 }
+
 .img-restaurant {
     width: 100%;
     border-radius: 5px;
@@ -226,16 +289,17 @@ p{
     object-fit: cover;
 }
 
-.info-restaurant{
+.info-restaurant {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.head_button{
+.head_button {
     color: $main-brand-color;
     border: 1px solid lightgray;
 }
+
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -264,10 +328,12 @@ p{
     color: $main-brand-color;
     text-decoration: none;
     border: 1px solid lightgray;
-    &:hover{
+
+    &:hover {
         color: $main-brand-color;
     }
-    i{
+
+    i {
         margin-right: 10px;
     }
 }
@@ -278,33 +344,35 @@ p{
     border-radius: 5px;
 }
 
-.product-card_quantity{
+.product-card_quantity {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.square_button{
+.square_button {
     border: 1px solid lightgray;
     color: $main-brand-color;
 }
 
-.products-card_title{
+.products-card_title {
     display: flex;
     gap: 6px;
     align-items: baseline;
     padding: 8px 0px;
     line-height: 10px;
-    span{
+
+    span {
         font-weight: bold;
         color: $review-4-5-green;
     }
-    h6{
+
+    h6 {
         margin: 0;
     }
 }
 
-.products_card_side{
+.products_card_side {
     display: flex;
     gap: 6px;
     padding-right: 10px;
@@ -323,7 +391,7 @@ p{
     color: $main-brand-color;
 }
 
-.product_price{
+.product_price {
     min-width: 60px;
     text-align: end;
 }
@@ -353,7 +421,7 @@ p{
     justify-content: center;
 }
 
-.chart_container{
+.chart_container {
     height: 800px;
     display: flex;
     position: sticky;
@@ -370,28 +438,31 @@ p{
 
 }
 
-.chart_title{
+.chart_title {
     border-bottom: 1px solid lightgray;
-    h4{
+
+    h4 {
         margin: 0;
         padding-bottom: 15px;
     }
 }
 
-.chart_items{
+.chart_items {
     flex-grow: 1;
     overflow: auto;
 }
 
-.chart_total{
+.chart_total {
     display: flex;
     flex-direction: column;
     border-top: 1px solid lightgray;
-    h5{
+
+    h5 {
         margin: 0;
         padding: 15px 0;
     }
-    button{
+
+    button {
         background-color: $main-brand-color;
         border: none;
         padding: 10px 0;
@@ -400,9 +471,10 @@ p{
 
 @media (max-width: 575.98px) {
 
-    .restaurant-head{
+    .restaurant-head {
         row-gap: 20px;
     }
+
     .grid {
         grid-template-columns: repeat(1, 1fr);
     }
@@ -410,9 +482,10 @@ p{
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) and (max-width: 767.98px) {
-    .restaurant-head{
+    .restaurant-head {
         row-gap: 20px;
     }
+
     .grid {
         grid-template-columns: repeat(1, 1fr);
     }
@@ -432,8 +505,7 @@ p{
 @media (min-width: 992px) and (max-width: 1499.98px) {
     .grid {
         grid-template-columns: repeat(1, 1fr);
-    }    
+    }
 
 }
-
 </style>
