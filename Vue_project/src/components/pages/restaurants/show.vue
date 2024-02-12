@@ -57,7 +57,8 @@ export default {
             } else {
                 this.products.push(newProduct)
             }
-            this.increaseTotalPrice();
+            this.increaseTotalPrice(); //Aumenta il prezzo totale
+            // Salva i dati nel local storage per renderli persistenti sul cambio di pagina
             localStorage.setItem('cart', JSON.stringify(this.products));
             localStorage.setItem('cartId', this.cartId);
             localStorage.setItem('price', this.totalPrice);
@@ -98,6 +99,7 @@ export default {
         this.fetchShow();
 
     }, mounted() {
+        // recuperiamo i dati dal local storage quando cambiamo pagina per mantenere il carrello aggiornato
         const cartData = localStorage.getItem('cart');
         if (cartData) {
             this.products = JSON.parse(cartData);
@@ -113,6 +115,7 @@ export default {
             this.totalPrice = +price;
         }
 
+        // ci mostra il contenuto del carrello solo se l'id del carrello è uguale all'id del ristorante corrente
         this.cartShow(this.currentRestaurantId);
         console.log(this.cartId, typeof(this.cartId))
         
