@@ -89,14 +89,14 @@ export default {
 }
 
 .active{
-    transform: rotate(20deg);
-    .badge-img{
-        filter: drop-shadow(7px 5px 3px #01ccbbad);
+    transform: scale(1.07);
+    .badge-title{
+        background-color: rgba(255, 166, 0, 0.7);
     }
 }
 
 .inactive{
-    transform: rotate(0deg);
+    transform: scale(1);
 }
 
 
@@ -119,7 +119,7 @@ export default {
     text-align: center;
     position: relative;
     padding: 15px 0px;
-    transition: 2s ease-in-out;
+    transition: 0.5s ease-in-out;
 }
 
 .badge-title {
