@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -24,6 +25,7 @@ Route::get('/restaurants',[RestaurantController::class,'index']);
 
 Route::get('/restaurants/{restaurant}',[RestaurantController::class,'show']);
 
+Route::post('/orders',[OrderController::class,'store']);
 // Route::get('/restaurants/filter', [RestaurantController::class, 'filter']);
 
 // Route::get('/search',[RestaurantController::class,'search']);
