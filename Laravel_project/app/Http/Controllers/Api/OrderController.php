@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
@@ -29,7 +30,16 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $data = $request->input('cart');
+
+    // Esegui logica per gestire i dati del carrello
+
+    return response()->json([
+        'success' => true,
+        'messaggio' => 'Dati del carrello ricevuti e gestiti con successo',
+        'data' => $data
+
+    ]);
     }
 
     /**

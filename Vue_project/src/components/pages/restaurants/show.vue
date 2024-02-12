@@ -11,7 +11,7 @@ export default {
             store,
             restaurant: null,
             currentRestaurantId: 0, // Variabile per tenere traccia dell'ID del ristorante attualmente visualizzato
-            cartId: 0, 
+            cartId: 0,
             BASE_URL: 'http://127.0.0.1:8000/api',
             products: [],
             totalPrice: 0,
@@ -42,7 +42,8 @@ export default {
                 this.cartVisible = true; // Mostra il carrello
             }
             let newProduct = {
-                id: product.id,
+                restaurant_id: this.restaurant.id,
+                product_id: product.id,
                 name: product.name,
                 price: product.price,
                 image: product.image,
@@ -93,6 +94,15 @@ export default {
             if (!this.cartVisible || current === this.cartId) {
                 return this.cartVisible = true;
             }
+        },
+        sendOrder() {
+            const cart = this.products;
+            axios.post(`${this.BASE_URL}/orders`, { cart })
+                .then(res => {
+                    console.log(res.data);
+                }).catch(error => {
+                    console.error(error);
+                });
         }
     },
     created() {
@@ -117,13 +127,13 @@ export default {
 
         // ci mostra il contenuto del carrello solo se l'id del carrello è uguale all'id del ristorante corrente
         this.cartShow(this.currentRestaurantId);
-        console.log(this.cartId, typeof(this.cartId))
-        
+        console.log(this.cartId, typeof (this.cartId))
+
 
     },
     watch: {
         'restaurant.id'(newId, oldId) {
-            console.log(newId,oldId)
+            console.log(newId, oldId)
             if (newId !== oldId) {
                 if (this.products.length > 0) {
                     this.cartVisible = false; // Nascondi il carrello solo se ci sono prodotti nel carrello
@@ -216,12 +226,12 @@ export default {
                             <h4>Il tuo ordine</h4>
                         </div>
                         <template v-if="cartVisible && currentRestaurantId === cartId">
-                            <div class="chart_items" >
+                            <div class="chart_items">
                                 <ul class="chart" v-for="product in this.products">
                                     <li>
                                         <p>{{ product.name }}</p>
                                     </li>
-    
+
                                     <li class="chart_quantity">
                                         <button class="round_button" @click="removeProduct(product)">
                                             <i class="fa-solid fa-minus"></i>
@@ -232,27 +242,33 @@ export default {
                                         <button class="round_button" @click="addProduct(product)">
                                             <i class="fa-solid fa-plus"></i>
                                         </button>
-                                        <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100) /
+                                        <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100)
+                                            /
                                             100).toFixed(2) }}
                                             €</span>
                                     </li>
                                 </ul>
-                            </div>                            
+                            </div>
                             <div class="chart_total">
                                 <h5>Totale: {{ this.totalPrice }} €</h5>
-                                <button class="btn btn-light btn-main-color ">Vai al pagamento</button>
+                                <button @click="sendOrder()" class="btn btn-light btn-main-color ">Vai al pagamento</button>
                             </div>
                         </template>
                         <template v-else>
                             <div class="chart_total">
                                 <p class="cart-empty">
-                                    <svg height="80" width="120" viewBox="0 0 24 24" role="presentation" focusable="false" class="ccl-2608038983f5b413 ccl-73d4ddfccb057499 ccl-4475ede65a9c319d"><path d="M14 15V13H10V15H14ZM15 15H19.1872L19.7172 13H15V15ZM14 12V10H15V12H19.9822L20.5122 10H3.48783L4.01783 12H9V10H10V12H14ZM14 18V16H10V18H14ZM15 18H18.3922L18.9222 16H15V18ZM9 15V13H4.28283L4.81283 15H9ZM9 18V16H5.07783L5.60783 18H9ZM7 8V3H17V8H23L20 20H4L1 8H7ZM9 8H15V5H9V8Z" fill="#dddddd"></path></svg>
+                                    <svg height="80" width="120" viewBox="0 0 24 24" role="presentation" focusable="false"
+                                        class="ccl-2608038983f5b413 ccl-73d4ddfccb057499 ccl-4475ede65a9c319d">
+                                        <path
+                                            d="M14 15V13H10V15H14ZM15 15H19.1872L19.7172 13H15V15ZM14 12V10H15V12H19.9822L20.5122 10H3.48783L4.01783 12H9V10H10V12H14ZM14 18V16H10V18H14ZM15 18H18.3922L18.9222 16H15V18ZM9 15V13H4.28283L4.81283 15H9ZM9 18V16H5.07783L5.60783 18H9ZM7 8V3H17V8H23L20 20H4L1 8H7ZM9 8H15V5H9V8Z"
+                                            fill="#dddddd"></path>
+                                    </svg>
                                 </p>
                                 <h4 class="text-center text-secondary">Il Carrello é vuoto</h4>
-                                <button  class="btn btn-secondary disabled">Vai al pagamento</button>
+                                <button class="btn btn-secondary disabled">Vai al pagamento</button>
                             </div>
                         </template>
-                        
+
                     </div>
                 </div>
             </div>
@@ -477,14 +493,15 @@ p {
     }
 
     button {
-        
+
         border: none;
         padding: 10px 0;
     }
 }
-.cart-empty{
+
+.cart-empty {
     text-align: center;
-    
+
 }
 
 
@@ -527,5 +544,4 @@ p {
         grid-template-columns: repeat(1, 1fr);
     }
 
-}
-</style>
+}</style>
