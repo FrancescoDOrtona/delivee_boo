@@ -2,12 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Homepage from './components/pages/Homepage.vue';
 import Restaurants from './components/pages/restaurants/index.vue';
 import RestaurantShow from './components/pages/restaurants/show.vue';
-
+import Payment from './components/pages/Payment.vue';
 
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     // always scroll to top
-    return { top: 0 }
+    return { top: 0 };
   },
   history: createWebHistory(),
   routes: [
@@ -15,6 +15,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Homepage,
+    },
+    {
+      path: '/payment/',
+      name: 'payment',
+      component: Payment,
     },
     {
       path: '/restaurants/',
@@ -26,7 +31,7 @@ const router = createRouter({
       name: 'restaurants.show',
       props: true,
       component: RestaurantShow,
-    }
+    },
   ],
 });
 export { router };
