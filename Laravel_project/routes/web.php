@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\DashboardController;
@@ -36,6 +37,7 @@ Route::middleware('auth')
         
         Route::resource('restaurant', RestaurantController::class);
         Route::resource('product', ProductController::class);
+        Route::resource('order', OrderController::class);
     });
 
 require __DIR__ . '/auth.php';

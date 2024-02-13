@@ -14,7 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        // $restaurantId = auth()->user()->restaurant->id;
+
+        $orders = Order::all();
     }
 
     /**
