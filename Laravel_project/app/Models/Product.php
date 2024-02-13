@@ -28,6 +28,6 @@ class Product extends Model
     // Relazione many to many con Orders
     public function orders()
     {
-        $this->belongsToMany(Order::class);
+        $this->belongsToMany(Order::class)->withPivot('quantity');
     }
 }
