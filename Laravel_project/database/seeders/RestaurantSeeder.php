@@ -26,6 +26,6 @@ class RestaurantSeeder extends Seeder
         ]);
         $types = Type::whereIn('id',[1,3,5])->get();
 
-        $restaurant->types()->attach($types);
+        $restaurant->types()->attach($types); 
     }
 }
