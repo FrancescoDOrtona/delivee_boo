@@ -24,7 +24,7 @@ class OrderRequest extends FormRequest
         // Qui il backend prende i dati dal carrello!
         return [
             'token' => 'required',
-            'amount' => 'required',
+            'product' => 'required',
 
         ];
     }
