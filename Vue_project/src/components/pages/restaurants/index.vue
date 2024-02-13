@@ -147,16 +147,18 @@ export default {
             </ul>
           </li>
           <li>
-            <div class="accordion" id="accordionPanelsStayOpenExample">
+            <!-- Accordion Start -->
+
+            <div class="accordion" id="accordionExample">
               <div class="bottom-line">
                 <h2 class="accordion-header">
                   <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseOne">
+                    data-bs-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
                     Categorie
                   </button>
                 </h2>
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                <div id="collapseOne" class="accordion-collapse collapse show">
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li v-for="(type) in types" :key="type.id" class="pb-3 d-flex">
@@ -174,12 +176,12 @@ export default {
               <div class="bottom-line">
                 <h2 class="accordion-header">
                   <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseTwo">
+                    data-bs-target="#collapseTwo" aria-expanded="true"
+                    aria-controls="collapseTwo">
                     Ordina
                   </button>
                 </h2>
-                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                <div id="collapseTwo" class="accordion-collapse collapse">
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li class="pb-3 d-flex">
@@ -206,12 +208,12 @@ export default {
               <div class="bottom-line">
                 <h2 class="accordion-header">
                   <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseTwo">
+                    data-bs-target="#collapseThree" aria-expanded="true"
+                    aria-controls="collapseThree">
                     Offerte
                   </button>
                 </h2>
-                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                <div id="collapseThree" class="accordion-collapse collapse">
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li class="d-flex">
@@ -226,12 +228,12 @@ export default {
               <div class="bottom-line">
                 <h2 class="accordion-header">
                   <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseThree">
+                    data-bs-target="#collapseFour" aria-expanded="true"
+                    aria-controls="collapseFour">
                     Regime alimentari
                   </button>
                 </h2>
-                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+                <div id="collapseFour" class="accordion-collapse collapse">
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li class="pb-3 d-flex">
@@ -250,12 +252,12 @@ export default {
               <div class="bottom-line">
                 <h2 class="accordion-header">
                   <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#panelsStayOpen-collapseFoor" aria-expanded="false"
-                    aria-controls="panelsStayOpen-collapseFoor">
+                    data-bs-target="#collapseFive" aria-expanded="false"
+                    aria-controls="collapseFive">
                     Buono pasto
                   </button>
                 </h2>
-                <div id="panelsStayOpen-collapseFoor" class="accordion-collapse collapse">
+                <div id="collapseFive" class="accordion-collapse collapse">
                   <div class="accordion-body">
                     <ul class="fw-light">
                       <li class="d-flex">
