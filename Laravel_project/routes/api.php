@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -21,11 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/restaurants',[RestaurantController::class,'index']);
+Route::get('/restaurants', [RestaurantController::class, 'index']);
 
-Route::get('/restaurants/{restaurant}',[RestaurantController::class,'show']);
+Route::get('/restaurants/{restaurant}', [RestaurantController::class, 'show']);
 
-Route::post('/orders',[OrderController::class,'store']);
+Route::post('/orders', [OrderController::class, 'store']);
 // Route::get('/restaurants/filter', [RestaurantController::class, 'filter']);
 
 // Route::get('/search',[RestaurantController::class,'search']);
+
+Route::get('/orders/generate', [PaymentController::class, 'generate'])->name('order.make');
+Route::post('/orders/makePayment', [PaymentController::class, 'makePayment'])->name('makePayment.make');
