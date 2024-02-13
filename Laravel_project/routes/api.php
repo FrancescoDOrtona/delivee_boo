@@ -32,4 +32,5 @@ Route::post('/orders', [OrderController::class, 'store']);
 // Route::get('/search',[RestaurantController::class,'search']);
 
 Route::get('/orders/generate', [PaymentController::class, 'generate'])->name('order.make');
+
 Route::post('/orders/makePayment', [PaymentController::class, 'makePayment'])->name('makePayment.make');
