@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -30,16 +31,43 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        $data = $request->input('cart');
+    
+    // Esegui la logica per gestire i dati del cliente e del carrello
+    // Estrai i dati JSON dal corpo della richiesta
+    $requestData = $request->json()->all();
 
-    // Esegui logica per gestire i dati del carrello
+    // Estrai il cliente e il carrello dai dati della richiesta
+    $customer = $requestData['customer'];
+    $cart = $requestData['cart'];
 
-    return response()->json([
-        'success' => true,
-        'messaggio' => 'Dati del carrello ricevuti e gestiti con successo',
-        'data' => $data
+    //recuperiamo gli ids dei prodotti dal carrello
+    $productIds = [];
+    foreach($cart as $item){
+        $productIds[] = $item['product_id'];
+    }
+    
+    $products = Product::whereIn('id',$productIds)->get();
+    // calcola il totale dei prodotti
 
-    ]);
+    $totalAmount = 0;
+    foreach($cart as $item){
+        foreach($products as $product){
+            if($item['product_id'] == $product->id){
+                $totalAmount += $product->price * $item['quantity'];
+                break;
+            }
+        }
+    }
+
+    // return response()->json([
+    //     'success' => true,
+    //     'messaggio' => 'Dati del cliente e del carrello ricevuti e gestiti con successo',
+    //     'total'=> $totalAmount,
+    //     'customer'=> $customer
+       
+    // ]);
+
+    return redirect()->route('makePayment.make', ['totalAmount' => $totalAmount,'customer'=> $customer]);
     }
 
     /**

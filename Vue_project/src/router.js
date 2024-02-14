@@ -3,6 +3,7 @@ import Homepage from './components/pages/Homepage.vue';
 import Restaurants from './components/pages/restaurants/index.vue';
 import RestaurantShow from './components/pages/restaurants/show.vue';
 import Payment from './components/pages/Payment.vue';
+import Checkout from './components/pages/Checkout.vue';
 
 const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
@@ -31,6 +32,12 @@ const router = createRouter({
       name: 'restaurants.show',
       props: true,
       component: RestaurantShow,
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      props: true,
+      component: Checkout,
     },
   ],
 });
