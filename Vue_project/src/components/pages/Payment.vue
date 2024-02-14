@@ -5,7 +5,7 @@ export default {
   data() {
     return {
       btOrders: 'http://127.0.0.1:8000/api/orders',
-      token: null,
+      token: '',
     };
   },
   components: {},
@@ -20,6 +20,7 @@ export default {
           console.log('Authorization Key not found!', error.response);
         });
     },
+
     displayDropIn() {
       var button = document.querySelector('#submit-button');
 
@@ -31,7 +32,27 @@ export default {
         function (err, instance) {
           button.addEventListener('click', function () {
             instance.requestPaymentMethod(function (err, payload) {
-              console.log(payload);
+              if (err) {
+                console.error(
+                  'Errore durante la richiesta del metodo di pagamento:',
+                  err
+                );
+                // Gestire l'errore, ad esempio mostrando un messaggio all'utente
+              } else {
+                console.log('Payload del metodo di pagamento:', payload);
+                // Utilizzare il payload per l'elaborazione del pagamento
+
+                // Esegui una chiamata POST per inviare il token al server
+                axios
+                  .post(`http://127.0.0.1:8000/api/orders/makePayment`, {
+                    token: payload.nonce,
+                    product: 3,
+                  })
+                  .then((response) => {
+                    console.log('Risposta dal server:', response.data);
+                    // Gestire la risposta dal server
+                  });
+              }
             });
           });
         }
@@ -64,15 +85,7 @@ export default {
 <template>
   <div class="w-150 container">
     <h1>Pagina pagamento</h1>
-    <div>
-      <!-- <v-braintree
-        :authorization="this.token"
-        locale="it_IT"
-        @success="onSuccess"
-        @error="onError"
-        >
-      </v-braintree> -->
-    </div>
+    <div></div>
     <div id="dropin-container"></div>
     <button id="submit-button" class="button button--small button--green">
       Purchase
@@ -83,39 +96,5 @@ export default {
 <style lang="scss" scoped>
 .w-150 {
   margin-top: 150px;
-}
-
-.button {
-  cursor: pointer;
-  font-weight: 500;
-  left: 3px;
-  line-height: inherit;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 3px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  display: inline-block;
-}
-
-.button--small {
-  padding: 10px 20px;
-  font-size: 0.875rem;
-}
-
-.button--green {
-  outline: none;
-  background-color: #64d18a;
-  border-color: #64d18a;
-  color: white;
-  transition: all 200ms ease;
-}
-
-.button--green:hover {
-  background-color: #8bdda8;
-  color: white;
 }
 </style>
