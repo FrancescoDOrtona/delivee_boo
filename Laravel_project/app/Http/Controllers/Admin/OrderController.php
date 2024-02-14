@@ -21,7 +21,7 @@ class OrderController extends Controller
         // Ottieni gli ordini relativi al ristorante loggato
         $orders = Order::whereHas('products', function ($query) use ($restaurantId) {
             $query->where('restaurant_id', $restaurantId);
-        })->get();
+        })->orderBy('created_at', 'desc')->get();
 
         // Restituisci gli ordini alla vista
         return view('admin.order.index', compact('orders'));
