@@ -22,12 +22,12 @@ class Product extends Model
     // Relazione 1 to many con Restaurant
     public function restaurant()
     {
-        $this->belongsTo(Restaurant::class);
+        return $this->belongsTo(Restaurant::class);
     }
 
     // Relazione many to many con Orders
     public function orders()
     {
-        $this->belongsToMany(Order::class)->withPivot('quantity');
+        return $this->belongsToMany(Order::class)->withPivot('quantity');
     }
 }

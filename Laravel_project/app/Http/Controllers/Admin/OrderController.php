@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -14,9 +15,16 @@ class OrderController extends Controller
      */
     public function index()
     {
-        // $restaurantId = auth()->user()->restaurant->id;
+        // Ottieni l'ID del ristorante loggato
+        $restaurantId = Auth::user()->restaurant->id; // Assumi che restaurant_id sia l'attributo che contiene l'ID del ristorante nell'oggetto User
 
-        $orders = Order::all();
+        // Ottieni gli ordini relativi al ristorante loggato
+        $orders = Order::whereHas('products', function ($query) use ($restaurantId) {
+            $query->where('restaurant_id', $restaurantId);
+        })->get();
+
+        // Restituisci gli ordini alla vista
+        return view('admin.order.index', compact('orders'));
     }
 
     /**
