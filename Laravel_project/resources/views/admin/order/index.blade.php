@@ -18,6 +18,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Phone</th>
+                    <th scope="col">Reception Date</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,7 @@
                     <td>{{ $order->customer_email }}</td>
                     <td>{{ $order->customer_address }}</td>
                     <td>{{ $order->customer_phone }}</td>
+                    <td>{{ $order->created_at}}</td>
                 </tr>                    
                 @endforeach
                 
