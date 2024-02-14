@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ChartController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RestaurantController;
@@ -38,6 +39,7 @@ Route::middleware('auth')
         Route::resource('restaurant', RestaurantController::class);
         Route::resource('product', ProductController::class);
         Route::resource('order', OrderController::class);
+        Route::get('chart', [ChartController::class, 'index'])->name('chart.index');
     });
 
 require __DIR__ . '/auth.php';
