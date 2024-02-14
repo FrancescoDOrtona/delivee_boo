@@ -31,9 +31,9 @@
                         <button type="submit" @click="sendOrder()" class="btn btn-primary">Procedi al pagamento</button>
                     </div>
                 </form>
-                <router-link :to="{ name: Payment}">
+                <!-- <router-link :to="{ name: Payment}">
                  pagamento 
-                </router-link>
+                </router-link> -->
             </div>
             <div class="col-12 col-md-6">
                <ul v-for="c in cart">
@@ -84,7 +84,7 @@ export default {
                     console.log(res.data);
                     
                 }).catch(error => {
-                    console.error(error);
+                    console.log(error);
                 });
         }
     },

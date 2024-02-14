@@ -59,15 +59,20 @@ class OrderController extends Controller
         }
     }
 
-    // return response()->json([
-    //     'success' => true,
-    //     'messaggio' => 'Dati del cliente e del carrello ricevuti e gestiti con successo',
-    //     'total'=> $totalAmount,
-    //     'customer'=> $customer
-       
-    // ]);
+    // Assegniamo il totale alla colonna total_price del DB
+    // $order = new Order();
+    // $order->total_price = $totalAmount;
+    // $order->save();
 
-    return redirect()->route('makePayment.make', ['totalAmount' => $totalAmount,'customer'=> $customer]);
+    // return redirect()->route('makePayment.make', ['totalAmount' => $totalAmount,'customer'=> $customer]);
+    return response()->json([
+        'success' => true,
+        'messaggio' => 'Dati del cliente e del carrello ricevuti e gestiti con successo',
+        'total'=> $totalAmount,
+        'customer'=> $customer
+       
+    ]);
+
     }
 
     /**

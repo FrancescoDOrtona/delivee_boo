@@ -30,11 +30,9 @@ class PaymentController extends Controller
     }
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
-        $totalAmount =  $request->input('totalAmount');
-        $customer =  $request->input('customer');
-
+        
         $result = $gateway->transaction()->sale([
-            'amount' => $totalAmount,
+            'amount' => 0,
             'paymentMethodNonce' => $request->token,
             'options' => [
                 'submitForSettlement' => true
