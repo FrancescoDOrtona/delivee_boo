@@ -14,6 +14,7 @@ class PaymentController extends Controller
 {
     public function generate(Request $request, Gateway $gateway)
     {
+
         $token = $gateway->clientToken()->generate();
 
         $data = [
@@ -29,10 +30,11 @@ class PaymentController extends Controller
     }
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
-        $product = Product::find($request->product);
+        $totalAmount =  $request->input('totalAmount');
+        $customer =  $request->input('customer');
 
         $result = $gateway->transaction()->sale([
-            'amount' => $product->price,
+            'amount' => $totalAmount,
             'paymentMethodNonce' => $request->token,
             'options' => [
                 'submitForSettlement' => true

@@ -95,15 +95,7 @@ export default {
                 return this.cartVisible = true;
             }
         },
-        sendOrder() {
-            const cart = this.products;
-            axios.post(`${this.BASE_URL}/orders`, { cart })
-                .then(res => {
-                    console.log(res.data);
-                }).catch(error => {
-                    console.error(error);
-                });
-        }
+        
     },
     created() {
         this.fetchShow();
@@ -251,7 +243,7 @@ export default {
                             </div>
                             <div class="chart_total">
                                 <h5>Totale: {{ this.totalPrice }} €</h5>
-                                <button @click="sendOrder()" class="btn btn-light btn-main-color ">Vai al pagamento</button>
+                                <router-link :to="{ name: 'checkout' }" class="btn btn-light btn-main-color ">Vai al pagamento</router-link>
                             </div>
                         </template>
                         <template v-else>
