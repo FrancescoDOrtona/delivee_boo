@@ -26,13 +26,13 @@ class OrderSeeder extends Seeder
 
             // Prendo un numero casuale tra gli id dei piatti associati
             $all_products_ids = $current_restaurant->products->pluck('id');
-            $rdm_products_ids = $faker->randomElements($all_products_ids, null);
+            $rdm_products_ids = $faker->randomElements($all_products_ids, $faker->numberBetween(1, count($all_products_ids)));
 
             $new_order = new Order([
-                'customer_name' => $faker->name(),
+                'customer_name' => $faker->firstName(),
                 'customer_last_name' => $faker->lastName(),
                 'customer_email' => $faker->email(),
-                'customer_phone' => '333333333333',
+                'customer_phone' => $faker->e164PhoneNumber(),
                 'customer_address' => $faker->address(),
                 'payment_status' => $faker->boolean(),
                 'total_price' => 0,
@@ -51,13 +51,17 @@ class OrderSeeder extends Seeder
             $new_order->total_price = $total;
             $new_order->save();
 
-            /**
-             * relazione 'ordine-id' - 'piatto-id' - 'quantità'
-             */
-            for ($i = 0; $i < count($rdm_products_ids); $i++) {
-                $currProductId = $rdm_products_ids[$i];
-                $currQuantity = $quantities[$i];
-                $new_order->products()->attach($currProductId, ['quantity' => $currQuantity]);
+            // dd($new_order);
+
+            if ($new_order->save()) {
+                // Esegui attach solo se l'ordine è stato salvato correttamente
+                for ($j = 0; $j < count($rdm_products_ids); $j++) {
+                    $currProductId = $rdm_products_ids[$j];
+                    $currQuantity = $quantities[$j];
+                    $new_order->products()->attach($currProductId, ['quantity' => $currQuantity]);
+                }
+            } else {
+                redirect()->back()->with('error', 'Impossibile completare l\'ordine al momento. Si prega di riprovare più tardi.');
             }
         //    sono tiltato 
         }
