@@ -19,6 +19,7 @@ class Order extends Model
         'total_price',
         'order_code',
         'created_at',
+        'quantity',
     ];
 
     // Relazione many to many con Products

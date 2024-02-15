@@ -4,6 +4,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      orderId: 0,
       btOrders: 'http://127.0.0.1:8000/api/orders',
       token: '',
     };
@@ -63,6 +64,9 @@ export default {
     this.fetchAuth();
     this.displayDropIn();
   },
+  created(){
+      this.orderId = this.$route.params.orderId;
+  }
 };
 
 // var button = document.querySelector('#submit-button');
@@ -91,6 +95,7 @@ export default {
       Purchase
     </button>
   </div>
+  {{ this.orderId }}
 </template>
 
 <style lang="scss" scoped>

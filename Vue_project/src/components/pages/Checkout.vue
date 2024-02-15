@@ -2,7 +2,7 @@
     <div class="container w-150">
         <div class="row">
             <div class="col-12 col-md-6">
-                <form @submit.prevent="submitForm" class="row g-3">
+                <form class="row g-3">
                     <div class="col-md-6">
                         <label for="name" class="form-label">Nome</label>
                         <input type="text" v-model="customer.name" class="form-control" id="name">
@@ -28,12 +28,11 @@
 
 
                     <div class="col-12">
-                        <button type="submit" @click="sendOrder()" class="btn btn-primary">Procedi al pagamento</button>
+                        <router-link :to="{ name: 'payment'}">
+                            <button type="submit" @click="sendOrder(), submitForm()" class="btn btn-primary">Procedi al pagamento</button>
+                        </router-link>
                     </div>
-                </form>
-                <!-- <router-link :to="{ name: Payment}">
-                 pagamento 
-                </router-link> -->
+                </form>               
             </div>
             <div class="col-12 col-md-6">
                <ul v-for="c in cart">
@@ -61,7 +60,7 @@ export default {
                 'phone_number': '',
             },
             cart: [],
-            
+            currentOrderId : 0,
         }
     },
     methods: {
@@ -81,6 +80,8 @@ export default {
                 cart: this.cart
              })
                 .then(res => {
+                    this.currentOrderId = res.data.orderId;
+                    console.log(res.data.orderId, 'questa è la risposta');
                     console.log(res.data);
                     
                 }).catch(error => {
