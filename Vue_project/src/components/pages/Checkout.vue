@@ -1,7 +1,13 @@
 <template>
-    <main>
+    <main class="w-150">
         <div class="bg-img"></div>
-        <div class="container w-150">
+        <div class="container btn-back">
+            <router-link :to="{ name: 'restaurants.show', params: { id: cart[0].restaurant_id } }" class="btn btn-light">
+                <span><i class="fa-solid fa-arrow-left color-main"></i></span>
+                <span>Indietro</span>
+            </router-link>
+        </div>
+        <div class="container ">
             <div class="row flex-md-nowrap gap-2">
                 <div class="col-12 col-md-6 customer-form">
                     <h2 class="border_btm pb-2">Dati di spedizione</h2>
@@ -12,11 +18,13 @@
                         </div>
                         <div class="col-md-6">
                             <label for="last_name" class="form-label fw-bold">Cognome</label>
-                            <input type="text" v-model="customer.last_name" class="form-control" id="last_name" placeholder="Rossi">
+                            <input type="text" v-model="customer.last_name" class="form-control" id="last_name"
+                                placeholder="Rossi">
                         </div>
                         <div class="col-12">
                             <label for="email" class="form-label fw-bold">Email</label>
-                            <input type="email" v-model="customer.email" class="form-control" id="email" placeholder="mario.rossi@deliveboo.it">
+                            <input type="email" v-model="customer.email" class="form-control" id="email"
+                                placeholder="mario.rossi@deliveboo.it">
                         </div>
                         <div class="col-12">
                             <label for="address" class="form-label fw-bold">Indirizzo</label>
@@ -32,8 +40,8 @@
 
                         <div class="col-12">
                             <!-- Button trigger modal -->
-                            <button @click="sendOrder()" type="submit" class="btn btn-light btn-form fw-bold" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                            <button @click="sendOrder()" type="submit" class="btn btn-light btn-form fw-bold"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Procedi al pagamento
                             </button>
                         </div>
@@ -44,9 +52,9 @@
                     <h2 class="border_btm pb-2">Riepilogo Ordine</h2>
                     <div class="summary_list_container">
                         <ul class="border_btm summary_list" v-for="c in cart">
-                            <li>{{ c.name }}</li>
-                            <li>{{ c.price }} €</li>
-                            <li>x{{ c.quantity }}</li>
+                            <li class="col-6">{{ c.name }}</li>
+                            <li class="col-3">{{ c.price }} €</li>
+                            <li class="col-3 col_quantity">x{{ c.quantity }}</li>
                         </ul>
                     </div>
                     <h4 class="border_top pt-2">Totale: {{ this.currentTotal }}</h4>
@@ -205,7 +213,7 @@ export default {
             this.cart = JSON.parse(cartData);
             console.log(this.cart);
         }
-        if (priceData){
+        if (priceData) {
             this.currentTotal = JSON.parse(priceData);
         }
     },
@@ -222,6 +230,7 @@ export default {
 
 <style lang="scss" scoped>
 @import url(../../../style/partials/_variables.scss);
+
 .bg-img {
     width: 100%;
     height: 100%;
@@ -232,12 +241,13 @@ export default {
 }
 
 .w-150 {
-    margin-top: 150px;
+    margin-top: 130px;
 }
 
 /* RIEPILOGO ORDINE */
 
 .summary {
+    height: 477.39px;
     padding: 20px;
     border: 1px solid gray;
     border-radius: 10px;
@@ -249,7 +259,7 @@ export default {
     flex-direction: column;
 }
 
-.summary_list{
+.summary_list {
     display: flex;
     margin: 0;
     padding: 15px 0px;
@@ -257,12 +267,35 @@ export default {
     font-weight: 600;
 }
 
-.summary_list_container{
+.summary_list_container {
     flex-grow: 1;
-    overflow: hidden;
+    overflow: auto;
 }
 
-.customer-form{
+/* Personalizza la scrollbar per i browser WebKit */
+.summary_list_container::-webkit-scrollbar {
+    width: 10px;
+    /* Larghezza della scrollbar */
+}
+
+.summary_list_container::-webkit-scrollbar-track {
+    background: transparent;
+    /* Colore dello sfondo della traccia */
+}
+
+.summary_list_container::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Colore del pulsante */
+    border-radius: 5px;
+    /* Bordo arrotondato */
+}
+
+.summary_list_container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Cambia il colore al passaggio del mouse */
+}
+
+.customer-form {
     padding: 20px;
     border: 1px solid gray;
     border-radius: 10px;
@@ -323,20 +356,44 @@ export default {
     color: white;
 }
 
-.btn-form{
+.btn-form {
     background-color: #01ccbc;
     border: none;
-    &:hover{
+
+    &:hover {
         background-color: #05ddcb;
     }
 }
 
-.border_btm{
+.color-main {
+    color: #05ddcb;
+}
+
+.btn-back {
+    a {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        border: 1px solid lightgray;
+    }
+
+    display: flex;
+    justify-content: flex-start;
+    padding: 12px 0px;
+}
+
+.border_btm {
     border-bottom: 0.5px solid rgba(150, 150, 150, 0.5);
 }
 
-.border_top{
+.border_top {
     border-top: 0.5px solid rgba(150, 150, 150, 0.5);
+}
+
+.col_quantity{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
 }
 
 /* LOADER */
