@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Orders\OrderRequest;
+use App\Models\Order;
 use App\Models\Product;
 use Braintree\Gateway;
 use Illuminate\Http\Request;
@@ -30,10 +31,12 @@ class PaymentController extends Controller
     }
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
-        $total_price = 
+        $current_order = Order::where('id', $request->orderId)->get();
         
+        dd($current_order);
+
         $result = $gateway->transaction()->sale([
-            'amount' => 0,
+            'amount' => $current_order->total_price,
             'paymentMethodNonce' => $request->token,
             'options' => [
                 'submitForSettlement' => true
@@ -45,6 +48,8 @@ class PaymentController extends Controller
                 'success' => true,
                 'message' => 'Transazione eseguita con Successo!'
             ];
+
+            // $current_order['order_status']
 
             return response()->json($data, 200);
         } else {

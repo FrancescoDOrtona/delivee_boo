@@ -47,7 +47,7 @@ export default {
                 axios
                   .post(`http://127.0.0.1:8000/api/orders/makePayment`, {
                     token: payload.nonce,
-                    product: 3,
+                    orderId: 10,
                   })
                   .then((response) => {
                     console.log('Risposta dal server:', response.data);
@@ -65,7 +65,7 @@ export default {
     this.displayDropIn();
   },
   created(){
-      this.orderId = this.$route.params.orderId;
+    this.orderId = +this.$route.params.orderId;
   }
 };
 
