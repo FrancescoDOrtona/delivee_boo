@@ -31,12 +31,10 @@ class PaymentController extends Controller
     }
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
-        $current_order = Order::where('id', $request->orderId)->get();
+        $current_order = Order::where('id', $request->orderId)->first();
         
-        dd($current_order);
-
         $result = $gateway->transaction()->sale([
-            'amount' => $current_order->total_price,
+            'amount' => $current_order['total_price'],
             'paymentMethodNonce' => $request->token,
             'options' => [
                 'submitForSettlement' => true
@@ -46,14 +44,14 @@ class PaymentController extends Controller
         if ($result->success) {
 
             // Aggiorna il campo payment_status a true
+            // $current_order->update(['payment_status' => true]);
             Order::where('id', $request->orderId)->update(['payment_status' => true]);
 
             $data = [
+                'status' => $current_order['payment_status'],
                 'success' => true,
                 'message' => 'Transazione eseguita con Successo!'
             ];
-
-            // $current_order['order_status']
 
             return response()->json($data, 200);
         } else {
