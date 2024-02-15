@@ -30,6 +30,7 @@ class PaymentController extends Controller
     }
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
+        $total_price = 
         
         $result = $gateway->transaction()->sale([
             'amount' => 0,

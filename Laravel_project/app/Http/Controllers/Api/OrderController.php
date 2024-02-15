@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 use App\Models\Product;
+use Faker\Generator as Faker;
 
 class OrderController extends Controller
 {
@@ -29,16 +30,18 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOrderRequest $request)
+    public function store(StoreOrderRequest $request,  Faker $faker)
     {
     
     // Esegui la logica per gestire i dati del cliente e del carrello
     // Estrai i dati JSON dal corpo della richiesta
     $requestData = $request->json()->all();
-
+        // dd($requestData);
     // Estrai il cliente e il carrello dai dati della richiesta
     $customer = $requestData['customer'];
     $cart = $requestData['cart'];
+
+    
 
     //recuperiamo gli ids dei prodotti dal carrello
     $productIds = [];
@@ -60,16 +63,43 @@ class OrderController extends Controller
     }
 
     // Assegniamo il totale alla colonna total_price del DB
-    // $order = new Order();
-    // $order->total_price = $totalAmount;
-    // $order->save();
+    $order = new Order();
+    $order->customer_name = $customer['name'];
+    $order->customer_last_name = $customer['last_name'];
+    $order->customer_email = $customer['email'];
+    $order->customer_phone = $customer['phone_number'];
+    $order->customer_address = $customer['address'];
+    $order->payment_status = false;
+    $order->order_code =  $faker->unique()->bothify('??##########');
+    $order->total_price = $totalAmount;
+    $order->save();
+
+    if ($order->save()) {
+        // Esegui attach solo se l'ordine è stato salvato correttamente
+        foreach ($productIds as $productId) {
+            $current_quantity = 0;
+            foreach ($cart as $item) {
+                if ($item['product_id'] == $productId) {
+                    $current_quantity = $item['quantity'];
+                    break; // Esci dal loop una volta trovato il prodotto nel carrello
+                }
+            }
+            $order->products()->attach($productId, ['quantity' => $current_quantity]);
+        }
+    } else {
+        return response()->json([
+            'success' => false,
+            'messaggio' => 'Impossibile completare l\'ordine al momento. Si prega di riprovare più tardi.',
+        ]);
+    }
 
     // return redirect()->route('makePayment.make', ['totalAmount' => $totalAmount,'customer'=> $customer]);
     return response()->json([
         'success' => true,
         'messaggio' => 'Dati del cliente e del carrello ricevuti e gestiti con successo',
         'total'=> $totalAmount,
-        'customer'=> $customer
+        'customer'=> $customer,
+        'cart' => $cart, 
        
     ]);
 
