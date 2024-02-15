@@ -44,8 +44,7 @@ export default {
                 // Utilizzare il payload per l'elaborazione del pagamento
 
                 // Esegui una chiamata POST per inviare il token al server
-                axios
-                  .post(`http://127.0.0.1:8000/api/orders/makePayment`, {
+                axios.post(`http://127.0.0.1:8000/api/orders/makePayment`, {
                     token: payload.nonce,
                     orderId: 10,
                   })
