@@ -44,6 +44,10 @@ class PaymentController extends Controller
         ]);
 
         if ($result->success) {
+
+            // Aggiorna il campo payment_status a true
+            Order::where('id', $request->orderId)->update(['payment_status' => true]);
+
             $data = [
                 'success' => true,
                 'message' => 'Transazione eseguita con Successo!'
