@@ -3,39 +3,42 @@
         <div class="container container-custom-2">
             <div class="grid">
                 <ul class=" py-2 px-3">
-                    <li class="fs-5"><strong>Scopri Deliveboo</strong></li>
-                    <li><a href="">Chi siamo</a></li>
-                    <li><a href="">Ristoranti</a></li>
-                    <li><a href="">Lavora con noi</a></li>
+                    <li class="fs-6"><strong>Scopri Deliveboo</strong></li>
+                    <li><a href=""><small>Chi siamo</small></a></li>
+                    <li><a href=""><small>Ristoranti</small></a></li>
+                    <li><a href=""><small>Lavora con noi</small></a></li>
+                    <li><a href=""><small>Le nostri sedi</small></a></li>
+                    <li><a href=""><small>Programma fedeltà</small></a></li>
                 </ul>
                 <ul class=" py-2 px-3">
-                    <li class="fs-5"><strong>Note legali</strong></li>
-                    <li><a href="">Termini & Condizioni</a></li>
-                    <li><a href="">Informativa sulla privacy</a></li>
-                    <li><a href="">Cookies</a></li>
+                    <li class="fs-6"><strong>Note legali</strong></li>
+                    <li><a href=""><small>Termini & Condizioni</small></a></li>
+                    <li><a href=""><small>Informativa sulla privacy</small></a></li>
+                    <li><a href=""><small>Cookies</small></a></li>
                 </ul>
                 <ul class=" py-2 px-3">
-                    <li class="fs-5"><strong>Aiuto</strong></li>
-                    <li><a href="">Contatti</a></li>
-                    <li><a href="">FAQ</a></li>
-                    <li><a href="">Tipi di cucina</a></li>
+                    <li class="fs-6"><strong>Aiuto</strong></li>
+                    <li><a href=""><small>Contatti</small></a></li>
+                    <li><a href=""><small>FAQ</small></a></li>
+                    <li><a href=""><small>Tipi di cucina</small></a></li>
+                    <li><a href=""><small>Partners</small></a></li>
                 </ul>
                 <ul class="py-2 px-3">
-                    <li class="fs-5 pb-2"><strong>Scarica Deliveboo sul tuo smartphone</strong></li>
+                    <li class="fs-6 pb-2"><strong>Scarica Deliveboo sul tuo smartphone</strong></li>
                     <div class="download">
                         <img class="footer_download" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Download_on_the_App_Store_Badge_IT_RGB_blk.svg/2560px-Download_on_the_App_Store_Badge_IT_RGB_blk.svg.png" alt="">
                         <img class="footer_download h-43" src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Play_Store_badge_IT.svg" alt="">
                     </div>
                 </ul>
             </div>
-            <div class="row justify-content-between">
+            <div class="row justify-content-between mt-1">
                 <div class="col-2 d-flex gap-3">
-                    <a href=""><i class="fa-brands fa-facebook fs-5"></i></a>
-                    <a href=""><i class="fa-brands fa-instagram fs-5"></i></a>
-                    <a href=""><i class="fa-brands fa-x-twitter fs-5"></i></a>
+                    <a href=""><i class="fa-brands fa-facebook fs-6"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram fs-6"></i></a>
+                    <a href=""><i class="fa-brands fa-x-twitter fs-6"></i></a>
                 </div>
                 <div class='col-5 col-sm-2'>
-                    <p>© 2024 Deliveboo</p>
+                    <small>© 2024 Deliveboo</small>
                 </div>
             </div>
         </div>
@@ -53,7 +56,7 @@
 @import "../../style/partials/variables";
 
 footer{
-    padding: 20px;
+    padding: 12px;
     color: white;
     background-color: $dark-gray-footer;
 }
@@ -61,6 +64,10 @@ footer{
 a {
   text-decoration: none;
   color: currentColor;
+}
+
+ul{
+    margin: 0;
 }
 .grid {
     display: grid;
@@ -94,7 +101,7 @@ a {
  }
 
 .footer_download{
-    width: 130px;
+    width: 110px;
 }
 
 .download{
