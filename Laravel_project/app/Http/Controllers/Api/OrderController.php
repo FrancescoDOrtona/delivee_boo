@@ -69,7 +69,6 @@ class OrderController extends Controller
     $order->customer_email = $customer['email'];
     $order->customer_phone = $customer['phone_number'];
     $order->customer_address = $customer['address'];
-    $order->payment_status = false;
     $order->order_code =  $faker->unique()->bothify('??##########');
     $order->total_price = $totalAmount;
     $order->save();
