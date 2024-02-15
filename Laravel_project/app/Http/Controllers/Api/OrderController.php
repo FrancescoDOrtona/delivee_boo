@@ -99,7 +99,8 @@ class OrderController extends Controller
         'messaggio' => 'Dati del cliente e del carrello ricevuti e gestiti con successo',
         'total'=> $totalAmount,
         'customer'=> $customer,
-        'cart' => $cart, 
+        'cart' => $cart,
+        'orderId' => $order->id,
        
     ]);
 
