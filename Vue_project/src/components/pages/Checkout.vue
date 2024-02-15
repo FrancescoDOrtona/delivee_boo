@@ -265,6 +265,9 @@ export default {
     padding: 15px 0px;
     justify-content: space-between;
     font-weight: 600;
+    &:last-child{
+        border: none;
+    }
 }
 
 .summary_list_container {

@@ -122,13 +122,15 @@ export default {
 </form>
 
   <!-- side-bar -->
+  <div class="bg-image">
 
+  </div>
   <div class="container-fluid mt-100 ">
     <div class="d-flex ">
 
       <div class="side-bar d-none d-md-block">
         <ul class="p-0">
-          <li class="bottom-line">Milano</li>
+          <li class="bottom-line fs-4">Milano</li>
          
           <!-- search bar  -->
           <li class="bottom-line">
@@ -138,11 +140,11 @@ export default {
             <ul class="bottom-line">
               <li class="pb-3 fw-light d-flex">
                 <input type="radio" name="option1" id="consegna" />
-                <label for="consegna">Consegna</label>
+                <label class="input_label" for="consegna">Consegna</label>
               </li>
               <li class="fw-light d-flex">
                 <input type="radio" name="option1" id="Ritiro" />
-                <label for="Ritiro">Ritiro</label>
+                <label class="input_label" for="Ritiro">Ritiro</label>
               </li>
             </ul>
           </li>
@@ -186,19 +188,19 @@ export default {
                     <ul class="fw-light">
                       <li class="pb-3 d-flex">
                         <input type="radio" value="consegna" id="consegna" name="option2" />
-                        <label for="consegna">Consegna più rapida</label>
+                        <label class="input_label" for="consegna">Consegna più rapida</label>
                       </li>
                       <li class="pb-3 d-flex">
                         <input type="radio" id="consigliati" name="option2" value="consigliati" />
-                        <label for="consigliati">Consigliati</label>
+                        <label class="input_label" for="consigliati">Consigliati</label>
                       </li>
                       <li class="pb-3 d-flex">
                         <input type="radio" id="distanza" name="option2" value="distanza" />
-                        <label for="distanza">Distanza</label>
+                        <label class="input_label" for="distanza">Distanza</label>
                       </li>
                       <li class="pb-3 d-flex">
                         <input type="radio" name="option2" id="votati" value="votati" />
-                        <label for="votati">I più votati</label>
+                        <label class="input_label" for="votati">I più votati</label>
                       </li>
                     </ul>
                   </div>
@@ -218,7 +220,7 @@ export default {
                     <ul class="fw-light">
                       <li class="d-flex">
                         <input type="checkbox" class="me-1" id="accetta-contanti" value="accetta-contanti" name="option3" />
-                        <label for="accetta-contanti">Accetta contanti</label>
+                        <label class="input_label" for="accetta-contanti">Accetta contanti</label>
                       </li>
                     </ul>
                   </div>
@@ -238,11 +240,11 @@ export default {
                     <ul class="fw-light">
                       <li class="pb-3 d-flex">
                         <input type="checkbox" class="me-1" value="senza-glutine" name="option4" id="senza-glutine" />
-                        <label for="">Senza Glutine</label>
+                        <label class="input_label" for="">Senza Glutine</label>
                       </li>
                       <li class="pb-3 d-flex">
                         <input type="checkbox" class="me-1" name="option4" value="vegetariano" id="vegetariano" />
-                        <label for="vegetariano">Vegetariano</label>
+                        <label class="input_label" for="vegetariano">Vegetariano</label>
                       </li>
                     </ul>
                   </div>
@@ -262,7 +264,7 @@ export default {
                     <ul class="fw-light">
                       <li class="d-flex">
                         <input type="radio" name="option5" value="ticket-restaurant" id="ticket-restaurant" />
-                        <label for="ticket-restaurant">Ticket Restaurant</label>
+                        <label class="input_label" for="ticket-restaurant">Ticket Restaurant</label>
                       </li>
                     </ul>
                   </div>
@@ -321,6 +323,15 @@ export default {
 
 @import '../../../../style/partials/variables.scss';
 
+.bg-image{
+  width: 100%;
+    height: 100%;
+    background-image: url(../../../public/wave-haikei-3.svg);
+    top: 0;
+    position: absolute;
+    z-index: -10;
+}
+
 * {
   color: $text-gray !important;
 }
@@ -368,7 +379,7 @@ li {
 }
 
 .accordion-button {
-  background-color: $page-body-light !important;
+  background-color: transparent !important;
   border-color: $page-body-light !important;
   box-shadow: none !important;
   padding: 5px 0px !important;
@@ -532,6 +543,8 @@ input[type='radio'] {
 
 .input_label {
   text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 500;
 }
 .btn_done{
   background-color: $main-brand-color;

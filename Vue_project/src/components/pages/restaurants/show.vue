@@ -137,7 +137,8 @@ export default {
 </script>
 
 <template>
-    <div class="container-fluid page-top-margin">
+    <div class="bg-image"></div>
+    <div class="container-fluid page-top-margin border_btm">
         <div class="row">
             <div class="mb-3">
                 <router-link :to="{ name: 'restaurants.index' }" class="btn btn-light router-link">
@@ -167,12 +168,14 @@ export default {
                         <span><i class="fa-solid fa-person-biking"></i></span>
                         <h5>Consegna in 25-30 minuti</h5>
                     </div>
-                    <button class="btn btn-light head_button">Avvia ordine di Gruppo</button>
+                    <button class="btn btn-light head_button">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Avvia ordine di Gruppo</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    <hr class="hr-shadow">
 
     <div class="body-products">
         <div class="container-fluid ">
@@ -272,6 +275,15 @@ export default {
 @import "../../../../style/partials/variables.scss";
 @import "../../../../style/partials/mixins.scss";
 
+.bg-image{
+    width: 100%;
+    height: 100%;
+    background-image: url(../../../public/wave-haikei-4.svg);
+    top: 0;
+    position: absolute;
+    z-index: -10;
+}
+
 
 .active {
     border: 1px solid green;
@@ -318,8 +330,13 @@ p {
 }
 
 .head_button {
-    color: $main-brand-color;
     border: 1px solid lightgray;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    i{
+        color: $main-brand-color;
+    }
 }
 
 .grid {
@@ -328,32 +345,20 @@ p {
     gap: 20px;
 }
 
-.body-products {
-    background-color: #f9fafa;
-}
-
 
 .col-9 {
     display: flex;
     justify-content: start;
 }
 
-.hr-shadow {
-    box-shadow: 2px 4px 10px 2px #767676;
-}
 
 .brand-color {
     color: $main-brand-color;
 }
 
 .router-link {
-    color: $main-brand-color;
     text-decoration: none;
     border: 1px solid lightgray;
-
-    &:hover {
-        color: $main-brand-color;
-    }
 
     i {
         margin-right: 10px;
@@ -494,6 +499,15 @@ p {
 .cart-empty {
     text-align: center;
 
+}
+
+.border_btm{
+    border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+    padding-bottom: 20px;
+}
+
+.body-products{
+    padding-top: 20px;
 }
 
 
