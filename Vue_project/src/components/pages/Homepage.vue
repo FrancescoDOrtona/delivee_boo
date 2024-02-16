@@ -22,6 +22,7 @@ export default {
       store,
       isLoading: true,
       BASE_URL: 'http://127.0.0.1:8000/api',
+      successMessage: ''
     };
   },
   methods: {
@@ -44,6 +45,7 @@ export default {
       // Dopo il ritardo, imposta isLoading su false per nascondere il loader
       this.isLoading = false;
     }, 2000);
+    
   },
 };
 </script>

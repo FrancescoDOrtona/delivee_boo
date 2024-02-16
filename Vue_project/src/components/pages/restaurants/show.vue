@@ -279,6 +279,9 @@ export default {
     width: 100%;
     height: 100%;
     background-image: url(../../../public/wave-haikei-4.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    right: 0;
     top: 0;
     position: absolute;
     z-index: -10;

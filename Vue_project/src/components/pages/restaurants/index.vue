@@ -327,7 +327,10 @@ export default {
   width: 100%;
     height: 100%;
     background-image: url(../../../public/wave-haikei-3.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
     top: 0;
+    right: 0;
     position: absolute;
     z-index: -10;
 }

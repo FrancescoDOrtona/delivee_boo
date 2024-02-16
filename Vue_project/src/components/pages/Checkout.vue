@@ -74,6 +74,11 @@
                         <div class="modal-body">
                             <div></div>
                             <div id="dropin-container"></div>
+                            <!-- Messaggio di successo o di errore -->
+                            <div v-if="paymentStatus !== null" class="alert mt-2"
+                                :class="{ 'alert-success': paymentStatus, 'alert-danger': !paymentStatus }">
+                                {{ paymentStatus ? 'Pagamento completato con successo!' : 'Errore durante il pagamento.' }}
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="button button--small button--gray"
@@ -113,7 +118,8 @@ export default {
             currentOrderId: 0,
             currentTotal: 0,
             token: '',
-            isLoading: false
+            isLoading: false,
+            paymentStatus: null
         }
     },
     methods: {
@@ -181,18 +187,25 @@ export default {
                                         if (response.data.success == true) {
                                             // Mostra il loader
                                             self.isLoading = true;
-                                            // Nasconde il loader dopo 1.5 sec
+
+                                            // Timeout per nascondere il loader dopo 3 secondi
                                             setTimeout(() => {
+                                                self.isLoading = false;
+
+                                                // Timeout per impostare il pagamento su successo dopo altri 1 secondo
                                                 setTimeout(() => {
-                                                    self.isLoading = false;
-                                                }, 2500);
-                                                // Esegui il redirect dopo 2 secondi
+                                                    self.paymentStatus = true;
+                                                }, 1000);
+                                            }, 3000);
+
+                                            // Esegui il redirect dopo 6 secondi
+                                            setTimeout(() => {
                                                 self.$router.push({ name: 'home' })
                                                     .then(() => {
                                                         // Dopo il redirect, esegui il reload della pagina
                                                         window.location.reload();
                                                     });
-                                            }, 3000);
+                                            }, 6000);
                                         } else {
                                             // Imposta il pagamento su errore
                                             self.paymentStatus = false;
@@ -235,7 +248,10 @@ export default {
     width: 100%;
     height: 100%;
     background-image: url(../../../public/wave-haikei-2.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
     top: 0;
+    right: 0;
     position: absolute;
     z-index: -10;
 }
@@ -265,7 +281,8 @@ export default {
     padding: 15px 0px;
     justify-content: space-between;
     font-weight: 600;
-    &:last-child{
+
+    &:last-child {
         border: none;
     }
 }
@@ -393,7 +410,7 @@ export default {
     border-top: 0.5px solid rgba(150, 150, 150, 0.5);
 }
 
-.col_quantity{
+.col_quantity {
     display: flex;
     justify-content: flex-end;
     padding-right: 20px;
@@ -465,4 +482,5 @@ export default {
     100% {
         transform: rotateY(3600deg);
     }
-}</style>
+}
+</style>
