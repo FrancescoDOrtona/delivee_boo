@@ -315,7 +315,7 @@ p {
     gap: 10px;
 
     i {
-        color: lightgray;
+        color: gray;
     }
 }
 
