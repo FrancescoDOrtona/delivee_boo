@@ -460,6 +460,7 @@ input[type='radio'] {
 
   .image_badge {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     position: absolute;
     z-index: 10;
