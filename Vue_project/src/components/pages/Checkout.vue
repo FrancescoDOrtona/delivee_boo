@@ -380,7 +380,9 @@ export default {
         // Display an error message
         this.$refs[
           `${inputName}ConfirmMessage`
-        ].innerHTML = `Per favore inserisci il ${formattedName}!`;
+        ].innerHTML = `Per favore inserisci ${
+          inputName == 'email' || inputName == 'indirizzo' ? "l'" : 'il'
+        } ${formattedName}!`;
         // Add a class to style the error
         this.$refs[inputName].classList.add('confirm-error');
         // Disable submit button
