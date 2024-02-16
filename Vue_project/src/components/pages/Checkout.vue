@@ -70,77 +70,6 @@
                 placeholder="320 6745938"
               />
             </div>
-  <main class="w-150">
-    <div class="bg-img"></div>
-    <div class="container btn-back">
-      <router-link
-        :to="{
-          name: 'restaurants.show',
-          params: { id: cart[0].restaurant_id },
-        }"
-        class="btn btn-light"
-      >
-        <span><i class="fa-solid fa-arrow-left color-main"></i></span>
-        <span>Indietro</span>
-      </router-link>
-    </div>
-    <div class="container">
-      <div class="row flex-md-nowrap gap-2">
-        <div class="col-12 col-md-6 customer-form">
-          <h2 class="border_btm pb-2">Dati di spedizione</h2>
-          <form @submit.prevent="submitForm" class="row g-3">
-            <div class="col-md-6">
-              <label for="name" class="form-label fw-bold">Nome</label>
-              <input
-                type="text"
-                v-model="customer.name"
-                class="form-control"
-                id="name"
-                placeholder="Mario"
-              />
-            </div>
-            <div class="col-md-6">
-              <label for="last_name" class="form-label fw-bold">Cognome</label>
-              <input
-                type="text"
-                v-model="customer.last_name"
-                class="form-control"
-                id="last_name"
-                placeholder="Rossi"
-              />
-            </div>
-            <div class="col-12">
-              <label for="email" class="form-label fw-bold">Email</label>
-              <input
-                type="email"
-                v-model="customer.email"
-                class="form-control"
-                id="email"
-                placeholder="mario.rossi@deliveboo.it"
-              />
-            </div>
-            <div class="col-12">
-              <label for="address" class="form-label fw-bold">Indirizzo</label>
-              <input
-                type="text"
-                v-model="customer.address"
-                class="form-control"
-                id="address"
-                placeholder="Viale Cappuccini 87"
-              />
-            </div>
-            <div class="col-12">
-              <label for="phone_number" class="form-label fw-bold"
-                >Numero di telefono</label
-              >
-              <input
-                type="text"
-                v-model="customer.phone_number"
-                class="form-control"
-                id="phone_number"
-                placeholder="320 6745938"
-              />
-            </div>
 
             <div class="col-12">
               <!-- Button trigger modal -->
@@ -177,6 +106,7 @@
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
         ref="exampleModal"
+        data-bs-backdrop="static"
       >
         <div class="modal-dialog">
           <div class="modal-content">
@@ -185,11 +115,11 @@
                 Completa l'acquisto e termina il tuo ordine.
               </h1>
               <!-- <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button> -->
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button> -->
             </div>
             <div class="modal-body">
               <div></div>
@@ -292,57 +222,6 @@ export default {
           console.log('Authorization Key not found!', error.response);
         });
     },
-  data() {
-    return {
-      BASE_URL: 'http://127.0.0.1:8000/api',
-      btOrders: 'http://127.0.0.1:8000/api/orders',
-      customer: {
-        name: '',
-        last_name: '',
-        email: '',
-        address: '',
-        phone_number: '',
-      },
-      cart: [],
-      currentOrderId: 0,
-      currentTotal: 0,
-      token: '',
-      isLoading: false,
-      paymentStatus: null,
-    };
-  },
-  methods: {
-    closeModal() {
-      // Chiudi il modal utilizzando il riferimento
-      var modal = document.getElementById('exampleModal');
-      modal.classList.remove('show');
-    },
-    openModal() {
-      this.$refs.exampleModal.classList.add('show');
-    },
-    sendOrder() {
-      axios
-        .post(`${this.BASE_URL}/orders`, {
-          customer: this.customer,
-          cart: this.cart,
-        })
-        .then((res) => {
-          this.currentOrderId = res.data.orderId;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    fetchAuth() {
-      axios
-        .get(`${this.btOrders}/generate`)
-        .then((res) => {
-          this.token = res.data.data.token;
-        })
-        .catch((error) => {
-          console.log('Authorization Key not found!', error.response);
-        });
-    },
 
     displayDropIn() {
       var closeButton = document.querySelector('#close-button');
@@ -351,7 +230,7 @@ export default {
 
       braintree.dropin.create(
         {
-          authorization: 'sandbox_x6h8xpjh_q547bdcc9wvr47w2',
+          authorization: 'sandbox_bnfr9j56_q547bdcc9wvr47w2',
           selector: '#dropin-container',
         },
         (err, instance) => {
@@ -430,43 +309,6 @@ export default {
     this.displayDropIn();
   },
 };
-                      // Esegui il redirect dopo 6 secondi
-                      setTimeout(() => {
-                        self.$router.push({ name: 'home' }).then(() => {
-                          // Dopo il redirect, esegui il reload della pagina
-                          window.location.reload();
-                        });
-                      }, 6000);
-                    } else {
-                      // Imposta il pagamento su errore
-                      self.paymentStatus = false;
-                    }
-                  });
-              }
-            });
-          });
-        }
-      );
-    },
-  },
-  created() {
-    // Leggi i dati del carrello dal localStorage all'avvio del componente
-    const cartData = localStorage.getItem('cart');
-    const priceData = localStorage.getItem('price');
-    if (cartData) {
-      this.cart = JSON.parse(cartData);
-      console.log(this.cart);
-    }
-    if (priceData) {
-      this.currentTotal = JSON.parse(priceData);
-    }
-  },
-  computed() {},
-  mounted() {
-    this.fetchAuth();
-    this.displayDropIn();
-  },
-};
 </script>
 
 <style lang="scss" scoped>
@@ -482,35 +324,15 @@ export default {
   right: 0;
   position: absolute;
   z-index: -10;
-  width: 100%;
-  height: 100%;
-  background-image: url(../../../public/wave-haikei-2.svg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  top: 0;
-  right: 0;
-  position: absolute;
-  z-index: -10;
 }
 
 .w-150 {
-  margin-top: 130px;
   margin-top: 130px;
 }
 
 /* RIEPILOGO ORDINE */
 
 .summary {
-  height: 477.39px;
-  padding: 20px;
-  border: 1px solid gray;
-  border-radius: 10px;
-  background: rgba(134, 134, 134, 0.5);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(134, 134, 134, 0.25);
-  display: flex;
-  flex-direction: column;
   height: 477.39px;
   padding: 20px;
   border: 1px solid gray;
@@ -529,15 +351,7 @@ export default {
   padding: 15px 0px;
   justify-content: space-between;
   font-weight: 600;
-  display: flex;
-  margin: 0;
-  padding: 15px 0px;
-  justify-content: space-between;
-  font-weight: 600;
 
-  &:last-child {
-    border: none;
-  }
   &:last-child {
     border: none;
   }
@@ -546,21 +360,15 @@ export default {
 .summary_list_container {
   flex-grow: 1;
   overflow: auto;
-  flex-grow: 1;
-  overflow: auto;
 }
 
 /* Personalizza la scrollbar per i browser WebKit */
 .summary_list_container::-webkit-scrollbar {
   width: 10px;
   /* Larghezza della scrollbar */
-  width: 10px;
-  /* Larghezza della scrollbar */
 }
 
 .summary_list_container::-webkit-scrollbar-track {
-  background: transparent;
-  /* Colore dello sfondo della traccia */
   background: transparent;
   /* Colore dello sfondo della traccia */
 }
@@ -570,15 +378,9 @@ export default {
   /* Colore del pulsante */
   border-radius: 5px;
   /* Bordo arrotondato */
-  background: #888;
-  /* Colore del pulsante */
-  border-radius: 5px;
-  /* Bordo arrotondato */
 }
 
 .summary_list_container::-webkit-scrollbar-thumb:hover {
-  background: #555;
-  /* Cambia il colore al passaggio del mouse */
   background: #555;
   /* Cambia il colore al passaggio del mouse */
 }
@@ -591,19 +393,9 @@ export default {
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(134, 134, 134, 0.25);
-  padding: 20px;
-  border: 1px solid gray;
-  border-radius: 10px;
-  background: rgba(134, 134, 134, 0.5);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(134, 134, 134, 0.25);
 }
 
 .show {
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
   display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -621,22 +413,9 @@ export default {
   border-width: 1px;
   border-radius: 3px;
   display: inline-block;
-  cursor: pointer;
-  font-weight: 500;
-  left: 3px;
-  line-height: inherit;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 3px;
-  display: inline-block;
 }
 
 .button--small {
-  padding: 10px 20px;
-  font-size: 0.875rem;
   padding: 10px 20px;
   font-size: 0.875rem;
 }
@@ -647,16 +426,9 @@ export default {
   border-color: #64d18a;
   color: white;
   transition: all 200ms ease;
-  outline: none;
-  background-color: #64d18a;
-  border-color: #64d18a;
-  color: white;
-  transition: all 200ms ease;
 }
 
 .button--green:hover {
-  background-color: #8bdda8;
-  color: white;
   background-color: #8bdda8;
   color: white;
 }
@@ -667,16 +439,9 @@ export default {
   border-color: #949695;
   color: white;
   transition: all 200ms ease;
-  outline: none;
-  background-color: #949695;
-  border-color: #949695;
-  color: white;
-  transition: all 200ms ease;
 }
 
 .button--gray:hover {
-  background-color: #838383;
-  color: white;
   background-color: #838383;
   color: white;
 }
@@ -684,19 +449,13 @@ export default {
 .btn-form {
   background-color: #01ccbc;
   border: none;
-  background-color: #01ccbc;
-  border: none;
 
-  &:hover {
-    background-color: #05ddcb;
-  }
   &:hover {
     background-color: #05ddcb;
   }
 }
 
 .color-main {
-  color: #05ddcb;
   color: #05ddcb;
 }
 
@@ -707,16 +466,7 @@ export default {
     align-items: center;
     border: 1px solid lightgray;
   }
-  a {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    border: 1px solid lightgray;
-  }
 
-  display: flex;
-  justify-content: flex-start;
-  padding: 12px 0px;
   display: flex;
   justify-content: flex-start;
   padding: 12px 0px;
@@ -724,18 +474,13 @@ export default {
 
 .border_btm {
   border-bottom: 0.5px solid rgba(150, 150, 150, 0.5);
-  border-bottom: 0.5px solid rgba(150, 150, 150, 0.5);
 }
 
 .border_top {
   border-top: 0.5px solid rgba(150, 150, 150, 0.5);
-  border-top: 0.5px solid rgba(150, 150, 150, 0.5);
 }
 
 .col_quantity {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 20px;
   display: flex;
   justify-content: flex-end;
   padding-right: 20px;
@@ -748,14 +493,7 @@ export default {
   backdrop-filter: blur(30px);
   border: 1px solid rgba(61, 254, 214, 0.25);
   position: relative;
-  background: rgba(61, 254, 214, 0.4);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(61, 254, 214, 0.25);
-  position: relative;
 
-  .modal-header {
-    border: none;
-  }
   .modal-header {
     border: none;
     justify-content: center;
@@ -764,17 +502,9 @@ export default {
   .modal-footer {
     border: none;
   }
-  .modal-footer {
-    border: none;
-  }
 }
 
 .loading {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 99999;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -802,21 +532,6 @@ export default {
   box-sizing: border-box;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
   animation: coin-flip 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-  content: '$';
-  display: inline-block;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 62px;
-  font-size: 32px;
-  font-weight: bold;
-  background: #ffd700;
-  color: #daa520;
-  border: 4px double;
-  box-sizing: border-box;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
-  animation: coin-flip 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 
 @keyframes coin-flip {
@@ -824,14 +539,7 @@ export default {
   100% {
     animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
   }
-  0%,
-  100% {
-    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
-  }
 
-  0% {
-    transform: rotateY(0deg);
-  }
   0% {
     transform: rotateY(0deg);
   }
@@ -840,17 +548,9 @@ export default {
     transform: rotateY(1800deg);
     animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
   }
-  50% {
-    transform: rotateY(1800deg);
-    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
-  }
 
-  100% {
-    transform: rotateY(3600deg);
-  }
   100% {
     transform: rotateY(3600deg);
   }
 }
 </style>
-
