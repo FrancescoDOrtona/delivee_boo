@@ -190,10 +190,10 @@ export default {
                             <div class="col-12 col-md-6 col-lg-8 product-text mx-2 flex-grow-1">
                                 <div class="products-card_title">
                                     <h6 class="fw-bold">{{ product.name }}</h6>
-                                    <template v-for="(p, idx) in this.products" :key="idx">
-                                        <template v-if="p.id === product.id">
-                                            <span>x{{ p.quantity }}</span>
-                                        </template>
+                                    <template v-for="p in this.products">
+                                        <div   v-if="p.product_id === product.id">
+                                            <span>x {{ p.quantity }}</span>                                      
+                                        </div>
                                     </template>
                                 </div>
                                 <p>{{ product.description }}</p>
