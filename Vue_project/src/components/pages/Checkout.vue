@@ -141,12 +141,12 @@
           <h2 class="border_btm pb-2">Riepilogo Ordine</h2>
           <div class="summary_list_container">
             <ul class="border_btm summary_list" v-for="c in cart">
-              <li class="col-6">{{ c.name }}</li>
-              <li class="col-3">{{ c.price }} €</li>
+              <li class="col-6 col_name">{{ c.name }}</li>
               <li class="col-3 col_quantity">x{{ c.quantity }}</li>
+              <li class="col-3 col_price">{{ c.price }} €</li>
             </ul>
           </div>
-          <h4 class="border_top pt-2">Totale: {{ this.currentTotal }}</h4>
+          <h4 class="border_top pt-2">Totale: {{ this.currentTotal }} €</h4>
         </div>
       </div>
 
@@ -588,12 +588,17 @@ export default {
 
 .border_top {
   border-top: 0.5px solid rgba(150, 150, 150, 0.5);
+  text-align: end;
 }
 
 .col_quantity {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding-right: 20px;
+}
+
+.col_price {
+  text-align: end;
 }
 
 /* LOADER */
