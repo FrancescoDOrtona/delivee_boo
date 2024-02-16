@@ -6,6 +6,16 @@ body {
     background-image: url(https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg);
 }
 
+ul,li{
+    list-style: none;
+    text-decoration: none;
+}
+
+a{
+    color: currentColor;
+    text-decoration: none;
+}
+
 .products {
     display: grid;
     // grid-template-columns: repeat(auto-fill, minmax(250px , 300px));
