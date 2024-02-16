@@ -21,10 +21,12 @@ class OrderController extends Controller
         // Ottieni gli ordini relativi al ristorante loggato
         $orders = Order::whereHas('products', function ($query) use ($restaurantId) {
             $query->where('restaurant_id', $restaurantId);
-        })->orderBy('created_at', 'desc')->get();
+        })->orderBy('created_at', 'desc')->paginate(13);
 
+          // Calcola il numero totale di pagine
+        $totalPages = ceil($orders->total() / $orders->perPage());
         // Restituisci gli ordini alla vista
-        return view('admin.order.index', compact('orders'));
+        return view('admin.order.index', compact('orders', 'totalPages'));
     }
 
     /**
