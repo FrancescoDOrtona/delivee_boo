@@ -258,10 +258,11 @@ export default {
                                         <i class="fa-solid fa-plus"></i>
                                     </button>
                                     <template v-for="p in this.products">
-                                        <button  v-if="p.product_id === product.id" class="square_button btn btn-light" @click="removeProduct(p)">
+                                        <button v-if="p.product_id === product.id" class="square_button btn btn-light"
+                                            @click="removeProduct(p)">
                                             <i class="fa-solid fa-minus"></i>
                                         </button>
-                                    
+
                                     </template>
                                 </div>
                             </div>
@@ -273,39 +274,66 @@ export default {
                 <div class="col-12 col-lg-3 chart-side">
                     <div class="card chart_container p-4">
                         <div class="chart_title">
-                            <h3>Il tuo ordine da:</h3>
-                            <template v-if="currentRestaurant">
+
+                            <template v-if="currentRestaurant && products.length > 0">
+                                <h3>Il tuo ordine da:</h3>
                                 <h4 class="text-capitalize">{{ currentRestaurant.restaurant_name }}</h4>
+                            </template>
+                            <template v-else>
+                                <h3>Aggiungi un prodotto</h3>
                             </template>
                         </div>
 
-                        <div class="chart_items">
-                            <ul class="chart" v-for="product in this.products">
-                                <li>
-                                    <p>{{ product.name }}</p>
-                                </li>
+                        <template v-if="products.length > 0">
+                            <div class="chart_items">
+                                <ul class="chart" v-for="product in this.products">
+                                    <li>
+                                        <p>{{ product.name }}</p>
+                                    </li>
 
-                                <li class="chart_quantity">
-                                    <button class="round_button" @click="removeProduct(product)">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </button>
-                                    <span class="total_quantity">
-                                        {{ product.quantity }}
-                                    </span>
-                                    <button class="round_button" @click="addProduct(product)">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                    <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100)
-                                        /
-                                        100).toFixed(2) }}
-                                        €</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="chart_total">
+                                    <li class="chart_quantity">
+                                        <button class="round_button" @click="removeProduct(product)">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                        <span class="total_quantity">
+                                            {{ product.quantity }}
+                                        </span>
+                                        <button class="round_button" @click="addProduct(product)">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                        <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100)
+                                            /
+                                            100).toFixed(2) }}
+                                            €</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </template>
+
+                        <template v-else>
+                            <div class="chart_total chart_items">
+                                <p class="cart-empty">
+                                    <svg height="80" width="120" viewBox="0 0 24 24" role="presentation" focusable="false"
+                                        class="ccl-2608038983f5b413 ccl-73d4ddfccb057499 ccl-4475ede65a9c319d">
+                                        <path
+                                            d="M14 15V13H10V15H14ZM15 15H19.1872L19.7172 13H15V15ZM14 12V10H15V12H19.9822L20.5122 10H3.48783L4.01783 12H9V10H10V12H14ZM14 18V16H10V18H14ZM15 18H18.3922L18.9222 16H15V18ZM9 15V13H4.28283L4.81283 15H9ZM9 18V16H5.07783L5.60783 18H9ZM7 8V3H17V8H23L20 20H4L1 8H7ZM9 8H15V5H9V8Z"
+                                            fill="#dddddd"></path>
+                                    </svg>
+                                    <h4 class="text-center text-secondary">Il Carrello é vuoto</h4>
+                                </p>
+                            </div>
+                        </template>
+
+                        <div v-if="products.length > 0" class="chart_total">
                             <h5>Totale: {{ this.totalPrice.toFixed(2) }} €</h5>
-                            <router-link :to="{ name: 'checkout' }" class="btn btn-light btn-main-color ">Vai al
-                                pagamento</router-link>
+
+                            <router-link :to="{ name: 'checkout' }" class="btn btn-light btn-main-color ">
+                                Vai al pagamento
+                            </router-link>
+                        </div>
+                        <div v-else class="chart_total">
+                           
+                            <a class="btn btn-secondary">Vai al pagamento</a>
                         </div>
                     </div>
                 </div>
@@ -530,6 +558,7 @@ p {
     display: flex;
     flex-direction: column;
     border-top: 1px solid lightgray;
+    justify-content: center;
 
     h5 {
         margin: 0;
@@ -545,7 +574,7 @@ p {
 
 .cart-empty {
     text-align: center;
-
+  
 }
 
 .border_btm {
@@ -663,4 +692,5 @@ p {
         grid-template-columns: repeat(1, 1fr);
     }
 
-}</style>
+}
+</style>
