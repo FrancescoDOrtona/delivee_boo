@@ -13,12 +13,8 @@
                     <th scope="col">Order Code</th>
                     <th scope="col">Total Price</th>
                     <th scope="col">Payment Status</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Phone</th>
                     <th scope="col">Reception Date</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -27,12 +23,8 @@
                     <td class="text-uppercase">{{ $order->order_code }}</td>
                     <td>{{ $order->total_price }} €</td>
                     <td>{{ $order->payment_status ? 'Success' : 'Failed' }}</td>
-                    <td>{{ $order->customer_name }}</td>
-                    <td>{{ $order->customer_last_name }}</td>
-                    <td>{{ $order->customer_email }}</td>
-                    <td>{{ $order->customer_address }}</td>
-                    <td>{{ $order->customer_phone }}</td>
                     <td>{{ $order->created_at}}</td>
+                    <td><button class="btn btn-primary"><a href="{{route('admin.order.show', $order)}}">Details</a></button></td>
                 </tr>                    
                 @endforeach
                 

@@ -48,7 +48,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $products = $order->products()->withPivot('quantity')->get();
+        return view('admin.order.show', compact('order','products'));
     }
 
     /**
