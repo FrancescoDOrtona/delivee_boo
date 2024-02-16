@@ -372,8 +372,12 @@ export default {
             .join(' ');
 
       // only allows for number for a given name input
-      if (inputName === 'telefono') {
-        inputValue = input.value.replace(/\D/g, '');
+      if (
+        inputName &&
+        inputName === 'numero_di_telefono' &&
+        this.customer[inputName]
+      ) {
+        inputValue = this.customer[inputName].replace(/\D/g, '');
       }
 
       if (!inputValue) {
