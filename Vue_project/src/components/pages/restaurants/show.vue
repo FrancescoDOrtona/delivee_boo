@@ -15,7 +15,9 @@ export default {
             BASE_URL: 'http://127.0.0.1:8000/api',
             products: [],
             totalPrice: 0,
-            cartVisible: false // Variabile per mostrare o nascondere il carrello
+            currentRestaurant: {},
+            modalVisible: false,
+            preventDefaultEvent: false
 
         }
     },
@@ -32,15 +34,11 @@ export default {
         productExists(newProduct) {
             return this.products.some((product) => product.name === newProduct.name)
         },
+        
         addProduct(product) {
-            // Assegniamo l'id del carrello tramite il prodotto aggiunto del ristorante
-            this.cartId = this.restaurant.id
-            console.log(this.cartId)
-            // Verifica se il carrello è vuoto o associato a un altro ristorante
-            if (!this.cartVisible || this.currentRestaurantId !== this.restaurant.id) {
-                this.products = [];
-                this.cartVisible = true; // Mostra il carrello
-            }
+            console.log(this.currentRestaurantId, this.products);
+
+            // Crea un nuovo prodotto da aggiungere al carrello
             let newProduct = {
                 restaurant_id: this.restaurant.id,
                 product_id: product.id,
@@ -48,21 +46,36 @@ export default {
                 price: product.price,
                 image: product.image,
                 quantity: 1,
-            }
-            if (this.productExists(newProduct)) {
-                this.products.forEach((product) => {
-                    if (product.name == newProduct.name) {
-                        product.quantity = product.quantity + 1
-                    }
-                })
+            };
+
+            // Verifica se il carrello è vuoto o associato a un altro ristorante
+            let differentRestaurant = this.products.length > 0 && this.products.some(existingProduct => existingProduct.restaurant_id !== product.restaurant_id);
+
+            // Mostra la modale se esiste almeno un prodotto associato a un ristorante diverso
+            if (differentRestaurant) {
+                this.showModal();
             } else {
-                this.products.push(newProduct)
+                // Verifica se il prodotto esiste già nel carrello
+                let existingProductIndex = this.products.findIndex(existingProduct => existingProduct.name === newProduct.name);
+
+                if (existingProductIndex !== -1) {
+                    // Incrementa la quantità del prodotto esistente
+                    this.products[existingProductIndex].quantity++;
+                } else {
+                    // Aggiunge il nuovo prodotto al carrello
+                    this.products.push(newProduct);
+                    this.currentRestaurant = this.restaurant;
+                }
+
+                // Aggiorna il prezzo totale
+                this.increaseTotalPrice();
+
+                // Salva i dati nel localStorage per renderli persistenti sul cambio di pagina
+                localStorage.setItem("cart", JSON.stringify(this.products));
+                localStorage.setItem("cartId", this.cartId);
+                localStorage.setItem("price", this.totalPrice);
+                localStorage.setItem("restaurant",JSON.stringify(this.restaurant));
             }
-            this.increaseTotalPrice(); //Aumenta il prezzo totale
-            // Salva i dati nel local storage per renderli persistenti sul cambio di pagina
-            localStorage.setItem('cart', JSON.stringify(this.products));
-            localStorage.setItem('cartId', this.cartId);
-            localStorage.setItem('price', this.totalPrice);
         },
         removeProduct(productToRemove) {
             for (let i = 0; i < this.products.length; i++) {
@@ -89,17 +102,42 @@ export default {
                 return +(Math.round((total += product.price * product.quantity) * 100) / 100).toFixed(2);
             }, 0);
         },
-        cartShow(current) {
-            console.log(this.cartVisible, this.currentRestaurantId, this.restaurant.id)
-            if (!this.cartVisible || current === this.cartId) {
-                return this.cartVisible = true;
-            }
+        showModal() {
+            // Mostra la modale (imposta una variabile di stato per gestire la visualizzazione della modale)
+            this.modalVisible = true;
+
+            // Blocca temporaneamente l'evento predefinito
+            this.preventDefaultEvent = true;
+        },
+
+        hideModal() {
+            // Nasconde la modale (imposta la variabile di stato per nascondere la modale)
+            this.modalVisible = false;
+
+            // Riabilita l'evento predefinito
+            this.preventDefaultEvent = false;
+        },
+
+        confirmAction() {
+            // Nasconde la modale
+            this.hideModal();
+            localStorage.clear();
+            this.currentRestaurant = {};
+            this.products = [];
+
+            // Aggiunge il prodotto al carrello dopo che l'utente ha confermato l'azione
+            this.addProductToCart(product);
         },
         
     },
     created() {
         this.fetchShow();
-
+        
+        const restaurant = localStorage.getItem('restaurant');
+        if (restaurant) {
+            this.currentRestaurant = JSON.parse(restaurant);
+        }
+        console.log(this.currentRestaurant.restaurant_name)
     }, mounted() {
         // recuperiamo i dati dal local storage quando cambiamo pagina per mantenere il carrello aggiornato
         const cartData = localStorage.getItem('cart');
@@ -117,20 +155,14 @@ export default {
             this.totalPrice = +price;
         }
 
-        // ci mostra il contenuto del carrello solo se l'id del carrello è uguale all'id del ristorante corrente
-        this.cartShow(this.currentRestaurantId);
-        console.log(this.cartId, typeof (this.cartId))
+
 
 
     },
-    watch: {
-        'restaurant.id'(newId, oldId) {
-            console.log(newId, oldId)
-            if (newId !== oldId) {
-                if (this.products.length > 0) {
-                    this.cartVisible = false; // Nascondi il carrello solo se ci sono prodotti nel carrello
-                }
-            }
+    computed(){
+        const restaurant = localStorage.getItem('restaurant');
+        if (restaurant) {
+            this.currentRestaurant = JSON.parse(restaurant);
         }
     }
 }
@@ -138,6 +170,25 @@ export default {
 
 <template>
     <div class="bg-image"></div>
+    <!-- La tua modale qui -->
+    <div v-if="modalVisible" class="overlay_custom">
+        <div class="modal_custom">
+            <!-- Contenuto della modale -->
+            <div class="modal_header">
+               <h4>
+                Attenzione,stai cambiando ristorante 
+               </h4>
+            </div>
+            <div class="modal_body">
+                <p>Premendo conferma cancellerai il tuo ordine del ristorante precedente</p>
+            </div>
+            <div class="modal_footer">
+                <button @click="hideModal()">Annulla</button>
+                <button @click="confirmAction()">Conferma</button>
+
+            </div>
+        </div>
+    </div>
     <div class="container-fluid page-top-margin border_btm">
         <div class="row">
             <div class="mb-3">
@@ -176,6 +227,7 @@ export default {
             </div>
         </div>
     </div>
+
 
     <div class="body-products">
         <div class="container-fluid ">
@@ -218,52 +270,40 @@ export default {
                 <div class="col-12 col-lg-3 chart-side">
                     <div class="card chart_container p-4">
                         <div class="chart_title">
-                            <h4>Il tuo ordine</h4>
+                            <h3>Il tuo ordine da:</h3>
+                            <template v-if="currentRestaurant">
+                                <h4 class="text-capitalize">{{ currentRestaurant.restaurant_name}}</h4>
+                            </template>
                         </div>
-                        <template v-if="cartVisible && currentRestaurantId === cartId">
-                            <div class="chart_items">
-                                <ul class="chart" v-for="product in this.products">
-                                    <li>
-                                        <p>{{ product.name }}</p>
-                                    </li>
 
-                                    <li class="chart_quantity">
-                                        <button class="round_button" @click="removeProduct(product)">
-                                            <i class="fa-solid fa-minus"></i>
-                                        </button>
-                                        <span class="total_quantity">
-                                            {{ product.quantity }}
-                                        </span>
-                                        <button class="round_button" @click="addProduct(product)">
-                                            <i class="fa-solid fa-plus"></i>
-                                        </button>
-                                        <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100)
-                                            /
-                                            100).toFixed(2) }}
-                                            €</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="chart_total">
-                                <h5>Totale: {{ this.totalPrice }} €</h5>
-                                <router-link :to="{ name: 'checkout' }" class="btn btn-light btn-main-color ">Vai al pagamento</router-link>
-                            </div>
-                        </template>
-                        <template v-else>
-                            <div class="chart_total">
-                                <p class="cart-empty">
-                                    <svg height="80" width="120" viewBox="0 0 24 24" role="presentation" focusable="false"
-                                        class="ccl-2608038983f5b413 ccl-73d4ddfccb057499 ccl-4475ede65a9c319d">
-                                        <path
-                                            d="M14 15V13H10V15H14ZM15 15H19.1872L19.7172 13H15V15ZM14 12V10H15V12H19.9822L20.5122 10H3.48783L4.01783 12H9V10H10V12H14ZM14 18V16H10V18H14ZM15 18H18.3922L18.9222 16H15V18ZM9 15V13H4.28283L4.81283 15H9ZM9 18V16H5.07783L5.60783 18H9ZM7 8V3H17V8H23L20 20H4L1 8H7ZM9 8H15V5H9V8Z"
-                                            fill="#dddddd"></path>
-                                    </svg>
-                                </p>
-                                <h4 class="text-center text-secondary">Il Carrello é vuoto</h4>
-                                <button class="btn btn-secondary disabled">Vai al pagamento</button>
-                            </div>
-                        </template>
+                        <div class="chart_items">
+                            <ul class="chart" v-for="product in this.products">
+                                <li>
+                                    <p>{{ product.name }}</p>
+                                </li>
 
+                                <li class="chart_quantity">
+                                    <button class="round_button" @click="removeProduct(product)">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </button>
+                                    <span class="total_quantity">
+                                        {{ product.quantity }}
+                                    </span>
+                                    <button class="round_button" @click="addProduct(product)">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                    <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100)
+                                        /
+                                        100).toFixed(2) }}
+                                        €</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="chart_total">
+                            <h5>Totale: {{ this.totalPrice }} €</h5>
+                            <router-link :to="{ name: 'checkout' }" class="btn btn-light btn-main-color ">Vai al
+                                pagamento</router-link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -275,7 +315,7 @@ export default {
 @import "../../../../style/partials/variables.scss";
 @import "../../../../style/partials/mixins.scss";
 
-.bg-image{
+.bg-image {
     width: 100%;
     height: 100%;
     background-image: url(../../../public/wave-haikei-4.svg);
@@ -337,7 +377,8 @@ p {
     display: flex;
     gap: 10px;
     align-items: center;
-    i{
+
+    i {
         color: $main-brand-color;
     }
 }
@@ -504,15 +545,71 @@ p {
 
 }
 
-.border_btm{
+.border_btm {
     border-bottom: 1px solid rgba(211, 211, 211, 0.5);
     padding-bottom: 20px;
 }
 
-.body-products{
+.body-products {
     padding-top: 20px;
 }
 
+/* Stili per l'overlay che copre l'intero viewport */
+.overlay_custom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo nero semi-trasparente */
+    z-index: 9999; /* Assicura che l'overlay sia sopra tutti gli altri elementi */
+    display: flex;
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+/* Stili per la modale */
+.modal_custom {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Ombra */
+    max-width: 400px; /* Larghezza massima */
+    padding: 20px;
+}
+
+/* Stili per l'intestazione della modale */
+.modal_header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Stili per il corpo della modale */
+.modal_body {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Stili per il piè di pagina della modale */
+.modal_footer {
+    text-align: center;
+}
+
+/* Stili per i pulsanti nella modale */
+.modal_custom button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #007bff; /* Colore di sfondo blu */
+    color: white; /* Colore del testo bianco */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Effetto di transizione */
+}
+
+/* Stili per i pulsanti nella modale al passaggio del mouse */
+.modal_custom button:hover {
+    background-color: #0056b3; /* Sfondo più scuro al passaggio del mouse */
+}
 
 
 @media (max-width: 575.98px) {
@@ -553,4 +650,5 @@ p {
         grid-template-columns: repeat(1, 1fr);
     }
 
-}</style>
+}
+</style>
