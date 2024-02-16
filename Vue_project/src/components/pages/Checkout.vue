@@ -18,7 +18,7 @@
         <div class="col-12 col-md-6 customer-form">
           <h2 class="border_btm pb-2">Dati di spedizione</h2>
           <form @submit.prevent="submitForm" class="row g-3">
-            <div class="col-md-6">
+            <div class="col-md-6 space">
               <label for="name" class="form-label fw-bold">Nome</label>
               <input
                 type="text"
@@ -39,7 +39,7 @@
                 ></div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 space">
               <label for="last_name" class="form-label fw-bold">Cognome</label>
               <input
                 type="text"
@@ -59,7 +59,7 @@
                 ></div>
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 space">
               <label for="email" class="form-label fw-bold">Email</label>
               <input
                 type="email"
@@ -79,7 +79,7 @@
                 ></div>
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 space">
               <label for="address" class="form-label fw-bold">Indirizzo</label>
               <input
                 type="text"
@@ -99,7 +99,7 @@
                 ></div>
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 space">
               <label for="phone_number" class="form-label fw-bold"
                 >Numero di telefono</label
               >
@@ -443,7 +443,6 @@ export default {
 /* RIEPILOGO ORDINE */
 
 .summary {
-  height: 477.39px;
   padding: 20px;
   border: 1px solid gray;
   border-radius: 10px;
@@ -599,6 +598,10 @@ export default {
 
 .col_price {
   text-align: end;
+}
+
+.space {
+  height: 100px;
 }
 
 /* LOADER */
