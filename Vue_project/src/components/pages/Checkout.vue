@@ -22,21 +22,42 @@
               <label for="name" class="form-label fw-bold">Nome</label>
               <input
                 type="text"
-                v-model="customer.name"
+                v-model="customer.nome"
                 class="form-control"
-                id="name"
+                id="nome"
                 placeholder="Mario"
+                ref="nome"
+                @input="inputValidation('nome')"
+                @blur="inputValidation('nome')"
+                autofocus
               />
+              <!-- Error message from validation -->
+              <div class="mb-1 mt-2 row">
+                <div
+                  ref="nomeConfirmMessage"
+                  class="confirm-message col-md-6"
+                ></div>
+              </div>
             </div>
             <div class="col-md-6">
               <label for="last_name" class="form-label fw-bold">Cognome</label>
               <input
                 type="text"
-                v-model="customer.last_name"
+                v-model="customer.cognome"
                 class="form-control"
-                id="last_name"
+                id="cognome"
                 placeholder="Rossi"
+                ref="cognome"
+                @input="inputValidation('cognome')"
+                @blur="inputValidation('cognome')"
               />
+              <!-- Error message from validation -->
+              <div class="mb-1 mt-2 row">
+                <div
+                  ref="cognomeConfirmMessage"
+                  class="confirm-message col-md-6"
+                ></div>
+              </div>
             </div>
             <div class="col-12">
               <label for="email" class="form-label fw-bold">Email</label>
@@ -46,17 +67,37 @@
                 class="form-control"
                 id="email"
                 placeholder="mario.rossi@deliveboo.it"
+                ref="email"
+                @input="inputValidation('email')"
+                @blur="inputValidation('email')"
               />
+              <!-- Error message from validation -->
+              <div class="mb-1 mt-2 row">
+                <div
+                  ref="emailConfirmMessage"
+                  class="confirm-message col-md-6"
+                ></div>
+              </div>
             </div>
             <div class="col-12">
               <label for="address" class="form-label fw-bold">Indirizzo</label>
               <input
                 type="text"
-                v-model="customer.address"
+                v-model="customer.indirizzo"
                 class="form-control"
-                id="address"
+                id="indirizzo"
                 placeholder="Viale Cappuccini 87"
+                ref="indirizzo"
+                @input="inputValidation('indirizzo')"
+                @blur="inputValidation('indirizzo')"
               />
+              <!-- Error message from validation -->
+              <div class="mb-1 mt-2 row">
+                <div
+                  ref="indirizzoConfirmMessage"
+                  class="confirm-message col-md-6"
+                ></div>
+              </div>
             </div>
             <div class="col-12">
               <label for="phone_number" class="form-label fw-bold"
@@ -64,11 +105,21 @@
               >
               <input
                 type="text"
-                v-model="customer.phone_number"
+                v-model="customer.numero_di_telefono"
                 class="form-control"
-                id="phone_number"
+                id="telefono"
                 placeholder="320 6745938"
+                ref="numero_di_telefono"
+                @input="inputValidation('numero_di_telefono')"
+                @blur="inputValidation('numero_di_telefono')"
               />
+              <!-- Error message from validation -->
+              <div class="mb-1 mt-2 row">
+                <div
+                  ref="numero_di_telefonoConfirmMessage"
+                  class="confirm-message col-md-6"
+                ></div>
+              </div>
             </div>
 
             <div class="col-12">
@@ -76,6 +127,7 @@
               <button
                 @click="sendOrder()"
                 type="submit"
+                ref="submit"
                 class="btn btn-light btn-form fw-bold"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
@@ -176,12 +228,13 @@ export default {
       BASE_URL: 'http://127.0.0.1:8000/api',
       btOrders: 'http://127.0.0.1:8000/api/orders',
       customer: {
-        name: '',
-        last_name: '',
+        nome: '',
+        cognome: '',
         email: '',
-        address: '',
-        phone_number: '',
+        indirizzo: '',
+        telefono: '',
       },
+
       cart: [],
       currentOrderId: 0,
       currentTotal: 0,
@@ -200,9 +253,16 @@ export default {
       this.$refs.exampleModal.classList.add('show');
     },
     sendOrder() {
+      let customerToSend = {
+        name: this.customer.nome,
+        last_name: this.customer.cognome,
+        email: this.customer.email,
+        address: this.customer.indirizzo,
+        phone_number: this.customer.numero_di_telefono,
+      };
       axios
         .post(`${this.BASE_URL}/orders`, {
-          customer: this.customer,
+          customer: customerToSend,
           cart: this.cart,
         })
         .then((res) => {
@@ -290,6 +350,50 @@ export default {
         }
       );
     },
+
+    // Input validation
+    inputValidation(inputName) {
+      // get the input values
+      let inputValue = this.customer[inputName];
+
+      // reformat the message input name
+      let formattedName = inputName.includes('_')
+        ? inputName
+            .split('_')
+            .map((word, index) =>
+              index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word
+            )
+            .join(' ')
+        : inputName
+            .split('_')
+            .map((word, index) =>
+              index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word
+            )
+            .join(' ');
+
+      // only allows for number for a given name input
+      if (inputName === 'telefono') {
+        inputValue = input.value.replace(/\D/g, '');
+      }
+
+      if (!inputValue) {
+        // Display an error message
+        this.$refs[
+          `${inputName}ConfirmMessage`
+        ].innerHTML = `Per favore inserisci il ${formattedName}!`;
+        // Add a class to style the error
+        this.$refs[inputName].classList.add('confirm-error');
+        // Disable submit button
+        this.$refs['submit'].disabled = true;
+      } else {
+        // Clear error message
+        this.$refs[`${inputName}ConfirmMessage`].innerHTML = '';
+        // Remove error styling
+        this.$refs[inputName].classList.remove('confirm-error');
+        // Enable submit button
+        this.$refs['submit'].disabled = false;
+      }
+    },
   },
   created() {
     // Leggi i dati del carrello dal localStorage all'avvio del componente
@@ -297,7 +401,7 @@ export default {
     const priceData = localStorage.getItem('price');
     if (cartData) {
       this.cart = JSON.parse(cartData);
-      console.log(this.cart);
+      // console.log(this.cart);
     }
     if (priceData) {
       this.currentTotal = JSON.parse(priceData);
@@ -552,5 +656,16 @@ export default {
   100% {
     transform: rotateY(3600deg);
   }
+}
+//Form Validation
+.confirm-message {
+  color: red;
+  font-weight: 500;
+  width: 100%;
+}
+
+.confirm-error {
+  border-color: red !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.25) !important;
 }
 </style>
