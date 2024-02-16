@@ -34,7 +34,7 @@ export default {
         productExists(newProduct) {
             return this.products.some((product) => product.name === newProduct.name)
         },
-        
+
         addProduct(product) {
             console.log(this.currentRestaurantId, this.products);
 
@@ -74,7 +74,7 @@ export default {
                 localStorage.setItem("cart", JSON.stringify(this.products));
                 localStorage.setItem("cartId", this.cartId);
                 localStorage.setItem("price", this.totalPrice);
-                localStorage.setItem("restaurant",JSON.stringify(this.restaurant));
+                localStorage.setItem("restaurant", JSON.stringify(this.restaurant));
             }
         },
         removeProduct(productToRemove) {
@@ -128,11 +128,11 @@ export default {
             // Aggiunge il prodotto al carrello dopo che l'utente ha confermato l'azione
             this.addProductToCart(product);
         },
-        
+
     },
     created() {
         this.fetchShow();
-        
+
         const restaurant = localStorage.getItem('restaurant');
         if (restaurant) {
             this.currentRestaurant = JSON.parse(restaurant);
@@ -159,7 +159,7 @@ export default {
 
 
     },
-    computed(){
+    computed() {
         const restaurant = localStorage.getItem('restaurant');
         if (restaurant) {
             this.currentRestaurant = JSON.parse(restaurant);
@@ -175,9 +175,9 @@ export default {
         <div class="modal_custom">
             <!-- Contenuto della modale -->
             <div class="modal_header">
-               <h4>
-                Attenzione,stai cambiando ristorante 
-               </h4>
+                <h4>
+                    Attenzione,stai cambiando ristorante
+                </h4>
             </div>
             <div class="modal_body">
                 <p>Premendo conferma cancellerai il tuo ordine del ristorante precedente</p>
@@ -243,8 +243,8 @@ export default {
                                 <div class="products-card_title">
                                     <h6 class="fw-bold">{{ product.name }}</h6>
                                     <template v-for="p in this.products">
-                                        <div   v-if="p.product_id === product.id">
-                                            <span>x {{ p.quantity }}</span>                                      
+                                        <div v-if="p.product_id === product.id">
+                                            <span>x {{ p.quantity }}</span>
                                         </div>
                                     </template>
                                 </div>
@@ -254,12 +254,15 @@ export default {
                             <div class="col-12 col-md-6 col-lg-4 justify-content-lg-end products_card_side">
                                 <img class="product-img" :src="`http://127.0.0.1:8000/storage/${product.image}`" alt="">
                                 <div class="product-card_quantity">
-                                    <button class="square_button btn btn-light" @click="removeProduct(product)">
-                                        <i class="fa-solid fa-minus"></i>
-                                    </button>
                                     <button class="btn btn-light square_button" @click="addProduct(product)">
                                         <i class="fa-solid fa-plus"></i>
                                     </button>
+                                    <template v-for="p in this.products">
+                                        <button  v-if="p.product_id === product.id" class="square_button btn btn-light" @click="removeProduct(p)">
+                                            <i class="fa-solid fa-minus"></i>
+                                        </button>
+                                    
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +275,7 @@ export default {
                         <div class="chart_title">
                             <h3>Il tuo ordine da:</h3>
                             <template v-if="currentRestaurant">
-                                <h4 class="text-capitalize">{{ currentRestaurant.restaurant_name}}</h4>
+                                <h4 class="text-capitalize">{{ currentRestaurant.restaurant_name }}</h4>
                             </template>
                         </div>
 
@@ -300,7 +303,7 @@ export default {
                             </ul>
                         </div>
                         <div class="chart_total">
-                            <h5>Totale: {{ this.totalPrice }} €</h5>
+                            <h5>Totale: {{ this.totalPrice.toFixed(2) }} €</h5>
                             <router-link :to="{ name: 'checkout' }" class="btn btn-light btn-main-color ">Vai al
                                 pagamento</router-link>
                         </div>
@@ -561,19 +564,25 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Sfondo nero semi-trasparente */
-    z-index: 9999; /* Assicura che l'overlay sia sopra tutti gli altri elementi */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Sfondo nero semi-trasparente */
+    z-index: 9999;
+    /* Assicura che l'overlay sia sopra tutti gli altri elementi */
     display: flex;
-    justify-content: center; /* Centra orizzontalmente */
-    align-items: center; /* Centra verticalmente */
+    justify-content: center;
+    /* Centra orizzontalmente */
+    align-items: center;
+    /* Centra verticalmente */
 }
 
 /* Stili per la modale */
 .modal_custom {
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Ombra */
-    max-width: 400px; /* Larghezza massima */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    /* Ombra */
+    max-width: 400px;
+    /* Larghezza massima */
     padding: 20px;
 }
 
@@ -598,17 +607,21 @@ p {
 .modal_custom button {
     padding: 10px 20px;
     margin: 0 10px;
-    background-color: #007bff; /* Colore di sfondo blu */
-    color: white; /* Colore del testo bianco */
+    background-color: #007bff;
+    /* Colore di sfondo blu */
+    color: white;
+    /* Colore del testo bianco */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s; /* Effetto di transizione */
+    transition: background-color 0.3s;
+    /* Effetto di transizione */
 }
 
 /* Stili per i pulsanti nella modale al passaggio del mouse */
 .modal_custom button:hover {
-    background-color: #0056b3; /* Sfondo più scuro al passaggio del mouse */
+    background-color: #0056b3;
+    /* Sfondo più scuro al passaggio del mouse */
 }
 
 
@@ -650,5 +663,4 @@ p {
         grid-template-columns: repeat(1, 1fr);
     }
 
-}
-</style>
+}</style>
