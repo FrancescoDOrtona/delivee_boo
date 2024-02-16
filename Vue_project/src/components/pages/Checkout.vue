@@ -106,6 +106,7 @@
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
         ref="exampleModal"
+        data-bs-backdrop="static"
       >
         <div class="modal-dialog">
           <div class="modal-content">
@@ -224,7 +225,7 @@ export default {
 
     displayDropIn() {
       var closeButton = document.querySelector('#close-button');
-      var submitButton = document.querySelector('#submit-button');
+      var button = document.querySelector('#submit-button');
       var self = this;
 
       braintree.dropin.create(
@@ -234,7 +235,7 @@ export default {
         },
         (err, instance) => {
           button.addEventListener('click', () => {
-            submitButton.disabled = true;
+            button.disabled = true;
             closeButton.disabled = true;
             instance.requestPaymentMethod((err, payload) => {
               if (err) {
