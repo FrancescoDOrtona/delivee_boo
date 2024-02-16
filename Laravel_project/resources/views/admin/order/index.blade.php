@@ -6,7 +6,7 @@
         class="table-responsive"
     >
         <table
-            class="table table-primary"
+            class="table"
         >
             <thead>
                 <tr>
@@ -30,8 +30,19 @@
                 
             </tbody>
         </table>
+        <div class="container">
+            <div class="row">
+                <ul class="pagination d-flex justify-content-center gap-3">
+                    @for ($i = 1; $i <= $totalPages; $i++)
+                        @if ($i < $orders->lastPage())
+                        <li class="page-item {{ $i == $orders->currentPage() ? 'active' : '' }}">
+                            <a class="page-link {{ $i == $orders->currentPage() ? 'current-page' : '' }}" href="{{ route('admin.order.index', ['page' => $i]) }}">{{ $i }}</a>
+                        </li>
+                        @endif
+                    @endfor
+                </ul>
+            </div>
+        </divc>
     </div>
 </div>
-
-
 @endsection

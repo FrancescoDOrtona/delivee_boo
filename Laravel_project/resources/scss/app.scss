@@ -11,6 +11,28 @@ ul,li{
     text-decoration: none;
 }
 
+.show-orders{
+    .card{
+        min-height: 160px;
+        background-color: rgba(189, 210, 253, 0.676);
+    }
+}
+
+.relative{
+    margin: 20px 0px;
+}
+
+.page-link{
+    border-radius: 5px;
+}
+
+.current-page {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px !important; 
+    padding: 5px 10px; 
+}
+
 a{
     color: currentColor;
     text-decoration: none;
