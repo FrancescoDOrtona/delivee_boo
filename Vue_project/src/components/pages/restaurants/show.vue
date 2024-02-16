@@ -303,7 +303,7 @@ export default {
                             </ul>
                         </div>
                         <div class="chart_total">
-                            <h5>Totale: {{ this.totalPrice }} €</h5>
+                            <h5>Totale: {{ this.totalPrice.toFixed(2) }} €</h5>
                             <router-link :to="{ name: 'checkout' }" class="btn btn-light btn-main-color ">Vai al
                                 pagamento</router-link>
                         </div>
