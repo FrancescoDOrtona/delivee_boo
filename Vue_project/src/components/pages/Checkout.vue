@@ -168,99 +168,7 @@
           <h4 class="border_top pt-2">Totale: {{ this.currentTotal }}</h4>
         </div>
       </div>
-            <div class="col-12">
-              <!-- Button trigger modal -->
-              <button
-                @click="sendOrder()"
-                type="submit"
-                class="btn btn-light btn-form fw-bold"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Procedi al pagamento
-              </button>
-            </div>
-          </form>
-        </div>
-        <div class="col-12 col-md-6 summary">
-          <h2 class="border_btm pb-2">Riepilogo Ordine</h2>
-          <div class="summary_list_container">
-            <ul class="border_btm summary_list" v-for="c in cart">
-              <li class="col-6">{{ c.name }}</li>
-              <li class="col-3">{{ c.price }} €</li>
-              <li class="col-3 col_quantity">x{{ c.quantity }}</li>
-            </ul>
-          </div>
-          <h4 class="border_top pt-2">Totale: {{ this.currentTotal }}</h4>
-        </div>
-      </div>
 
-      <!-- Modal -->
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-        ref="exampleModal"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Completa l'acquisto e termina il tuo ordine.
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <div></div>
-              <div id="dropin-container"></div>
-              <!-- Messaggio di successo o di errore -->
-              <div
-                v-if="paymentStatus !== null"
-                class="alert mt-2"
-                :class="{
-                  'alert-success': paymentStatus,
-                  'alert-danger': !paymentStatus,
-                }"
-              >
-                {{
-                  paymentStatus
-                    ? 'Pagamento completato con successo!'
-                    : 'Errore durante il pagamento.'
-                }}
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="button button--small button--gray"
-                data-bs-dismiss="modal"
-              >
-                Chiudi
-              </button>
-              <!-- Rimuovi l'attributo data-bs-dismiss dal pulsante Paga -->
-              <button
-                id="submit-button"
-                class="button button--small button--green"
-              >
-                Paga
-              </button>
-            </div>
-            <!-- Loader per il pagamento -->
-            <div v-if="isLoading" class="loading">
-              <span class="loader"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
       <!-- Modal -->
       <div
         class="modal fade"
@@ -437,6 +345,7 @@ export default {
     },
 
     displayDropIn() {
+      var closeButton = document.querySelector('#close-button');
       var button = document.querySelector('#submit-button');
       var self = this;
 
@@ -447,6 +356,8 @@ export default {
         },
         (err, instance) => {
           button.addEventListener('click', () => {
+            button.disabled = true;
+            closeButton.disabled = true;
             instance.requestPaymentMethod((err, payload) => {
               if (err) {
                 console.error(
