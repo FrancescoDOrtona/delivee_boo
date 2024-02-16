@@ -15,7 +15,9 @@ export default {
             BASE_URL: 'http://127.0.0.1:8000/api',
             products: [],
             totalPrice: 0,
-            cartVisible: false // Variabile per mostrare o nascondere il carrello
+            cartVisible: false, // Variabile per mostrare o nascondere il carrello
+            modalVisible: false,
+            preventDefaultEvent: false
 
         }
     },
@@ -32,15 +34,8 @@ export default {
         productExists(newProduct) {
             return this.products.some((product) => product.name === newProduct.name)
         },
-        addProduct(product) {
-            // Assegniamo l'id del carrello tramite il prodotto aggiunto del ristorante
-            this.cartId = this.restaurant.id
-            console.log(this.cartId)
-            // Verifica se il carrello è vuoto o associato a un altro ristorante
-            if (!this.cartVisible || this.currentRestaurantId !== this.restaurant.id) {
-                this.products = [];
-                this.cartVisible = true; // Mostra il carrello
-            }
+        addProductToCart(product) {
+            console.log(this.currentRestaurantId , this.products);
             let newProduct = {
                 restaurant_id: this.restaurant.id,
                 product_id: product.id,
@@ -63,6 +58,21 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.products));
             localStorage.setItem('cartId', this.cartId);
             localStorage.setItem('price', this.totalPrice);
+
+        },
+        addProduct(product) {
+            // Assegniamo l'id del carrello tramite il prodotto aggiunto del ristorante
+            this.cartId = this.restaurant.id
+            console.log(this.cartId)
+            // Verifica se il carrello è vuoto o associato a un altro ristorante
+            if (this.currentRestaurantId !== this.restaurant.id) {
+                // Mostra la modale
+                this.showModal();
+
+            } else {
+                // Aggiunge il prodotto al carrello senza mostrare la modale
+                this.addProductToCart(product);
+            }
         },
         removeProduct(productToRemove) {
             for (let i = 0; i < this.products.length; i++) {
@@ -95,7 +105,30 @@ export default {
                 return this.cartVisible = true;
             }
         },
-        
+        showModal() {
+            // Mostra la modale (imposta una variabile di stato per gestire la visualizzazione della modale)
+            this.modalVisible = true;
+
+            // Blocca temporaneamente l'evento predefinito
+            this.preventDefaultEvent = true;
+        },
+
+        hideModal() {
+            // Nasconde la modale (imposta la variabile di stato per nascondere la modale)
+            this.modalVisible = false;
+
+            // Riabilita l'evento predefinito
+            this.preventDefaultEvent = false;
+        },
+
+        confirmAction() {
+            // Nasconde la modale
+            this.hideModal();
+
+            // Aggiunge il prodotto al carrello dopo che l'utente ha confermato l'azione
+            this.addProductToCart(product);
+        },
+
     },
     created() {
         this.fetchShow();
@@ -138,29 +171,36 @@ export default {
 
 <template>
     <div class="bg-image"></div>
+     <!-- La tua modale qui -->
+     <div  class="modal ">
+                    <!-- Contenuto della modale -->
+                    <div>modaleeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</div>
+                    <button @click="hideModal">Annulla</button>
+                    <button @click="confirmAction">Conferma</button>
+    </div>
     <div class="container-fluid page-top-margin border_btm">
         <div class="row">
             <div class="mb-3">
                 <router-link :to="{ name: 'restaurants.index' }" class="btn btn-light router-link">
                     <i class="fa-solid fa-arrow-left brand-color"></i>Indietro</router-link>
-            </div>
-            <div class="row restaurant-head ">
-                <div class="col-12 col-md-4">
-                    <img v-if="restaurant.restaurant_image" class="img-restaurant"
-                        :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="">
-                    <img v-else class="img-restaurant"
-                        src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="">
                 </div>
-                <div class="col-12 col-md-4">
-                    <div class="info-restaurant">
-                        <h2 class="fw-bold">
-                            {{ restaurant.restaurant_name }}
-                        </h2>
-                        <p class="icons_align"><i class="fa-solid fa-clock fs-5"></i>15 - 25 min· Poke·Sushi</p>
-                        <p class="icons_align"><i class="fa-solid fa-map-location fs-5"></i>Distanza: 1.18 km · Chiude alle
+                <div class="row restaurant-head ">
+                    <div class="col-12 col-md-4">
+                        <img v-if="restaurant.restaurant_image" class="img-restaurant"
+                        :src="`http://127.0.0.1:8000/storage/${restaurant.restaurant_image}`" alt="">
+                        <img v-else class="img-restaurant"
+                        src="https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg" alt="">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="info-restaurant">
+                            <h2 class="fw-bold">
+                                {{ restaurant.restaurant_name }}
+                            </h2>
+                            <p class="icons_align"><i class="fa-solid fa-clock fs-5"></i>15 - 25 min· Poke·Sushi</p>
+                            <p class="icons_align"><i class="fa-solid fa-map-location fs-5"></i>Distanza: 1.18 km · Chiude alle
                             22:30 · Consegna gratuita</p>
-                        <p class="icons_align"><i class="fa-solid fa-circle-info fs-5"></i>{{
-                            restaurant.restaurant_description }}</p>
+                            <p class="icons_align"><i class="fa-solid fa-circle-info fs-5"></i>{{
+                                restaurant.restaurant_description }}</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-4 d-flex flex-column align-items-center">
@@ -176,7 +216,8 @@ export default {
             </div>
         </div>
     </div>
-
+   
+    
     <div class="body-products">
         <div class="container-fluid ">
             <div class="row justify-content-between row-gap-5">
@@ -186,15 +227,15 @@ export default {
                 <div class="col-12 col-lg-9">
                     <div class="grid">
                         <div class="card p-3 flex-column flex-lg-row" v-for="(product, index) in restaurant.products"
-                            :key="index">
-                            <div class="col-12 col-md-6 col-lg-8 product-text mx-2 flex-grow-1">
-                                <div class="products-card_title">
-                                    <h6 class="fw-bold">{{ product.name }}</h6>
-                                    <template v-for="(p, idx) in this.products" :key="idx">
-                                        <template v-if="p.id === product.id">
-                                            <span>x{{ p.quantity }}</span>
-                                        </template>
+                        :key="index">
+                        <div class="col-12 col-md-6 col-lg-8 product-text mx-2 flex-grow-1">
+                            <div class="products-card_title">
+                                <h6 class="fw-bold">{{ product.name }}</h6>
+                                <template v-for="(p, idx) in this.products" :key="idx">
+                                    <template v-if="p.id === product.id">
+                                        <span>x{{ p.quantity }}</span>
                                     </template>
+                                </template>
                                 </div>
                                 <p>{{ product.description }}</p>
                                 <small>{{ product.price }} €</small>
@@ -205,7 +246,7 @@ export default {
                                     <button class="square_button btn btn-light" @click="removeProduct(product)">
                                         <i class="fa-solid fa-minus"></i>
                                     </button>
-                                    <button class="btn btn-light square_button" @click="addProduct(product)">
+                                    <button class="btn btn-light square_button" @click="addProductToCart(product)">
                                         <i class="fa-solid fa-plus"></i>
                                     </button>
                                 </div>
@@ -213,7 +254,7 @@ export default {
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- CART -->
                 <div class="col-12 col-lg-3 chart-side">
                     <div class="card chart_container p-4">
@@ -234,7 +275,7 @@ export default {
                                         <span class="total_quantity">
                                             {{ product.quantity }}
                                         </span>
-                                        <button class="round_button" @click="addProduct(product)">
+                                        <button class="round_button" @click="addProductToCart(product)">
                                             <i class="fa-solid fa-plus"></i>
                                         </button>
                                         <span class="product_price">{{ (Math.round((product.price * product.quantity) * 100)
@@ -246,7 +287,8 @@ export default {
                             </div>
                             <div class="chart_total">
                                 <h5>Totale: {{ this.totalPrice }} €</h5>
-                                <router-link :to="{ name: 'checkout' }" class="btn btn-light btn-main-color ">Vai al pagamento</router-link>
+                                <router-link :to="{ name: 'checkout' }" class="btn btn-light btn-main-color ">Vai al
+                                    pagamento</router-link>
                             </div>
                         </template>
                         <template v-else>
@@ -275,7 +317,7 @@ export default {
 @import "../../../../style/partials/variables.scss";
 @import "../../../../style/partials/mixins.scss";
 
-.bg-image{
+.bg-image {
     width: 100%;
     height: 100%;
     background-image: url(../../../public/wave-haikei-4.svg);
@@ -337,7 +379,8 @@ p {
     display: flex;
     gap: 10px;
     align-items: center;
-    i{
+
+    i {
         color: $main-brand-color;
     }
 }
@@ -504,12 +547,12 @@ p {
 
 }
 
-.border_btm{
+.border_btm {
     border-bottom: 1px solid rgba(211, 211, 211, 0.5);
     padding-bottom: 20px;
 }
 
-.body-products{
+.body-products {
     padding-top: 20px;
 }
 
@@ -553,4 +596,5 @@ p {
         grid-template-columns: repeat(1, 1fr);
     }
 
-}</style>
+}
+</style>
