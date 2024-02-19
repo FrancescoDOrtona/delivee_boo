@@ -106,5 +106,17 @@
 .card_text {
     font-size: 18px;
     line-height: 130%;
+
 }
+
+@media (max-width: 575.98px) {
+        .card_text{
+            font-size: 13px;
+        }
+
+        .card_button {
+            padding: 10px 10px;
+            line-height: 15px;
+        }
+    }
 </style>
