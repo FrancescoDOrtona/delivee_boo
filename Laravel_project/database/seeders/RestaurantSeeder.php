@@ -37,7 +37,7 @@ class RestaurantSeeder extends Seeder
             'Alibabá' => [3],
             'Pizzeria Napoli' => [1, 11],
             'Iginio Massari' => [8],
-            'Currymania' => [4],
+            'Currymania' => [4,11],
             'Old Wild West' => [6],
             'Polo Nord' => [9, 12],
             'Ruspantino' => [10],
