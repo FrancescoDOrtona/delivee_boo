@@ -27,9 +27,8 @@
                     @if (!Auth()->user()) href="{{ url('/') }}" @else href="{{ url('dashboard') }}" @endif>
                     <div class="logo_laravel">
                         <img class="app-logo" src="./images/logo/logo-no-bg.png" alt="">
-                        <img class="app-logo" src="./images/logo/logo-teal-titolo.svg" alt="">
-
                     </div>
+                    <img class="app-title" src="./images/logo/logo-teal-titolo.svg" alt="">
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
 

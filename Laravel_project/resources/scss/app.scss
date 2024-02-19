@@ -6,34 +6,35 @@ body {
     background-image: url(https://consumer-component-library.roocdn.com/27.1.19/static/images/placeholder.svg);
 }
 
-ul,li{
+ul,
+li {
     list-style: none;
     text-decoration: none;
 }
 
-.show-orders{
-    .card{
+.show-orders {
+    .card {
         min-height: 160px;
         background-color: rgba(189, 210, 253, 0.676);
     }
 }
 
-.relative{
+.relative {
     margin: 20px 0px;
 }
 
-.page-link{
+.page-link {
     border-radius: 5px;
 }
 
 .current-page {
     background-color: #007bff;
     color: #fff;
-    border-radius: 5px !important; 
-    padding: 5px 10px; 
+    border-radius: 5px !important;
+    padding: 5px 10px;
 }
 
-a{
+a {
     color: currentColor;
     text-decoration: none;
 }
@@ -58,6 +59,9 @@ a{
 
 .app-logo {
     width: 80px;
+}
+.app-title {
+    width: 140px;
 }
 
 .card-img {
