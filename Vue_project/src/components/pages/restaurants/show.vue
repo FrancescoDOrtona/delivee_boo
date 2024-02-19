@@ -207,7 +207,7 @@ export default {
                         <h2 class="fw-bold">
                             {{ restaurant.restaurant_name }}
                         </h2>
-                        <p class="icons_align"><i class="fa-solid fa-clock fs-5"></i>15 - 25 min· Poke·Sushi</p>
+                        <p class="icons_align"><i class="fa-solid fa-clock fs-5"></i>15 - 25 min</p>
                         <p class="icons_align"><i class="fa-solid fa-map-location fs-5"></i>Distanza: 1.18 km · Chiude alle
                             22:30 · Consegna gratuita</p>
                         <p class="icons_align"><i class="fa-solid fa-circle-info fs-5"></i>{{
