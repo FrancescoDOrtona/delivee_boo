@@ -652,6 +652,12 @@ export default {
   animation: coin-flip 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 
+@media (max-width: 575.98px) {
+  main {
+    padding: 0 12px;
+  }
+}
+
 @keyframes coin-flip {
   0%,
   100% {
