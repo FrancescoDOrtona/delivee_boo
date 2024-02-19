@@ -92,9 +92,9 @@ class RestaurantSeeder extends Seeder
             ],
             [
                 'restaurant_name' => 'Pizzeria Napoli',
-                'restaurant_description' => '',
+                'restaurant_description' => 'Scoprire sapori dimenticati grazie alla scelta di ingredienti Italiani di stagione di qualità e provenienza rigorosamente controllata.',
                 'restaurant_address' => 'Via Torino 70',
-                'restaurant_image' => 'Scoprire sapori dimenticati grazie alla scelta di ingredienti Italiani di stagione di qualità e provenienza rigorosamente controllata.',
+                'restaurant_image' => '',
                 'phone_number' => '0280012789',
                 'vat_number' => '11111111115',
                 'user_id' => 6,
@@ -144,7 +144,7 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
                 'phone_number' => '0280012354',
                 'vat_number' => '11111111123',
-                'user_id' => 9,
+                'user_id' => 11,
             ],
             [
                
@@ -154,7 +154,7 @@ class RestaurantSeeder extends Seeder
                 'restaurant_image' => '',
                 'phone_number' => '0284246454',
                 'vat_number' => '11111111111',
-                'user_id' => 10,
+                'user_id' => 12,
             ]
         ];
         foreach ($restaurants as $restaurantData) {
