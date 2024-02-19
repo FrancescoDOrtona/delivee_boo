@@ -81,6 +81,10 @@ a {
     .products {
         grid-template-columns: repeat(1, 1fr);
     }
+
+    .container.py-5 {
+        padding-top: 0 !important;
+    }
 }
 
 // Small devices (landscape phones, 576px and up)
