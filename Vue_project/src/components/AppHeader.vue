@@ -34,12 +34,6 @@
       </div>
 
       <div class="header-buttons d-none d-lg-flex">
-        <a class="buttons_icon btn btn-light" href="">
-          <span class="color-brand">
-            <i class="fa-solid fa-cart-shopping"></i>
-          </span>
-          <span class="d-none d-sm-none d-lg-block">{{ totalPrice }} €</span>
-        </a>
         <a class="buttons_icon btn btn-light" href="http://127.0.0.1:8000/login">
           <span class="color-brand">
             <i class="fa-solid fa-right-to-bracket"></i>
@@ -59,29 +53,6 @@
 
 <script>
 import { useLink } from 'vue-router';
-
-export default {
-  data() {
-    return {
-      totalPrice: 0,
-    }
-  },
-  created(){
-    const cartData = localStorage.getItem('price');
-    if (cartData) {
-      this.totalPrice = JSON.parse(cartData);
-      // console.log(this.cart);
-    }
-  },
-  methods:{
-    
-  },
-  watch:{
-    totalPrice: function (nuovoValore, valorePrecedente){
-      console.log('La variabileDaOsservare è stata modificata:', nuovoValore);  
-    }
-  }
-  }
 </script>
 
 <style lang="scss" scoped>
