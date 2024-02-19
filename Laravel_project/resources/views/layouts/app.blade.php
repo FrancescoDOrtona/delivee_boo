@@ -14,7 +14,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="icon" href="./images/logo/favicon-deliveboo.png" type="image/x-icon">
+    <link rel="icon" href="/images/logo/favicon-deliveboo.png" type="image/x-icon">
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
@@ -27,9 +27,9 @@
                 <a class="navbar-brand d-flex align-items-center"
                     @if (!Auth()->user()) href="{{ url('/') }}" @else href="{{ url('dashboard') }}" @endif>
                     <div class="logo_laravel">
-                        <img class="app-logo" src="./images/logo/logo-no-bg.png" alt="">
+                        <img class="app-logo" src="/images/logo/logo-no-bg.png" alt="">
                     </div>
-                    <img class="app-title" src="./images/logo/logo-teal-titolo.svg" alt="">
+                    <img class="app-title" src="/images/logo/logo-teal-titolo.svg" alt="">
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
 

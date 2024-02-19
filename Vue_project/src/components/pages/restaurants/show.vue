@@ -524,7 +524,7 @@ p {
 }
 
 .chart_container {
-    height: 800px;
+    height: 600px;
     display: flex;
     position: sticky;
     top: 20px;
