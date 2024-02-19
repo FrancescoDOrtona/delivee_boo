@@ -22,12 +22,12 @@
   {{-- fine modale  --}}
 <div class="container">
     <div class="row mt-4">
-        <div class="col-6 ">
+        <div class="col-12 col-md-6 ">
             <img class="img-fluid cover w-100 rounded" src="{{asset('storage/'.$product->image)}}" alt="">
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <h2>{{ $product->name }}</h2>
-            <ul>
+            <ul class="">
                 <li>{{ $product->price }} € </li>
                 @if($product->available == false)
                 <li>Not Available</li>
@@ -38,7 +38,7 @@
                 <li>{{$product->description}}</li>
             </ul>
             <div class="d-flex align-items-start gap-3 ">
-                <a href="{{route('admin.product.edit', $product)}}" class="btn btn-secondary">Edit Product</a>
+                <a href="{{route('admin.product.edit', $product)}}" class="btn btn-secondary">Edit</a>
                 <form class="margin-left-auto form-delete" action="{{route('admin.product.destroy',$product)}}" method="POST" data-delete-name="{{$product->name}}">
                     @csrf
                     @method('DELETE')

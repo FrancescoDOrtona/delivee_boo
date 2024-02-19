@@ -236,38 +236,42 @@ export default {
                     <h4>I nostri prodotti</h4>
                 </div>
                 <div class="col-12 col-lg-9">
-                    <div class="grid">
-                        <div class="card p-3 flex-column flex-lg-row" v-for="(product, index) in restaurant.products"
-                            :key="index">
-                            <div class="col-12 col-md-6 col-lg-8 product-text mx-2 flex-grow-1">
-                                <div class="products-card_title">
-                                    <h6 class="fw-bold">{{ product.name }}</h6>
-                                    <template v-for="p in this.products">
-                                        <div v-if="p.product_id === product.id">
-                                            <span>x {{ p.quantity }}</span>
-                                        </div>
-                                    </template>
-                                </div>
-                                <p>{{ product.description }}</p>
-                                <small>{{ product.price }} €</small>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-4 justify-content-lg-end products_card_side">
-                                <img class="product-img" :src="`http://127.0.0.1:8000/storage/${product.image}`" alt="">
-                                <div class="product-card_quantity">
-                                    <button class="btn btn-light square_button" @click="addProduct(product)">
-                                        <i class="fa-solid fa-plus"></i>
-                                    </button>
-                                    <template v-for="p in this.products">
-                                        <button v-if="p.product_id === product.id" class="square_button btn btn-light"
-                                            @click="removeProduct(p)">
-                                            <i class="fa-solid fa-minus"></i>
-                                        </button>
 
-                                    </template>
+                    <div class="grid">
+                        <template v-for="(product, index) in restaurant.products">
+                            <div v-if="product.available" class="card p-3 flex-column flex-lg-row" :key="product.id">
+                                <div class="col-12 col-md-6 col-lg-8 product-text mx-2 flex-grow-1">
+                                    <div class="products-card_title">
+                                        <h6 class="fw-bold">{{ product.name }}</h6>
+                                        <template v-for="p in products">
+                                            <div v-if="p.product_id === product.id">
+                                                <span>x {{ p.quantity }}</span>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <p>{{ product.description }}</p>
+                                    <small>{{ product.price }} €</small>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-4 justify-content-lg-end products_card_side">
+                                    <img class="product-img" :src="`http://127.0.0.1:8000/storage/${product.image}`" alt="">
+                                    <div class="product-card_quantity">
+                                        <button class="btn btn-light square_button" @click="addProduct(product)">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </button>
+                                        <template v-for="p in products">
+                                            <button v-if="p.product_id === product.id" class="square_button btn btn-light"
+                                                @click="removeProduct(p)">
+                                                <i class="fa-solid fa-minus"></i>
+                                            </button>
+                                        </template>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
+
+
                 </div>
 
                 <!-- CART -->
@@ -319,7 +323,7 @@ export default {
                                             d="M14 15V13H10V15H14ZM15 15H19.1872L19.7172 13H15V15ZM14 12V10H15V12H19.9822L20.5122 10H3.48783L4.01783 12H9V10H10V12H14ZM14 18V16H10V18H14ZM15 18H18.3922L18.9222 16H15V18ZM9 15V13H4.28283L4.81283 15H9ZM9 18V16H5.07783L5.60783 18H9ZM7 8V3H17V8H23L20 20H4L1 8H7ZM9 8H15V5H9V8Z"
                                             fill="#dddddd"></path>
                                     </svg>
-                                    <h4 class="text-center text-secondary">Il Carrello é vuoto</h4>
+                                <h4 class="text-center text-secondary">Il Carrello é vuoto</h4>
                                 </p>
                             </div>
                         </template>
@@ -332,7 +336,7 @@ export default {
                             </router-link>
                         </div>
                         <div v-else class="chart_total">
-                           
+
                             <a class="btn btn-secondary">Vai al pagamento</a>
                         </div>
                     </div>
@@ -574,7 +578,7 @@ p {
 
 .cart-empty {
     text-align: center;
-  
+
 }
 
 .border_btm {
