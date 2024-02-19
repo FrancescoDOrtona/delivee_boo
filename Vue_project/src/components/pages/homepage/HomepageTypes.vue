@@ -5,7 +5,8 @@
             <p>Seleziona la categoria che preferisci e scegli cosa prenotare tra una moltitudine di aziende partner.</p>
         </div>
         <div class="types-section_badges top-row">
-            <div @click="addTypeId(type.id), toggleEffect(type.id)" v-for="type in store.dataRT.types" :key="type" class="badge" :class="{ 'active': isActive(type.id) }">
+            <div @click="addTypeId(type.id), toggleEffect(type.id)" v-for="type in store.dataRT.types" :key="type"
+                class="badge" :class="{ 'active': isActive(type.id) }">
                 <img class="badge-img" :src="type.img_url" alt="">
                 <div class="badge-title">
                     <h5>{{ type.name }}</h5>
@@ -88,14 +89,15 @@ export default {
     cursor: pointer;
 }
 
-.active{
+.active {
     transform: scale(1.07);
-    .badge-title{
+
+    .badge-title {
         background-color: rgba(255, 166, 0, 0.7);
     }
 }
 
-.inactive{
+.inactive {
     transform: scale(1);
 }
 
@@ -168,4 +170,24 @@ export default {
         }
     }
 }
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    .badge:nth-child(odd):nth-child(-n+5) {
+        grid-column: span 1;
+    }
+
+    .badge:nth-child(even):nth-child(n+7) {
+        grid-column: span 1;
+    }
+
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {}
+
+@media (min-width: 992px) and (max-width: 1499.98px) {}
 </style>

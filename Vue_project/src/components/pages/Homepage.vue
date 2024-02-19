@@ -75,7 +75,8 @@ export default {
   position: relative;
   top: 50%;
   transform: scale(2);
-
+  height: 600px;
+  padding-top: 100px;
 }
 .loader {
   width: 48px;
