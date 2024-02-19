@@ -25,7 +25,8 @@
             </div>
             <p class="text-secondary fw-semibold"> Manage your restaurant information</p>
             <div class="row">
-                <div class="col-sm-6 mb-4">
+              <div class="col-md-6">
+                <div class=" mb-4">
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">Name</h5>
@@ -33,7 +34,26 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6 mb-4">
+                <div class=" mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Address</h5>
+                      <p class="card-text">{{ $restaurant['restaurant_address'] }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class=" mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Phone Number</h5>
+                      <p class="card-text">{{ $restaurant['phone_number'] }}</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-6">
+                <div class="mb-4">
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">Description</h5>
@@ -41,23 +61,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Address</h5>
-                        <p class="card-text">{{ $restaurant['restaurant_address'] }}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 mb-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Phone Number</h5>
-                        <p class="card-text">{{ $restaurant['phone_number'] }}</p>
-                      </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 mb-4">
+                
+              </div>
+                <div class="col-12 col-md-6 mb-4">
                     <div class="card">
                       <div class="card-body">
                         <h5 class="card-title">Restaurant Image</h5>
