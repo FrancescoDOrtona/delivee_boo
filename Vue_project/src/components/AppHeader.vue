@@ -77,6 +77,7 @@ header {
   right: 0;
   left: 0;
   z-index: 10;
+  padding-right: 30px;
 }
 
 .header {
