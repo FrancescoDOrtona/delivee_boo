@@ -19,7 +19,7 @@
             </div>
             <div class="col-10 col-sm-12 col-md-8 py-3 py-md-5">
                 @if (!isset($restaurant['id']))
-                    <a href="{{ route('admin.restaurant.create') }}">Add your restaurant information</a>
+                    <a class="btn btn-primary" href="{{ route('admin.restaurant.create') }}">Add your restaurant</a>
                 @else
                     <div class="d-flex justify-content-between align-items-center">
                         <h2 class="fs-4">Restaurant Infomation</h2>

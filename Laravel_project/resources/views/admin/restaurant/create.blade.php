@@ -34,14 +34,14 @@
 
                 <div class="mb-4 row">
                     <h5 class="fw-bold fs-6 col-4">Types *</h5>
-                    <div class="col-6 d-flex flex-wrap">
+                    <div class="col-12 col-sm-6 grid-type">
                         @foreach ($types as $type)
-                            <div class="col-4 pl-3 text-center">
+                            <div class="pl-3 text-center">
                                 <input type="checkbox" name="types[]" id="type-{{ $type->id }}"
                                     value="{{ $type->id }}" @checked(in_array($type->id, old('types', [])))
                                     onchange="inputValidation('type-{{ $type->id }}')">
                                 <label for="type-{{ $type->id }}"
-                                    class="col-md-5 col-form-label text-md-right text-capitalize text-start">{{ __($type->name) }}
+                                    class="col-10 col-form-label text-md-right text-capitalize text-start">{{ __($type->name) }}
                                 </label>
                             </div>
                         @endforeach
