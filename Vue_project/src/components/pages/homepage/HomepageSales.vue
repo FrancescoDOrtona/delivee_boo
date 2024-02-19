@@ -88,6 +88,13 @@ export default {
     small{
         padding: 0px 140px;
     }
+
+    @media (max-width: 575.98px) {
+        small{
+        padding: 0px 0px;
+        font-size: 10px;
+    }
+    }
 }
 
 .bottom-bg{

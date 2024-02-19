@@ -12,7 +12,7 @@
                 <div class="card_layer"></div>
                 <div class="card_content">
                     <h2>Consegna con noi</h2>
-                <div class="card_text">La libertà di consegnare dove e quando vuoi, con ottimi guadagni, convenzioni e sconti riservati a te.</div><a href="https://deliveroo.it/apply?utm-campaign=ridewithus_lower&amp;utm-medium=organic&amp;utm-source=landingpage" class="card_button" target="_blank" rel="noreferrer">Inizia ora<img alt="Button arrow" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxOCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjQgMC40OTU5OTlMOS44NCAyLjA1NkwxMy44IDUuOTkySDBWOC4wMDhIMTMuOEw5Ljg0IDExLjk0NEwxMS40IDEzLjUwNEwxOCA3TDExLjQgMC40OTU5OTlaIiBmaWxsPSIjMDBDQ0JDIi8+Cjwvc3ZnPgo=" class="card_icon"></a></div>
+                <div class="card_text">La libertà di consegnare dove e quando vuoi, con ottimi guadagni, convenzioni e sconti riservati a te.</div><a href="https://deliveroo.it/apply?utm-campaign=ridewithus_lower&amp;utm-medium=organic&amp;utm-source=landingpage" class="card_button" target="_blank" rel="noreferrer"><span>Inizia ora</span> <img alt="Button arrow" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxOCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTExLjQgMC40OTU5OTlMOS44NCAyLjA1NkwxMy44IDUuOTkySDBWOC4wMDhIMTMuOEw5Ljg0IDExLjk0NEwxMS40IDEzLjUwNEwxOCA3TDExLjQgMC40OTU5OTlaIiBmaWxsPSIjMDBDQ0JDIi8+Cjwvc3ZnPgo=" class="card_icon"></a></div>
             </div>
         </div>
     </div>
@@ -106,5 +106,6 @@
 .card_text {
     font-size: 18px;
     line-height: 130%;
+    
 }
 </style>
