@@ -27,7 +27,7 @@
         <div class="row">
             <h3>Ordered products</h3>
             @foreach( $order->products as $product )
-            <div class="col-4">
+            <div class="col-12 col-xl-3  col-lg-6">
                 <ul class="card p-3">
                     <li><strong> Name :</strong> {{ $product->name }}</li>
                     <li><strong> Price :</strong> {{ $product->price }} €</li>
