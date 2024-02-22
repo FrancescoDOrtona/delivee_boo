@@ -180,7 +180,7 @@ export default {
                 </h4>
             </div>
             <div class="modal_body">
-                <p>Premendo conferma cancellerai il tuo ordine del ristorante precedente</p>
+                <p>Confermando cancellerai l'ordine dal ristorante precedente</p>
             </div>
             <div class="modal_footer">
                 <button @click="hideModal()">Annulla</button>

@@ -146,7 +146,7 @@
               <li class="col-3 col_price">{{ c.price }} €</li>
             </ul>
           </div>
-          <h4 class="border_top pt-2">Totale: {{ this.currentTotal }} €</h4>
+          <h4 class="border_top pt-2">Totale: {{ this.currentTotal.toFixed(2) }} €</h4>
         </div>
       </div>
 
