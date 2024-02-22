@@ -112,8 +112,8 @@ export default {
           </ul>
         </div>
         <div class="modal-footer_custom">
-          <input  @click="clearCheckbox()"  type="reset" data-bs-dismiss="modal" class="btn btn-primary" value="Pulisci">
-          <button  type="button" class="btn btn_done" @click="fetchFilteredRestaurants()"  data-bs-dismiss="modal">Fatto</button>
+          <input  @click="clearCheckbox()"  type="reset" data-bs-dismiss="modal" class="btn btn-primary btn-modal" value="Pulisci">
+          <button  type="button" class="btn btn_done btn-modal" @click="fetchFilteredRestaurants()"  data-bs-dismiss="modal">Fatto</button>
         </div>
       </div>
     </div>
@@ -335,9 +335,9 @@ export default {
     z-index: -10;
 }
 
-* {
-  color: $text-gray !important;
-}
+// * {
+//   color: $text-gray !important;
+// }
 
 .mt-100 {
   margin-top: 100px;
@@ -403,7 +403,7 @@ input[type='radio'] {
   border-radius: 5px;
   width: 100%;
   height: 50px;
-  color: lightgrey;
+  // color: lightgrey;
   background-color: rgb(239, 239, 239);
   border: 1px solid rgb(223, 223, 223);
   padding: 5px;
@@ -561,6 +561,10 @@ input[type='radio'] {
   display: grid;
   grid-template-columns: repeat(2,1fr);
   gap: 10px;
+  .btn-modal{
+    color: white;
+  }
+
 }
 .btn-modal-open{
   color: $main-brand-color;
